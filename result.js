@@ -20,7 +20,7 @@ if (trackDisplayEl) trackDisplayEl.textContent = trackName;
 // Get Scores from localStorage (with calibrated candidate defaults)
 let aptitude = localStorage.getItem("aptitude") !== null ? Number(localStorage.getItem("aptitude")) : 100;
 let gd = localStorage.getItem("gd") !== null ? Number(localStorage.getItem("gd")) : 100;
-let technical = localStorage.getItem("technical") !== null ? Number(localStorage.getItem("technical")) : 100;
+let technical = localStorage.getItem("technical") !== null ? Number(localStorage.getItem("technical")) : (localStorage.getItem("tech") !== null ? Number(localStorage.getItem("tech")) : 100);
 let hr = localStorage.getItem("hr") !== null ? Number(localStorage.getItem("hr")) : 98;
 
 // Display Individual Scores
@@ -229,6 +229,7 @@ document.getElementById("restartBtn")
     localStorage.removeItem("aptitude");
     localStorage.removeItem("gd");
     localStorage.removeItem("technical");
+    localStorage.removeItem("tech");
     localStorage.removeItem("hr");
 
     // Reset proctoring metrics
