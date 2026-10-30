@@ -1,6 +1,6 @@
 // =========================================================
 // Enterprise AI Interview Proctoring System
-// (Webcam HUD, Fullscreen Enforcement, Multi-Tab & Blur Defense, Strike System)
+// (System Integrity HUD, Fullscreen Enforcement, Multi-Tab & Blur Defense, Strike System)
 // =========================================================
 (function initProctoringEngine() {
     const currentPath = window.location.pathname.toLowerCase();
@@ -20,7 +20,6 @@
     }
 
     const MAX_STRIKES = 3;
-    let webcamStream = null;
     let isRequestingCamera = false;
     let isModalOpen = false;
     let isNavigatingAway = false;
@@ -267,22 +266,25 @@
             <div class="proctor-header" id="proctorHeader">
                 <div class="proctor-title-wrap">
                     <span class="proctor-rec-dot"></span>
-                    <span>AI Proctor Active</span>
+                    <span>System Integrity HUD</span>
                 </div>
                 <button id="proctorToggleBtn" class="proctor-toggle-btn" title="Minimize / Expand HUD">
                     <i class="fa-solid fa-compress" id="proctorToggleIcon"></i>
                 </button>
             </div>
-            <div class="proctor-body">
-                <div class="proctor-video-wrap">
-                    <video id="proctorVideo" class="proctor-video" autoplay playsinline muted></video>
-                    <div class="proctor-face-mesh">
-                        <span class="proctor-live-badge"><i class="fa-solid fa-shield"></i> LIVE FEED</span>
+            <div class="proctor-body" style="padding: 14px 16px;">
+                <div class="proctor-sensor-matrix" style="display: flex; flex-direction: column; gap: 9px;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 11.5px;">
+                        <span style="color: #64748b;"><i class="fa-solid fa-shield-halved" style="color: #10b981; margin-right: 6px;"></i>Session Security</span>
+                        <strong style="color: #10b981; font-weight: 700;">Active</strong>
                     </div>
-                    <div id="proctorCamFallback" class="proctor-cam-fallback" style="display: none;">
-                        <i class="fa-solid fa-video-slash"></i>
-                        <span>Webcam feed unavailable or denied.</span>
-                        <button id="proctorRetryCamBtn" class="proctor-retry-cam-btn">Request Access</button>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 11.5px;">
+                        <span style="color: #64748b;"><i class="fa-solid fa-window-restore" style="color: #3b82f6; margin-right: 6px;"></i>Focus Enclave</span>
+                        <strong style="color: #3b82f6; font-weight: 700;">Engaged</strong>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 11.5px;">
+                        <span style="color: #64748b;"><i class="fa-solid fa-keyboard" style="color: #8b5cf6; margin-right: 6px;"></i>Anti-Cheat Defense</span>
+                        <strong style="color: #8b5cf6; font-weight: 700;">Armed</strong>
                     </div>
                 </div>
             </div>
@@ -326,52 +328,10 @@
             }
         });
 
-        // Retry Camera Button
-        const retryBtn = document.getElementById("proctorRetryCamBtn");
-        if (retryBtn) {
-            retryBtn.addEventListener("click", setupWebcam);
-        }
-
-        // Initialize Webcam
-        setupWebcam();
+        // Webcam initialization removed
     }
 
-    // Webcam Setup
-    function setupWebcam() {
-        const video = document.getElementById("proctorVideo");
-        const fallback = document.getElementById("proctorCamFallback");
-        if (!video) return;
-
-        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-            if (fallback) fallback.style.display = "flex";
-            localStorage.setItem("proctoringCamStatus", "Not Supported");
-            return;
-        }
-
-        isRequestingCamera = true;
-        navigator.mediaDevices.getUserMedia({
-            video: {
-                width: { ideal: 320 },
-                height: { ideal: 240 },
-                facingMode: "user"
-            },
-            audio: false
-        })
-            .then(stream => {
-                isRequestingCamera = false;
-                webcamStream = stream;
-                video.srcObject = stream;
-                video.play().catch(() => { });
-                if (fallback) fallback.style.display = "none";
-                localStorage.setItem("proctoringCamStatus", "Verified Online");
-            })
-            .catch(err => {
-                isRequestingCamera = false;
-                if (fallback) fallback.style.display = "flex";
-                localStorage.setItem("proctoringCamStatus", "Permission Denied / Unavailable");
-                console.warn("Proctoring Webcam Access:", err.message);
-            });
-    }
+    // Webcam removed per specification
 
     // Attach Event Listeners
     function attachProctorSecurityListeners() {
@@ -447,9 +407,6 @@
         // 7. Mark navigation on beforeunload to prevent false strikes on round change
         window.addEventListener("beforeunload", () => {
             isNavigatingAway = true;
-            if (webcamStream) {
-                webcamStream.getTracks().forEach(track => track.stop());
-            }
         });
     }
 

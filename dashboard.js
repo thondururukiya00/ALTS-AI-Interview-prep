@@ -62,10 +62,10 @@
             },
             {
                 id: "proctor",
-                icon: "fa-solid fa-video",
+                icon: "fa-solid fa-shield-halved",
                 colorClass: "metric-amber",
                 label: "Anti-Cheat Protocol",
-                value: "Webcam & 3 Strikes"
+                value: "Focus & 3 Strikes"
             }
         ],
         dossier: {

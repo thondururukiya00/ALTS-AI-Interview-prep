@@ -139,15 +139,11 @@ try {
     logs = [];
 }
 
-// 1. Webcam status
+// 1. System Integrity status
 const camEl = document.getElementById("integrityCamStatus");
 if (camEl) {
-    camEl.textContent = camStatus;
-    if (camStatus.includes("Denied") || camStatus.includes("Not Supported")) {
-        camEl.style.color = "#dc2626";
-    } else {
-        camEl.style.color = "#059669";
-    }
+    camEl.textContent = "Focus & Defense Active";
+    camEl.style.color = "#059669";
 }
 
 // 2. Fullscreen status

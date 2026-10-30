@@ -47,51 +47,34 @@
         <!-- Left Column: Video Feed & Sensors -->
         <section class="feed-panel" aria-label="Surveillance and Sensor Matrix">
 
-            <!-- Video Feed Card -->
+            <!-- System Security & Integrity Matrix Card -->
             <div class="video-feed-card">
                 <div class="video-feed-header">
                     <div class="feed-title-wrap">
-                        <span>Biometric Candidate Feed</span>
+                        <i class="fa-solid fa-shield-halved" style="color:#7c3aed; margin-right:8px;"></i>
+                        <span>Autonomous System Integrity Enclave</span>
                     </div>
-                    <span class="cam-meta-tag">720p HD @ 30 FPS</span>
+                    <span class="cam-meta-tag" style="background:#ecfdf5; color:#059669; border-color:#a7f3d0;">ARMED & ONLINE</span>
                 </div>
 
-                <!-- Video Stage -->
-                <div class="video-stage">
-                    <video id="proctorVideo" autoplay playsinline muted></video>
-
-                    <!-- Camera Permission Placeholder -->
-                    <div class="camera-placeholder" id="cameraPlaceholder">
-                        <h3 style="font-family:var(--font-serif); font-size:18px; color:var(--color-ink); margin-bottom:4px;">Webcam Feed Inactive</h3>
-                        <p style="font-size:12.5px; color:var(--color-ink-muted); max-width:320px;">Grant camera authorization to enable candidate identity and eye-tracking verification.</p>
-                        <button type="button" class="btn-start-camera" onclick="window.initCamera()">
-                            Initialize Stream
-                        </button>
+                <div class="video-stage" style="display:flex; flex-direction:column; align-items:center; justify-content:center; background:#0f172a; min-height:260px; padding:24px; text-align:center; color:#f8fafc; border-radius:12px;">
+                    <div style="width:64px; height:64px; border-radius:50%; background:rgba(16, 185, 129, 0.15); display:flex; align-items:center; justify-content:center; margin-bottom:16px; border:2px solid #10b981;">
+                        <i class="fa-solid fa-shield-check" style="font-size:28px; color:#10b981;"></i>
                     </div>
-
-                    <!-- Video HUD Overlay -->
-                    <div class="video-hud-overlay">
-                        <div class="hud-top-bar">
-                            <div class="hud-rec-tag">
-                                <span class="rec-pulse-dot"></span>
-                                <span>LIVE STREAM</span>
-                            </div>
-                            <div class="hud-watermark">ALTS-ENCLAVE-9041</div>
-                        </div>
-
-                        <!-- Face Tracking Reticle -->
-                        <div class="face-reticle-box">
-                            <span class="face-detected-label">FRAME VERIFIED</span>
-                        </div>
-
-                        <div class="hud-bottom-bar">
-                            <div class="hud-metric-pill">
-                                <span>Candidate Verified</span>
-                            </div>
-                            <div class="hud-metric-pill">
-                                <span>Encrypted</span>
-                            </div>
-                        </div>
+                    <h3 style="font-family:var(--font-serif); font-size:20px; font-weight:600; margin-bottom:6px; color:#ffffff;">Proctoring Defense Shield Active</h3>
+                    <p style="font-size:13.5px; color:#94a3b8; max-width:440px; margin-bottom:18px; line-height:1.5;">
+                        Non-invasive biometric integrity monitoring is fully engaged. Focus lock, tab switching detection, multi-display safeguards, and developer tool interception are running in the secure enclave.
+                    </p>
+                    <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+                        <span style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); padding:6px 14px; border-radius:20px; font-size:12px; font-weight:600; color:#38bdf8;">
+                            <i class="fa-solid fa-check"></i> Focus Enclave Armed
+                        </span>
+                        <span style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); padding:6px 14px; border-radius:20px; font-size:12px; font-weight:600; color:#4ade80;">
+                            <i class="fa-solid fa-check"></i> Tab Defense Synchronized
+                        </span>
+                        <span style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); padding:6px 14px; border-radius:20px; font-size:12px; font-weight:600; color:#a78bfa;">
+                            <i class="fa-solid fa-check"></i> 3-Strike Rule Active
+                        </span>
                     </div>
                 </div>
             </div>

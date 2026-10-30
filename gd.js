@@ -21,116 +21,142 @@ if (!gdSets[currentSetId]) {
 const topic = gdSets[currentSetId];
 const gdTopicEl = document.getElementById("gdTopic");
 if (gdTopicEl) {
-    gdTopicEl.innerHTML = `[Set ${currentSetId}] ${topic}`;
+    gdTopicEl.innerHTML = `<strong>[Set ${currentSetId}]</strong> ${topic}`;
 }
 
 // =============================
-// AI Voice
+// AI Voice (Speech Synthesis)
 // =============================
+let isSpeakingAi = false;
 
-function speakTopic(){
-
-window.speechSynthesis.cancel();
-
-let speech = new SpeechSynthesisUtterance(topic);
-
-speech.lang = "en-US";
-
-speech.rate = 1;
-
-window.speechSynthesis.speak(speech);
-
+function getPreferredVoice() {
+    if (!('speechSynthesis' in window)) return null;
+    const voices = window.speechSynthesis.getVoices();
+    if (!voices || voices.length === 0) return null;
+    return voices.find(v => (v.lang === "en-US" || v.lang.startsWith("en")) &&
+        (v.name.includes("Google") || v.name.includes("Natural") || v.name.includes("Samantha") || v.name.includes("Jenny") || v.name.includes("David")))
+        || voices.find(v => v.lang.startsWith("en"))
+        || voices[0];
 }
 
-// Speak Automatically
-window.onload = speakTopic;
-
-// Play Again Button
-document.getElementById("playTopicBtn")
-.addEventListener("click",speakTopic);
-
-// =============================
-// Speech Recognition
-// =============================
-
-const SpeechRecognition =
-window.SpeechRecognition ||
-window.webkitSpeechRecognition;
-
-if(!SpeechRecognition){
-
-alert("Please use Google Chrome.");
-
+// Proactively load voices
+if ('speechSynthesis' in window) {
+    window.speechSynthesis.onvoiceschanged = () => {
+        getPreferredVoice();
+    };
 }
 
-const recognition = new SpeechRecognition();
+function speakTopic() {
+    if (!('speechSynthesis' in window)) {
+        console.warn("Speech Synthesis API not available in this browser.");
+        return;
+    }
 
-recognition.continuous = true;
-
-recognition.interimResults = true;
-
-recognition.lang = "en-US";
-
-let transcript="";
-
-// Start Speaking
-document.getElementById("startBtn").addEventListener("click", () => {
     try {
-        recognition.start();
-    } catch (e) {}
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.resume();
 
-    const wave = document.getElementById("voiceWave");
-    const orb = document.getElementById("aiAvatarOrb");
-    const ring = document.getElementById("orbPulseRing");
-    const label = document.getElementById("aiStatusLabel");
+        const speech = new SpeechSynthesisUtterance(topic);
+        speech.lang = "en-US";
+        speech.rate = 0.95;
+        speech.pitch = 1.0;
 
-    if (wave) wave.classList.add("active");
-    if (orb) orb.classList.add("listening");
-    if (ring) ring.style.display = "block";
-    if (label) {
-        label.textContent = "AI Moderator: Actively Listening & Analyzing Speech...";
-        label.style.color = "#059669";
+        const voice = getPreferredVoice();
+        if (voice) speech.voice = voice;
+
+        const wave = document.getElementById("voiceWave");
+        const orb = document.getElementById("aiAvatarOrb");
+        const ring = document.getElementById("orbPulseRing");
+        const label = document.getElementById("aiStatusLabel");
+        const playBtn = document.getElementById("playTopicBtn");
+
+        speech.onstart = () => {
+            isSpeakingAi = true;
+            if (wave) wave.classList.add("active");
+            if (orb) orb.classList.add("listening");
+            if (ring) ring.style.display = "block";
+            if (label) {
+                label.textContent = "AI Moderator: Reading Discussion Topic...";
+                label.style.color = "#7c3aed";
+            }
+            if (playBtn) playBtn.innerHTML = `🔊 Playing Topic...`;
+        };
+
+        speech.onend = () => {
+            isSpeakingAi = false;
+            if (wave) wave.classList.remove("active");
+            if (orb) orb.classList.remove("listening");
+            if (ring) ring.style.display = "none";
+            if (label) {
+                label.textContent = "AI Moderator: Ready to Listen";
+                label.style.color = "#64748b";
+            }
+            if (playBtn) playBtn.innerHTML = `🔊 Replay Topic Speech`;
+        };
+
+        speech.onerror = (e) => {
+            console.warn("Speech synthesis error:", e);
+            isSpeakingAi = false;
+            if (playBtn) playBtn.innerHTML = `🔊 Play Topic Speech`;
+        };
+
+        window.speechSynthesis.speak(speech);
+
+        // Chrome pause workaround
+        const resumeTimer = setInterval(() => {
+            if (!window.speechSynthesis.speaking) {
+                clearInterval(resumeTimer);
+            } else {
+                window.speechSynthesis.resume();
+            }
+        }, 3000);
+    } catch (err) {
+        console.warn("speakTopic failed:", err);
     }
-});
+}
 
-// Stop Speaking
-document.getElementById("stopBtn").addEventListener("click", () => {
-    try {
-        recognition.stop();
-    } catch (e) {}
+// User-gesture triggers
+const playTopicBtn = document.getElementById("playTopicBtn");
+if (playTopicBtn) {
+    playTopicBtn.addEventListener("click", speakTopic);
+}
 
-    const wave = document.getElementById("voiceWave");
-    const orb = document.getElementById("aiAvatarOrb");
-    const ring = document.getElementById("orbPulseRing");
-    const label = document.getElementById("aiStatusLabel");
+// Attempt initial greeting on first candidate interaction
+let hasAttemptedInitialSpeak = false;
+function tryInitialSpeak() {
+    if (hasAttemptedInitialSpeak) return;
+    hasAttemptedInitialSpeak = true;
+    speakTopic();
+}
+document.addEventListener("click", tryInitialSpeak, { once: true });
 
-    if (wave) wave.classList.remove("active");
-    if (orb) orb.classList.remove("listening");
-    if (ring) ring.style.display = "none";
-    if (label) {
-        label.textContent = "AI Moderator: Microphone Paused";
-        label.style.color = "#64748b";
-    }
-});
+// =============================
+// Speech Recognition (Voice Input) + Manual Typing Fallback
+// =============================
+const SpeechRecognitionClass = window.SpeechRecognition || window.webkitSpeechRecognition || null;
+let recognition = null;
+let isRecognizing = false;
+let accumulatedTranscript = "";
 
-// Convert Voice to Text
-recognition.onresult = function(event) {
-    transcript = "";
-    for (let i = 0; i < event.results.length; i++) {
-        transcript += event.results[i][0].transcript + " ";
-    }
+const transcriptEl = document.getElementById("transcript");
+const wordCountEl = document.getElementById("wordCount");
+const qualityTag = document.getElementById("speechQualityTag");
+const micHelpText = document.getElementById("micHelpText");
+const startBtn = document.getElementById("startBtn");
+const stopBtn = document.getElementById("stopBtn");
 
-    const transcriptEl = document.getElementById("transcript");
-    if (transcriptEl) transcriptEl.innerHTML = transcript;
+function getTranscriptContent() {
+    if (!transcriptEl) return "";
+    return (transcriptEl.value !== undefined ? transcriptEl.value : transcriptEl.textContent) || "";
+}
 
-    let words = transcript.trim();
-    let count = words === "" ? 0 : words.split(/\s+/).length;
+function updateWordCountAndQuality() {
+    const text = getTranscriptContent().trim();
+    const words = text === "" ? [] : text.split(/\s+/).filter(Boolean);
+    const count = words.length;
 
-    const wordCountEl = document.getElementById("wordCount");
-    if (wordCountEl) wordCountEl.innerHTML = count;
+    if (wordCountEl) wordCountEl.textContent = count;
 
-    // Quality Indicator
-    const qualityTag = document.getElementById("speechQualityTag");
     if (qualityTag) {
         if (count >= 180) {
             qualityTag.innerHTML = `<span style="color:#059669; font-weight:700;"><i class="fa-solid fa-circle-check"></i> Excellent Articulation (Target Reached)</span>`;
@@ -142,84 +168,204 @@ recognition.onresult = function(event) {
             qualityTag.innerHTML = `<span style="color:#94a3b8;"><i class="fa-solid fa-chart-simple"></i> Minimum 50 words required</span>`;
         }
     }
-};
+}
+
+if (transcriptEl) {
+    transcriptEl.addEventListener("input", () => {
+        accumulatedTranscript = getTranscriptContent();
+        updateWordCountAndQuality();
+    });
+}
+
+if (SpeechRecognitionClass) {
+    try {
+        recognition = new SpeechRecognitionClass();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.lang = "en-US";
+
+        recognition.onstart = function () {
+            isRecognizing = true;
+            if (startBtn) {
+                startBtn.innerHTML = `🎙️ Listening...`;
+                startBtn.style.background = "#059669";
+            }
+            const wave = document.getElementById("voiceWave");
+            const orb = document.getElementById("aiAvatarOrb");
+            const ring = document.getElementById("orbPulseRing");
+            const label = document.getElementById("aiStatusLabel");
+
+            if (wave) wave.classList.add("active");
+            if (orb) orb.classList.add("listening");
+            if (ring) ring.style.display = "block";
+            if (label) {
+                label.textContent = "AI Moderator: Actively Listening & Transcribing Speech...";
+                label.style.color = "#059669";
+            }
+            if (micHelpText) micHelpText.style.display = "none";
+        };
+
+        recognition.onresult = function (event) {
+            let interim = "";
+            let finalStr = "";
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+                const text = event.results[i][0].transcript;
+                if (event.results[i].isFinal) {
+                    finalStr += text + " ";
+                } else {
+                    interim += text;
+                }
+            }
+
+            if (finalStr) {
+                accumulatedTranscript = (accumulatedTranscript ? accumulatedTranscript.trim() + " " : "") + finalStr.trim();
+            }
+
+            const displayText = (accumulatedTranscript + (interim ? " " + interim : "")).trim();
+            if (transcriptEl) {
+                if (transcriptEl.value !== undefined) {
+                    transcriptEl.value = displayText;
+                } else {
+                    transcriptEl.textContent = displayText;
+                }
+            }
+            updateWordCountAndQuality();
+        };
+
+        recognition.onerror = function (event) {
+            console.warn("Speech Recognition Error:", event.error);
+            isRecognizing = false;
+            if (startBtn) {
+                startBtn.innerHTML = `🎤 Start Speaking`;
+                startBtn.style.background = "linear-gradient(135deg, #059669, #10b981)";
+            }
+            if (micHelpText) {
+                micHelpText.style.display = "block";
+                micHelpText.innerHTML = `<i class="fa-solid fa-circle-info"></i> Microphone status: <strong>${event.error}</strong>. You can type your response directly in the box above!`;
+            }
+        };
+
+        recognition.onend = function () {
+            isRecognizing = false;
+            if (startBtn) {
+                startBtn.innerHTML = `🎤 Start Speaking`;
+                startBtn.style.background = "linear-gradient(135deg, #059669, #10b981)";
+            }
+        };
+    } catch (e) {
+        console.warn("SpeechRecognition initialization failed:", e);
+    }
+}
+
+// Start Speaking Button
+if (startBtn) {
+    startBtn.addEventListener("click", () => {
+        window.speechSynthesis.cancel();
+
+        if (recognition && !isRecognizing) {
+            try {
+                recognition.start();
+            } catch (e) {
+                console.warn("Recognition start failed, restarting:", e);
+                try {
+                    recognition.stop();
+                    setTimeout(() => recognition.start(), 200);
+                } catch (err) {}
+            }
+        } else if (!recognition) {
+            if (micHelpText) {
+                micHelpText.style.display = "block";
+                micHelpText.innerHTML = `<i class="fa-solid fa-keyboard"></i> Speech recognition is not supported in this browser. Please type your discussion points directly in the box!`;
+            }
+            if (transcriptEl) transcriptEl.focus();
+        }
+    });
+}
+
+// Stop Speaking Button
+if (stopBtn) {
+    stopBtn.addEventListener("click", () => {
+        if (recognition && isRecognizing) {
+            try {
+                recognition.stop();
+            } catch (e) {}
+        }
+        isRecognizing = false;
+
+        const wave = document.getElementById("voiceWave");
+        const orb = document.getElementById("aiAvatarOrb");
+        const ring = document.getElementById("orbPulseRing");
+        const label = document.getElementById("aiStatusLabel");
+
+        if (wave) wave.classList.remove("active");
+        if (orb) orb.classList.remove("listening");
+        if (ring) ring.style.display = "none";
+        if (label) {
+            label.textContent = "AI Moderator: Microphone Paused";
+            label.style.color = "#64748b";
+        }
+        if (startBtn) {
+            startBtn.innerHTML = `🎤 Start Speaking`;
+            startBtn.style.background = "linear-gradient(135deg, #059669, #10b981)";
+        }
+    });
+}
 
 // =============================
 // Timer (5 Minutes)
 // =============================
+let time = 300;
+const timerEl = document.getElementById("timer");
 
-let time=300;
+const countdown = setInterval(() => {
+    let min = Math.floor(time / 60);
+    let sec = time % 60;
 
-const timer=document.getElementById("timer");
+    if (timerEl) {
+        timerEl.innerHTML = `${min}:${sec < 10 ? "0" : ""}${sec}`;
+    }
 
-const countdown=setInterval(()=>{
+    time--;
 
-let min=Math.floor(time/60);
-
-let sec=time%60;
-
-timer.innerHTML=`${min}:${sec<10?"0":""}${sec}`;
-
-time--;
-
-if(time<0){
-
-clearInterval(countdown);
-
-recognition.stop();
-
-finishGD();
-
-}
-
-},1000);
+    if (time < 0) {
+        clearInterval(countdown);
+        if (recognition) {
+            try { recognition.stop(); } catch (e) {}
+        }
+        finishGD();
+    }
+}, 1000);
 
 // =============================
 // Finish GD
 // =============================
-
-document.getElementById("finishBtn")
-.addEventListener("click",finishGD);
-
-function finishGD(){
-
-recognition.stop();
-
-clearInterval(countdown);
-
-let words=transcript.trim();
-
-let count=0;
-
-if(words!==""){
-
-count=words.split(/\s+/).length;
-
+const finishBtn = document.getElementById("finishBtn");
+if (finishBtn) {
+    finishBtn.addEventListener("click", finishGD);
 }
 
-let score=0;
+function finishGD() {
+    if (recognition) {
+        try { recognition.stop(); } catch (e) {}
+    }
+    window.speechSynthesis.cancel();
+    clearInterval(countdown);
 
-if(count>=200){
+    const wordsStr = getTranscriptContent().trim();
+    const count = wordsStr === "" ? 0 : wordsStr.split(/\s+/).filter(Boolean).length;
 
-score=100;
-
-}else if(count>=150){
-
-score=80;
-
-}else if(count>=100){
-
-score=60;
-
-}else if(count>=50){
-
-score=40;
-
-}else{
-
-score=20;
-
-}
+    let score = 0;
+    if (count >= 200) {
+        score = 100;
+    } else if (count >= 150) {
+        score = 80;
+    } else if (count >= 100) {
+        score = 60;
+    } else if (count >= 50) {
+        score = 40;
+    } else {
+        score = 20;
+    }
 
     localStorage.setItem("gd", score);
 

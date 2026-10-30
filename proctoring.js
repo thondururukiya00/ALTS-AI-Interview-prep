@@ -2,8 +2,8 @@
  * ===================================================
  * ALTS AI Powered Interview Assistant
  * Anti-Cheat Security Module: proctoring.js
- * Real-time Webcam Feed, Sensor Matrix, 3-Strike Rule,
- * Tab-switch & Shortcut Guard
+ * Real-time Sensor Matrix, 3-Strike Rule,
+ * Tab-switch & Shortcut Guard (Webcam removed)
  * ===================================================
  */
 
@@ -12,13 +12,10 @@
 
     const MAX_STRIKES = 3;
     let strikes = parseInt(localStorage.getItem("proctoringStrikes") || "0", 10);
-    let webcamStream = null;
     let audioContext = null;
     let isTerminated = false;
 
     // DOM Elements
-    const videoEl = document.getElementById("proctorVideo");
-    const placeholderEl = document.getElementById("cameraPlaceholder");
     const terminalEl = document.getElementById("auditTerminal");
     const strikeCountLabel = document.getElementById("strikeCountLabel");
     const sensorTabEl = document.getElementById("sensorTab");
@@ -134,43 +131,49 @@
     function addStrike(reason) {
         if (isTerminated) return;
 
-        strikes = Math.min(strikes + 1, MAX_STRIKES);
+        strikes++;
         playWarningTone(strikes >= MAX_STRIKES);
-        logEvent("STRIKE_INCREMENT", `${reason} (Strike ${strikes} of ${MAX_STRIKES})`, "danger");
+        logEvent("BREACH_DETECTED", `${reason} (Strike ${strikes}/${MAX_STRIKES})`, "danger");
         updateStrikeUI();
     }
 
     /**
-     * Administrative Termination Modal
+     * Termination Modal
      */
     function triggerAdministrativeTermination() {
         isTerminated = true;
-        logEvent("SESSION_TERMINATED", "Assessment session terminated by ALTS Anti-Cheat AI Engine. 3 Strikes reached.", "danger");
+        logEvent("SESSION_TERMINATED", "Exceeded allowable strike limit. Candidate session flagged for review.", "danger");
 
-        const overlay = document.createElement("div");
-        overlay.className = "proctor-modal-overlay";
-        overlay.id = "terminationModalOverlay";
-
-        overlay.innerHTML = `
-            <div class="termination-modal">
-                <div class="termination-icon">
-                    <i class="fa-solid fa-ban"></i>
+        let modal = document.getElementById("terminationModalOverlay");
+        if (!modal) {
+            modal = document.createElement("div");
+            modal.id = "terminationModalOverlay";
+            modal.className = "proctor-modal-overlay";
+            modal.innerHTML = `
+                <div class="proctor-modal-card">
+                    <div class="proctor-modal-icon danger">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                    <h2>Assessment Session Terminated</h2>
+                    <p>
+                        Your session has exceeded the maximum threshold of <strong>3 Integrity Strikes</strong>. 
+                        Violations have been logged and appended to your candidate evaluation dossier.
+                    </p>
+                    <div class="proctor-modal-actions">
+                        <button type="button" class="btn-modal-primary" onclick="window.location.href='result.html'">
+                            Proceed to Dossier Review
+                        </button>
+                        <button type="button" class="btn-modal-secondary" onclick="window.clearStrikesForTesting()">
+                            Reset Strikes (Testing Mode)
+                        </button>
+                    </div>
                 </div>
-                <h2>Assessment Terminated</h2>
-                <p>
-                    Maximum security violation threshold (3 Strikes) exceeded.
-                    Unscheduled tab-switching, unauthorized keyboard inputs, or window focus losses have been logged to candidate audit record.
-                </p>
-                <button type="button" class="btn-restart-assessment" onclick="window.resetStrikesAndReload()">
-                    <i class="fa-solid fa-rotate-left"></i> Acknowledge & Reset Session
-                </button>
-            </div>
-        `;
-
-        document.body.appendChild(overlay);
+            `;
+            document.body.appendChild(modal);
+        }
     }
 
-    window.resetStrikesAndReload = function () {
+    window.clearStrikesForTesting = function () {
         strikes = 0;
         localStorage.setItem("proctoringStrikes", "0");
         const overlay = document.getElementById("terminationModalOverlay");
@@ -181,42 +184,14 @@
     };
 
     /**
-     * Camera Management
+     * Autonomous Integrity Monitor (Non-Camera)
      */
-    async function startCamera() {
-        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-            logEvent("CAMERA_ERROR", "Webcam API not supported in this browser.", "danger");
-            return;
-        }
-
-        try {
-            logEvent("CAMERA_INIT", "Requesting webcam hardware access...", "info");
-            webcamStream = await navigator.mediaDevices.getUserMedia({
-                video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: "user" },
-                audio: false
-            });
-
-            if (videoEl) {
-                videoEl.srcObject = webcamStream;
-                videoEl.onloadedmetadata = () => {
-                    videoEl.play();
-                    if (placeholderEl) placeholderEl.style.display = "none";
-                    logEvent("CAMERA_ONLINE", "Secure video stream synchronized (1280x720 30FPS).", "ok");
-                };
-            }
-        } catch (err) {
-            logEvent("CAMERA_DENIED", "Camera permission dismissed or hardware inaccessible: " + err.message, "warn");
-            if (placeholderEl) {
-                placeholderEl.innerHTML = `
-                    <i class="fa-solid fa-video-slash" style="color:#ef4444;"></i>
-                    <p style="color:#f87171; font-weight:600;">Camera Permission Not Granted</p>
-                    <button class="btn-start-camera" onclick="window.initCamera()">Grant Webcam Access</button>
-                `;
-            }
-        }
+    function initIntegrityMonitor() {
+        logEvent("INTEGRITY_ONLINE", "Autonomous security enclave active: Focus lock, tab defense & shortcut intercept armed.", "ok");
+        localStorage.setItem("proctoringCamStatus", "System Integrity: Active");
     }
 
-    window.initCamera = startCamera;
+    window.initCamera = initIntegrityMonitor;
 
     /**
      * Tab Switching & Focus Loss Detection
@@ -235,7 +210,7 @@
                 sensorTabEl.textContent = "Active (Focused)";
                 sensorTabEl.className = "sensor-val active-safe";
             }
-            logEvent("WINDOW_RESTORED", "Candidate returned focus to active assessment enclave.", "info");
+            logEvent("TAB_RETURN", "Candidate returned focus to examination environment.", "info");
         }
     });
 
@@ -370,8 +345,7 @@
         hydrateCandidateMeta();
         logEvent("SYSTEM_READY", "ALTS Anti-Cheat Enclave initialized and armed.", "ok");
         logEvent("METRICS_LOADED", "3-Strike Policy Active: Tab-switch, DevTools & ContextMenu restricted.", "info");
-        startCamera();
+        initIntegrityMonitor();
     });
 
 })();
-
