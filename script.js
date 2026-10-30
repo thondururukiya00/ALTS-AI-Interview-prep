@@ -544,7 +544,7 @@ setupPasswordToggle("toggleConfirmPassword", "confirmPassword");
 const loginForm = document.getElementById("loginForm");
 
 if (loginForm) {
-    loginForm.addEventListener("submit", function (e) {
+    loginForm.addEventListener("submit", async function (e) {
         e.preventDefault();
         clearAuthMessage();
 

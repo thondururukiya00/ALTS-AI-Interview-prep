@@ -527,6 +527,7 @@ if (finishBtn) {
         }
 
         localStorage.setItem("hr", hrScore);
+        if (window.saveScoreToSupabase) window.saveScoreToSupabase(4, "HR & Behavioral", hrScore);
 
         // Advance active set for next session
         const totalSets = 5;

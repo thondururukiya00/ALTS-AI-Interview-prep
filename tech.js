@@ -679,6 +679,7 @@ function finishInterview() {
     if (totalScore > 100) totalScore = 100;
 
     localStorage.setItem("technical", totalScore);
+    if (window.saveScoreToSupabase) window.saveScoreToSupabase(3, "Technical & Coding", totalScore);
     localStorage.setItem("tech", totalScore);
 
     const attempted = questionScores.filter(s => s > 0).length;

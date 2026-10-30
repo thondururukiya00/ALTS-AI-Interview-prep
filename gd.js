@@ -389,6 +389,7 @@ function finishGD() {
     }
 
     localStorage.setItem("gd", score);
+    if (window.saveScoreToSupabase) window.saveScoreToSupabase(2, "Group Discussion", score);
 
     if (window.showRoundTransitionModal) {
         window.showRoundTransitionModal(

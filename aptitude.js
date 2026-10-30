@@ -276,6 +276,7 @@ function submitQuiz() {
     });
 
     localStorage.setItem("aptitude", score);
+    if (window.saveScoreToSupabase) window.saveScoreToSupabase(1, "Quantitative Aptitude", score);
 
     if (window.showRoundTransitionModal) {
         window.showRoundTransitionModal(

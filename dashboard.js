@@ -719,6 +719,7 @@
         renderMetrics(dashboardConfig.executiveMetrics);
         renderRounds(dashboardConfig.rounds);
         renderStageTable();
+        if (window.syncCloudScores) window.syncCloudScores();
         renderDossier(dashboardConfig.dossier);
         renderInstructions(dashboardConfig.securityGuidelines);
 
