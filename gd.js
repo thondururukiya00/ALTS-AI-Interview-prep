@@ -28,6 +28,7 @@ if (gdTopicEl) {
 // AI Voice (Speech Synthesis)
 // =============================
 let isSpeakingAi = false;
+let aiSpeechTimer = null;
 
 function getPreferredVoice() {
     if (!('speechSynthesis' in window)) return null;
@@ -83,6 +84,7 @@ function speakTopic() {
         };
 
         speech.onend = () => {
+            if (aiSpeechTimer) { clearInterval(aiSpeechTimer); aiSpeechTimer = null; }
             isSpeakingAi = false;
             if (wave) wave.classList.remove("active");
             if (orb) orb.classList.remove("listening");
@@ -95,6 +97,7 @@ function speakTopic() {
         };
 
         speech.onerror = (e) => {
+            if (aiSpeechTimer) { clearInterval(aiSpeechTimer); aiSpeechTimer = null; }
             console.warn("Speech synthesis error:", e);
             isSpeakingAi = false;
             if (playBtn) playBtn.innerHTML = `🔊 Play Topic Speech`;
@@ -103,9 +106,11 @@ function speakTopic() {
         window.speechSynthesis.speak(speech);
 
         // Chrome pause workaround
-        const resumeTimer = setInterval(() => {
+        if (aiSpeechTimer) clearInterval(aiSpeechTimer);
+        aiSpeechTimer = setInterval(() => {
             if (!window.speechSynthesis.speaking) {
-                clearInterval(resumeTimer);
+                clearInterval(aiSpeechTimer);
+                aiSpeechTimer = null;
             } else {
                 window.speechSynthesis.resume();
             }
@@ -282,9 +287,10 @@ if (startBtn) {
     });
 }
 
-// Stop Speaking Button
+// Stop/Pause Speaking Button (Pauses BOTH microphone & speaking AI voice)
 if (stopBtn) {
     stopBtn.addEventListener("click", () => {
+        // 1. Pause & Stop Microphone
         if (recognition && isRecognizing) {
             try {
                 recognition.stop();
@@ -292,6 +298,17 @@ if (stopBtn) {
         }
         isRecognizing = false;
 
+        // 2. Pause & Silence Speaking AI Voice
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+        }
+        if (aiSpeechTimer) {
+            clearInterval(aiSpeechTimer);
+            aiSpeechTimer = null;
+        }
+        isSpeakingAi = false;
+
+        // 3. Stop animations & reset indicator
         const wave = document.getElementById("voiceWave");
         const orb = document.getElementById("aiAvatarOrb");
         const ring = document.getElementById("orbPulseRing");
@@ -301,12 +318,16 @@ if (stopBtn) {
         if (orb) orb.classList.remove("listening");
         if (ring) ring.style.display = "none";
         if (label) {
-            label.textContent = "AI Moderator: Microphone Paused";
+            label.textContent = "AI Moderator: Microphone & AI Voice Paused";
             label.style.color = "#64748b";
         }
         if (startBtn) {
             startBtn.innerHTML = `🎤 Start Speaking`;
             startBtn.style.background = "linear-gradient(135deg, #059669, #10b981)";
+        }
+        const playBtn = document.getElementById("playTopicBtn");
+        if (playBtn) {
+            playBtn.innerHTML = `🔊 Play Topic Speech`;
         }
     });
 }

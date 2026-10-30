@@ -127,6 +127,7 @@ if (!hrSets[currentSetId]) {
 // Load Questions from Active Set (strictly ordered Easy -> Medium -> Hard)
 const selectedQuestions = hrSets[currentSetId];
 let currentQuestion = 0;
+let aiSpeechTimer = null;
 let cumulativeWordCount = 0;
 let currentQuestionWordCount = 0;
 let accumulatedTranscript = "";
@@ -198,6 +199,7 @@ function speakQuestion() {
         };
 
         speech.onend = () => {
+            if (aiSpeechTimer) { clearInterval(aiSpeechTimer); aiSpeechTimer = null; }
             if (wave) wave.classList.remove("active");
             if (orb) orb.classList.remove("listening");
             if (ring) ring.style.display = "none";
@@ -209,15 +211,18 @@ function speakQuestion() {
         };
 
         speech.onerror = (e) => {
+            if (aiSpeechTimer) { clearInterval(aiSpeechTimer); aiSpeechTimer = null; }
             console.warn("Speech synthesis error:", e);
             if (playQuestionBtn) playQuestionBtn.innerHTML = `🔊 Listen to Question`;
         };
 
         window.speechSynthesis.speak(speech);
 
-        const resumeTimer = setInterval(() => {
+        if (aiSpeechTimer) clearInterval(aiSpeechTimer);
+        aiSpeechTimer = setInterval(() => {
             if (!window.speechSynthesis.speaking) {
-                clearInterval(resumeTimer);
+                clearInterval(aiSpeechTimer);
+                aiSpeechTimer = null;
             } else {
                 window.speechSynthesis.resume();
             }
@@ -423,17 +428,30 @@ if (startBtn) {
     });
 }
 
+// Stop/Pause Speaking Button (Pauses BOTH microphone & speaking AI voice)
 if (stopBtn) {
     stopBtn.addEventListener("click", () => {
+        // 1. Pause & Stop Microphone
         if (recognition && isRecognizing) {
             try { recognition.stop(); } catch (e) {}
         }
         isRecognizing = false;
+
+        // 2. Pause & Silence Speaking AI Voice
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+        }
+        if (aiSpeechTimer) {
+            clearInterval(aiSpeechTimer);
+            aiSpeechTimer = null;
+        }
+
         if (startBtn) {
             startBtn.style.background = "linear-gradient(135deg, #059669, #10b981)";
             startBtn.innerHTML = `🎤 Start Speaking`;
         }
 
+        // 3. Stop animations & reset indicator
         const wave = document.getElementById("voiceWave");
         const orb = document.getElementById("aiAvatarOrb");
         const ring = document.getElementById("orbPulseRing");
@@ -443,8 +461,11 @@ if (stopBtn) {
         if (orb) orb.classList.remove("listening");
         if (ring) ring.style.display = "none";
         if (label) {
-            label.textContent = "AI Interviewer: Microphone Paused";
-            label.style.color = "#2563eb";
+            label.textContent = "AI Interviewer: Microphone & AI Voice Paused";
+            label.style.color = "#64748b";
+        }
+        if (playQuestionBtn) {
+            playQuestionBtn.innerHTML = `🔊 Listen to Question`;
         }
     });
 }
