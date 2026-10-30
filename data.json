@@ -13,9 +13,9 @@
   },
   "questionSets": {
     "activeSet": 1,
-    "totalSets": 5,
-    "tag": "No Repeated Questions",
-    "description": "Every round contains calibrated questions ordered strictly from Easy ➔ Medium ➔ Hard."
+    "totalSets": 3,
+    "tag": "Adaptive Evaluation",
+    "description": "Questions are dynamically calibrated from Easy to Hard across all rounds."
   },
   "executiveMetrics": [
     {

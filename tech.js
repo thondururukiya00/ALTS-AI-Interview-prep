@@ -118,13 +118,71 @@ const technicalSets = {
                 { input: "pwwkew", expected: "3" }
             ]
         }
+    ],
+    3: [
+        {
+            title: "Calculate the sum of digits of a number.",
+            category: "Programming",
+            difficulty: "Easy",
+            description: "Read an integer n and calculate the sum of its individual digits. Print the resulting integer sum.",
+            testCases: [
+                { input: "1234", expected: "10" },
+                { input: "505", expected: "10" },
+                { input: "9", expected: "9" }
+            ]
+        },
+        {
+            title: "Find the maximum element in an array.",
+            category: "Programming",
+            difficulty: "Easy",
+            description: "Read space-separated integers from standard input and print the maximum value found in the array.",
+            testCases: [
+                { input: "3 7 2 9 4", expected: "9" },
+                { input: "-5 -2 -9 -1", expected: "-1" },
+                { input: "42", expected: "42" }
+            ]
+        },
+        {
+            title: "Check whether two strings are Anagrams.",
+            category: "Strings",
+            difficulty: "Medium",
+            description: "Read two strings on separate lines and determine whether they are anagrams of each other (contain identical letters in any order, case-insensitive). Print 'Anagram' or 'Not Anagram'.",
+            testCases: [
+                { input: "listen\nsilent", expected: "Anagram" },
+                { input: "hello\nworld", expected: "Not Anagram" },
+                { input: "triangle\nintegral", expected: "Anagram" }
+            ]
+        },
+        {
+            title: "Find the first non-repeating character in a string.",
+            category: "Data Structures",
+            difficulty: "Medium",
+            description: "Given a lowercase string, find the first character that occurs only once and print it. If all characters repeat, print -1.",
+            testCases: [
+                { input: "swiss", expected: "w" },
+                { input: "aabbcc", expected: "-1" },
+                { input: "interview", expected: "n" }
+            ]
+        },
+        {
+            title: "Reverse the order of words in a sentence.",
+            category: "Algorithms",
+            difficulty: "Hard",
+            description: "Given a sentence string with space-separated words, reverse the order of the words while preserving the characters within each word. Print the reversed sentence.",
+            testCases: [
+                { input: "the sky is blue", expected: "blue is sky the" },
+                { input: "hello world", expected: "world hello" },
+                { input: "algorithm interview test", expected: "test interview algorithm" }
+            ]
+        }
     ]
 };
 
-// Active Non-Repeating Set
+// Active Non-Repeating Set (Internal rotation: 1, 2, or 3)
 let currentSetId = Number(localStorage.getItem("currentInterviewSet")) || 1;
-if (!technicalSets[currentSetId]) {
-    technicalSets[currentSetId] = technicalSets[1];
+if (currentSetId < 1 || currentSetId > 3 || !technicalSets[currentSetId]) {
+    currentSetId = 1;
+    localStorage.setItem("currentInterviewSet", 1);
 }
 
 const selectedQuestions = technicalSets[currentSetId];
@@ -212,7 +270,7 @@ function displayQuestion() {
 
     questionTitle.textContent = q.title;
     questionDescription.textContent = q.description;
-    questionCategory.textContent = `Set ${currentSetId} • ${q.category}`;
+    questionCategory.textContent = q.category;
     questionDifficulty.textContent = q.difficulty;
     questionDifficulty.className = "tag difficulty " + q.difficulty.toLowerCase();
 

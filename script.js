@@ -707,13 +707,34 @@ function logout() {
 // Navigation
 // ===============================
 
-function startInterview() {
-    let setNum = Number(localStorage.getItem("currentInterviewSet"));
-    if (!setNum || setNum < 1 || setNum > 5) {
-        setNum = 1;
-        localStorage.setItem("currentInterviewSet", 1);
+function getOrRotateNextSet() {
+    const TOTAL_SETS = 3;
+    let used = [];
+    try {
+        used = JSON.parse(localStorage.getItem("usedSetsHistory")) || [];
+    } catch (e) {
+        used = [];
     }
-    localStorage.setItem("lastInterviewSet", setNum);
+
+    let available = [1, 2, 3].filter(s => !used.includes(s));
+    if (available.length === 0) {
+        const lastSet = Number(localStorage.getItem("lastInterviewSet")) || 1;
+        used = [lastSet];
+        available = [1, 2, 3].filter(s => s !== lastSet);
+    }
+
+    const chosenSet = available[0] || 1;
+    used.push(chosenSet);
+
+    localStorage.setItem("usedSetsHistory", JSON.stringify(used));
+    localStorage.setItem("currentInterviewSet", chosenSet.toString());
+    localStorage.setItem("lastInterviewSet", chosenSet.toString());
+
+    return chosenSet;
+}
+
+function startInterview() {
+    getOrRotateNextSet();
     // Reset proctoring state for fresh session
     localStorage.setItem("proctoringStrikes", "0");
     localStorage.setItem("proctoringLogs", JSON.stringify([]));

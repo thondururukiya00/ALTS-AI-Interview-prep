@@ -100,84 +100,14 @@ const aptitudeSets = {
             options: ["1/221", "1/169", "2/221", "4/663"],
             answer: "1/221"
         }
-    ],
-    4: [
-        {
-            difficulty: "Easy",
-            question: "Find the Simple Interest on ₹2,000 for 2 years at an interest rate of 5% per annum.",
-            options: ["₹100", "₹150", "₹200", "₹250"],
-            answer: "₹200"
-        },
-        {
-            difficulty: "Easy",
-            question: "Find the odd one out among the given options:",
-            options: ["Copper", "Iron", "Brass", "Silver"],
-            answer: "Brass"
-        },
-        {
-            difficulty: "Medium",
-            question: "A car covers a distance of 180 km in 3 hours. If its speed is increased by 10 km/hr, how much time will it take to cover 280 km?",
-            options: ["3.5 hours", "4 hours", "4.5 hours", "5 hours"],
-            answer: "4 hours"
-        },
-        {
-            difficulty: "Medium",
-            question: "Statements: All flowers are trees. No tree is a fruit. Conclusion: I. No flower is a fruit. II. Some trees are flowers. Which conclusion follows?",
-            options: ["Only I follows", "Only II follows", "Both I and II follow", "Neither follows"],
-            answer: "Both I and II follow"
-        },
-        {
-            difficulty: "Hard",
-            question: "A committee of 4 members is to be selected from 5 men and 4 women. In how many ways can this be done if it must contain at least 2 women?",
-            options: ["65", "81", "90", "105"],
-            answer: "81"
-        }
-    ],
-    5: [
-        {
-            difficulty: "Easy",
-            question: "How many degrees does the minute hand of a clock turn in 25 minutes?",
-            options: ["120°", "150°", "180°", "135°"],
-            answer: "150°"
-        },
-        {
-            difficulty: "Easy",
-            question: "Complete the letter series: AZ, BY, CX, DW, ...?",
-            options: ["EV", "EU", "FU", "FW"],
-            answer: "EV"
-        },
-        {
-            difficulty: "Medium",
-            question: "The compound interest on ₹10,000 for 2 years at 10% per annum, compounded annually, is:",
-            options: ["₹2,000", "₹2,100", "₹2,200", "₹1,800"],
-            answer: "₹2,100"
-        },
-        {
-            difficulty: "Medium",
-            question: "In a row of 35 students, Rahul is 12th from the left end. What is his position from the right end?",
-            options: ["23rd", "24th", "25th", "22nd"],
-            answer: "24th"
-        },
-        {
-            difficulty: "Hard",
-            question: "Pipe A can fill a tank in 10 hours and Pipe B in 15 hours. Due to a leak at the bottom, it took 8 hours to fill the tank when both pipes were opened. In how many hours can the leak alone empty the full tank?",
-            options: ["24 hours", "20 hours", "30 hours", "18 hours"],
-            answer: "24 hours"
-        }
     ]
 };
 
-// Retrieve Active Non-Repeating Set
+// Retrieve Active Non-Repeating Set (Internal rotation: 1, 2, or 3)
 let currentSetId = Number(localStorage.getItem("currentInterviewSet")) || 1;
-if (!aptitudeSets[currentSetId]) {
+if (currentSetId < 1 || currentSetId > 3 || !aptitudeSets[currentSetId]) {
     currentSetId = 1;
     localStorage.setItem("currentInterviewSet", 1);
-}
-
-// Update UI Tag with Active Set
-const setTagEl = document.getElementById("setTag");
-if (setTagEl) {
-    setTagEl.innerHTML = `<i class="fa-solid fa-layer-group"></i> Active Set: Set ${currentSetId} of 5`;
 }
 
 // Load Questions from Active Set (strictly ordered Easy -> Medium -> Hard)

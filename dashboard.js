@@ -617,36 +617,50 @@
     }
 
     /**
-     * Cycle through question sets (1 to 5)
+     * Internal Non-Repeating Set Selector (3 Sets: 1, 2, 3)
+     */
+    function getOrRotateNextSet() {
+        const TOTAL_SETS = 3;
+        let used = [];
+        try {
+            used = JSON.parse(localStorage.getItem("usedSetsHistory")) || [];
+        } catch (e) {
+            used = [];
+        }
+
+        // Available sets from 1..3 not yet used
+        let available = [1, 2, 3].filter(s => !used.includes(s));
+
+        // When all 3 sets are exhausted, cycle to the next set without repeating the last one
+        if (available.length === 0) {
+            const lastSet = Number(localStorage.getItem("lastInterviewSet")) || 1;
+            used = [lastSet];
+            available = [1, 2, 3].filter(s => s !== lastSet);
+        }
+
+        const chosenSet = available[0] || 1;
+        used.push(chosenSet);
+
+        localStorage.setItem("usedSetsHistory", JSON.stringify(used));
+        localStorage.setItem("currentInterviewSet", chosenSet.toString());
+        localStorage.setItem("lastInterviewSet", chosenSet.toString());
+
+        return chosenSet;
+    }
+    window.getOrRotateNextSet = getOrRotateNextSet;
+
+    /**
+     * Cycle through question sets internally (noop for backward compat)
      */
     window.cycleInterviewSet = function () {
-        const totalSets = (dashboardConfig && dashboardConfig.questionSets.totalSets) || 5;
-        let currentSet = Number(localStorage.getItem("currentInterviewSet")) || 1;
-        let nextSet = (currentSet % totalSets) + 1;
-
-        localStorage.setItem("currentInterviewSet", nextSet.toString());
-        localStorage.setItem("lastInterviewSet", nextSet.toString());
-
-        const currentSetLabel = document.getElementById("currentSetLabel");
-        const startSetLabel = document.getElementById("startSetLabel");
-
-        if (currentSetLabel) currentSetLabel.textContent = `Set ${nextSet} of ${totalSets}`;
-        if (startSetLabel) startSetLabel.textContent = `Set ${nextSet}`;
-
-        showProctorToast(`Active question set updated to Set ${nextSet} of ${totalSets}.`);
+        getOrRotateNextSet();
     };
 
     /**
-     * Launch Interview (Round 1)
+     * Launch Interview (Round 1) - Silently selects non-repeating set
      */
     window.startInterview = function () {
-        let setNum = Number(localStorage.getItem("currentInterviewSet"));
-        if (!setNum || setNum < 1 || setNum > 5) {
-            setNum = 1;
-            localStorage.setItem("currentInterviewSet", "1");
-        }
-        localStorage.setItem("lastInterviewSet", setNum.toString());
-
+        getOrRotateNextSet();
         window.location.href = "aptitude.html";
     };
 

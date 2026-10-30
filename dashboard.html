@@ -92,8 +92,8 @@
                 <span class="telemetry-value">0 / 3 Allowed</span>
             </div>
             <div class="telemetry-row">
-                <span class="telemetry-label">Active Set:</span>
-                <span class="telemetry-value">Set 1 (E➔M➔H)</span>
+                <span class="telemetry-label">Session Status:</span>
+                <span class="telemetry-value" style="color: #6366f1;">Verified Active</span>
             </div>
         </div>
 
@@ -135,7 +135,7 @@
             </header>
 
             <!-- Welcome & Candidate Banner -->
-            <section class="welcome-section" aria-label="Candidate Profile and Question Set">
+            <section class="welcome-section" aria-label="Candidate Profile">
                 <div class="welcome-profile">
                     <div class="welcome-info">
                         <div class="welcome-badges-row">
@@ -145,20 +145,6 @@
                         </div>
                         <p id="userEmailDisplay" class="user-email-text">Auth User: <strong>rukiya.thonduru@alts.edu</strong> &bull; Candidate ID: <strong>ALTS-2026-9041</strong></p>
                     </div>
-                </div>
-
-                <div class="set-control-card">
-                    <div class="set-header">
-                        <span class="set-badge">QUESTION SET</span>
-                        <span class="no-repeat-tag"><i class="fa-solid fa-shield-check"></i> NO REPEATED QUESTIONS</span>
-                    </div>
-                    <div class="set-main">
-                        <h3 id="currentSetLabel">Set 1 of 5</h3>
-                        <button type="button" class="cycle-set-btn" onclick="cycleInterviewSet()" title="Rotate question set">
-                            Rotate Set
-                        </button>
-                    </div>
-                    <p id="setDesc" class="set-desc">Questions start with basic concepts and progress to harder problems.</p>
                 </div>
             </section>
 
@@ -244,7 +230,7 @@
             <!-- Start Assessment CTA -->
             <section class="start-btn-area">
                 <button class="start-btn" onclick="startInterview()">
-                    <span>Start Interview (<span id="startSetLabel">Set 1</span>)</span>
+                    <span>Start Interview</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </button>
                 <p class="start-btn-hint">Click to begin Round 1: Math & Logical Reasoning.</p>
