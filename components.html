@@ -660,35 +660,48 @@
 
 <script>
     function toggleTheme() {
-            const btn = document.getElementById('themeToggleBtn');
-            if (btn) {
-                btn.classList.add('theme-animating');
-                setTimeout(() => btn.classList.remove('theme-animating'), 400);
-            }
-            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('alts-theme', newTheme);
-            updateThemeUI(newTheme);
+        const btn = document.getElementById('themeToggleBtn');
+        if (btn) {
+            btn.classList.add('theme-animating');
+            setTimeout(() => btn.classList.remove('theme-animating'), 400);
         }
-
-        function updateThemeUI(theme) {
-            const icon = document.getElementById('themeIcon');
-            const btn = document.getElementById('themeToggleBtn');
-            if (theme === 'dark') {
-                if (icon) icon.className = 'fa-solid fa-sun';
-                if (btn) btn.title = 'Switch to Light Mode';
-            } else {
-                if (icon) icon.className = 'fa-solid fa-moon';
-                if (btn) btn.title = 'Switch to Dark Mode';
-            }
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        if (newTheme === 'dark') {
+            document.body.classList.add('dark-theme');
+        } else {
+            document.body.classList.remove('dark-theme');
         }
+        localStorage.setItem('alts-theme', newTheme);
+        updateThemeUI(newTheme);
+    }
 
-        // Initialize saved theme on load
+    function updateThemeUI(theme) {
+        const icon = document.getElementById('themeIcon');
+        const btn = document.getElementById('themeToggleBtn');
+        if (theme === 'dark') {
+            if (icon) icon.className = 'fa-solid fa-sun';
+            if (btn) btn.title = 'Switch to Light Mode';
+        } else {
+            if (icon) icon.className = 'fa-solid fa-moon';
+            if (btn) btn.title = 'Switch to Dark Mode';
+        }
+    }
+
+    window.toggleTheme = toggleTheme;
+
+    document.addEventListener('DOMContentLoaded', () => {
         const saved = localStorage.getItem('alts-theme') || 'light';
         document.documentElement.setAttribute('data-theme', saved);
+        if (saved === 'dark') {
+            document.body.classList.add('dark-theme');
+        } else {
+            document.body.classList.remove('dark-theme');
+        }
         updateThemeUI(saved);
-    })();
+    });
 </script>
 
 </body>
