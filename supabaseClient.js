@@ -107,3 +107,51 @@ window.saveCodeSubmissionToSupabase = async function (questionIndex, language, c
         console.warn("[Supabase] Code submission note:", e.message);
     }
 };
+
+// Helper 4: Record User Login in Supabase backend
+window.recordUserLogin = async function (name, email) {
+    if (!email) return;
+    const cleanEmail = email.toLowerCase().trim();
+    const cleanName = name || cleanEmail.split('@')[0];
+
+    try {
+        if (!window.supabaseClient) return;
+        
+        // 1. Upsert candidate into public.candidate_users table
+        const { error } = await window.supabaseClient
+            .from('candidate_users')
+            .upsert({
+                email: cleanEmail,
+                name: cleanName,
+                last_login: new Date().toISOString()
+            }, { onConflict: 'email' });
+
+        if (error) {
+            console.warn("[Supabase] recordUserLogin note:", error.message);
+        } else {
+            console.log("✓ [Supabase] Logged-in user recorded:", cleanEmail);
+        }
+    } catch (e) {
+        console.warn("[Supabase] recordUserLogin exception:", e.message);
+    }
+};
+
+// Helper 5: Fetch all logged-in candidates from Supabase
+window.fetchAllCandidateUsers = async function () {
+    if (!window.supabaseClient) return [];
+    try {
+        const { data, error } = await window.supabaseClient
+            .from('candidate_users')
+            .select('*')
+            .order('last_login', { ascending: false });
+
+        if (error) {
+            console.warn("[Supabase] fetchAllCandidateUsers error:", error.message);
+            return [];
+        }
+        return data || [];
+    } catch (e) {
+        console.warn("[Supabase] fetchAllCandidateUsers exception:", e.message);
+        return [];
+    }
+};

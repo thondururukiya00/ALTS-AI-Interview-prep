@@ -633,6 +633,18 @@ if (loginForm) {
             localStorage.setItem("userEmail", email);
             localStorage.setItem("userName", name);
 
+            // Sync to Supabase Backend
+            if (typeof window.recordUserLogin === "function") {
+                window.recordUserLogin(name, email);
+            }
+            if (window.supabaseClient && window.supabaseClient.auth) {
+                window.supabaseClient.auth.signUp({
+                    email: email,
+                    password: password,
+                    options: { data: { full_name: name } }
+                }).catch(() => {});
+            }
+
             showAuthMessage("Account created successfully! Redirecting to Dashboard...", "success");
             setTimeout(function () {
                 window.location.href = "dashboard.html";
@@ -664,6 +676,17 @@ if (loginForm) {
                 let derivedName = email.split("@")[0].replace(/[._-]/g, " ");
                 derivedName = derivedName.split(" ").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
                 localStorage.setItem("userName", derivedName);
+            }
+
+            // Sync to Supabase Backend
+            if (typeof window.recordUserLogin === "function") {
+                window.recordUserLogin(localStorage.getItem("userName") || email.split("@")[0], email);
+            }
+            if (window.supabaseClient && window.supabaseClient.auth) {
+                window.supabaseClient.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                }).catch(() => {});
             }
 
             showAuthMessage("Login successful! Redirecting to Dashboard...", "success");
