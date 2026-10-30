@@ -116,16 +116,6 @@
                     <i class="fa-solid fa-arrow-right"></i>
                 </button>
 
-                <!-- Quick One-Click Demo Login -->
-                <div class="auth-divider">
-                    <span>or fast pass</span>
-                </div>
-
-                <button type="button" class="btn-demo-quick" onclick="fillDemoAndLogin()">
-                    <i class="fa-solid fa-bolt"></i>
-                    <span>Quick Demo Login (Thonduru Rukiya)</span>
-                </button>
-
             </form>
 
             <!-- Mode Switcher (Login <-> Signup) -->
@@ -145,22 +135,6 @@
         <span>&bull;</span>
         <span>256-bit Secure Session</span>
     </footer>
-
-    <!-- Theme & Demo Script -->
-    <script>
-    function fillDemoAndLogin() {
-        const email = document.getElementById("email");
-        const pass = document.getElementById("password");
-        if (email) email.value = "rukiya.thonduru@alts.edu";
-        if (pass) pass.value = "SecurePass2026!";
-        
-        const form = document.getElementById("loginForm");
-        if (form) {
-            const submitEvent = new Event("submit", { cancelable: true });
-            form.dispatchEvent(submitEvent);
-        }
-    }
-</script>
 
 </body>
 </html>

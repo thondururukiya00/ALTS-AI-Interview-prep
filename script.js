@@ -836,17 +836,3 @@ function calculateResult() {
 
     } catch (e) {}
 })();
-
-window.autoFillDemoLogin = function() {
-    const emailEl = document.getElementById("email");
-    const passwordEl = document.getElementById("password");
-    if (emailEl) emailEl.value = "rukiya.thonduru@alts.edu";
-    if (passwordEl) passwordEl.value = "password123";
-    localStorage.setItem("userName", "Thonduru Rukiya");
-    localStorage.setItem("userEmail", "rukiya.thonduru@alts.edu");
-    localStorage.setItem("candidateId", "ALTS-2026-9041");
-    localStorage.setItem("candidateTrack", "SDE Level-1 Track");
-    if (window.showAuthMessage) {
-        showAuthMessage("Auto-filled candidate: Thonduru Rukiya. Click Login to enter.", "success");
-    }
-};
