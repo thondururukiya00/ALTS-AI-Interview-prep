@@ -133,7 +133,7 @@
                 topics: ["Quant", "Ratios & Work", "Logical Deduction", "Probability"],
                 meta: {
                     duration: "30 Mins",
-                    questions: "5 Questions",
+                    questions: "20 Questions",
                     marks: "100 Marks"
                 },
                 targetUrl: "aptitude.html"
