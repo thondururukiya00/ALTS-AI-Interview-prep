@@ -270,7 +270,7 @@ if (startBtn) {
                 try {
                     recognition.stop();
                     setTimeout(() => recognition.start(), 200);
-                } catch (err) {}
+                } catch (err) { }
             }
         } else if (!recognition) {
             if (micHelpText) {
@@ -288,7 +288,7 @@ if (stopBtn) {
         if (recognition && isRecognizing) {
             try {
                 recognition.stop();
-            } catch (e) {}
+            } catch (e) { }
         }
         isRecognizing = false;
 
@@ -330,7 +330,7 @@ const countdown = setInterval(() => {
     if (time < 0) {
         clearInterval(countdown);
         if (recognition) {
-            try { recognition.stop(); } catch (e) {}
+            try { recognition.stop(); } catch (e) { }
         }
         finishGD();
     }
@@ -346,7 +346,7 @@ if (finishBtn) {
 
 function finishGD() {
     if (recognition) {
-        try { recognition.stop(); } catch (e) {}
+        try { recognition.stop(); } catch (e) { }
     }
     window.speechSynthesis.cancel();
     clearInterval(countdown);

@@ -220,9 +220,8 @@
         </div>
 
         <div class="header-cta-group">
-            <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeToggleBtn" title="Toggle Light / Dark Mode">
+            <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeToggleBtn" title="Toggle Theme" aria-label="Toggle Theme">
                 <i class="fa-solid fa-moon" id="themeIcon"></i>
-                <span id="themeLabel">Dark Charcoal Mode</span>
             </button>
             <a href="login.html" class="btn-dev-outline">
                 <i class="fa-solid fa-arrow-right-to-bracket"></i>
@@ -661,27 +660,31 @@
 
 <script>
     function toggleTheme() {
-        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('alts-theme', newTheme);
-        updateThemeUI(newTheme);
-    }
-
-    function updateThemeUI(theme) {
-        const icon = document.getElementById('themeIcon');
-        const label = document.getElementById('themeLabel');
-        if (theme === 'dark') {
-            if (icon) icon.className = 'fa-solid fa-sun';
-            if (label) label.textContent = 'Light Mode';
-        } else {
-            if (icon) icon.className = 'fa-solid fa-moon';
-            if (label) label.textContent = 'Dark Charcoal Mode';
+            const btn = document.getElementById('themeToggleBtn');
+            if (btn) {
+                btn.classList.add('theme-animating');
+                setTimeout(() => btn.classList.remove('theme-animating'), 400);
+            }
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('alts-theme', newTheme);
+            updateThemeUI(newTheme);
         }
-    }
 
-    // Initialize saved theme on load
-    (function () {
+        function updateThemeUI(theme) {
+            const icon = document.getElementById('themeIcon');
+            const btn = document.getElementById('themeToggleBtn');
+            if (theme === 'dark') {
+                if (icon) icon.className = 'fa-solid fa-sun';
+                if (btn) btn.title = 'Switch to Light Mode';
+            } else {
+                if (icon) icon.className = 'fa-solid fa-moon';
+                if (btn) btn.title = 'Switch to Dark Mode';
+            }
+        }
+
+        // Initialize saved theme on load
         const saved = localStorage.getItem('alts-theme') || 'light';
         document.documentElement.setAttribute('data-theme', saved);
         updateThemeUI(saved);

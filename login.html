@@ -31,9 +31,8 @@
         </a>
 
         <div class="login-top-actions">
-            <button class="theme-toggle-btn" onclick="toggleAuthTheme()" id="loginThemeBtn" title="Toggle Light / Dark Mode">
+            <button class="theme-toggle-btn" onclick="toggleAuthTheme()" id="loginThemeBtn" title="Toggle Theme" aria-label="Toggle Theme">
                 <i class="fa-solid fa-moon" id="loginThemeIcon"></i>
-                <span id="loginThemeLabel">Dark Mode</span>
             </button>
             <a href="index.html" class="btn-top-home">
                 <i class="fa-solid fa-house"></i>
@@ -156,6 +155,11 @@
         }
 
         function toggleAuthTheme() {
+            const btn = document.getElementById('loginThemeBtn');
+            if (btn) {
+                btn.classList.add('theme-animating');
+                setTimeout(() => btn.classList.remove('theme-animating'), 400);
+            }
             const current = document.documentElement.getAttribute("data-theme") || "light";
             const next = current === "dark" ? "light" : "dark";
             document.documentElement.setAttribute("data-theme", next);
@@ -165,20 +169,19 @@
 
         function updateLoginThemeUI(theme) {
             const icon = document.getElementById("loginThemeIcon");
-            const label = document.getElementById("loginThemeLabel");
+            const btn = document.getElementById("loginThemeBtn");
             if (theme === "dark") {
                 if (icon) icon.className = "fa-solid fa-sun";
-                if (label) label.textContent = "Light Mode";
+                if (btn) btn.title = "Switch to Light Mode";
             } else {
                 if (icon) icon.className = "fa-solid fa-moon";
-                if (label) label.textContent = "Dark Mode";
+                if (btn) btn.title = "Switch to Dark Mode";
             }
         }
 
-        (function () {
-            const saved = localStorage.getItem("alts-theme") || "light";
-            document.documentElement.setAttribute("data-theme", saved);
-            updateLoginThemeUI(saved);
+        const saved = localStorage.getItem("alts-theme") || "light";
+        document.documentElement.setAttribute("data-theme", saved);
+        updateLoginThemeUI(saved);
         })();
     </script>
 

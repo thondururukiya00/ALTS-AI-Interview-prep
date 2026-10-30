@@ -130,9 +130,8 @@
                 </div>
 
                 <div class="header-actions">
-                    <button class="theme-toggle-btn" onclick="toggleDashboardTheme()" id="dashThemeToggle" title="Toggle Light / Dark Mode">
+                    <button class="theme-toggle-btn" onclick="toggleDashboardTheme()" id="dashThemeToggle" title="Toggle Theme" aria-label="Toggle Theme">
                         <i class="fa-solid fa-moon" id="dashThemeIcon"></i>
-                        <span id="dashThemeLabel">Dark Mode</span>
                     </button>
                     <a href="components.html" class="btn-header-components" title="Explore Developer Component System">
                         <i class="fa-solid fa-shapes"></i>
@@ -372,27 +371,31 @@
 
 <script>
     function toggleDashboardTheme() {
-        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('alts-theme', newTheme);
-        updateDashboardThemeUI(newTheme);
-    }
-
-    function updateDashboardThemeUI(theme) {
-        const icon = document.getElementById('dashThemeIcon');
-        const label = document.getElementById('dashThemeLabel');
-        if (theme === 'dark') {
-            if (icon) icon.className = 'fa-solid fa-sun';
-            if (label) label.textContent = 'Light Mode';
-        } else {
-            if (icon) icon.className = 'fa-solid fa-moon';
-            if (label) label.textContent = 'Dark Mode';
+            const btn = document.getElementById('dashThemeToggle');
+            if (btn) {
+                btn.classList.add('theme-animating');
+                setTimeout(() => btn.classList.remove('theme-animating'), 400);
+            }
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('alts-theme', newTheme);
+            updateDashboardThemeUI(newTheme);
         }
-    }
 
-    // Initialize saved theme on load
-    (function () {
+        function updateDashboardThemeUI(theme) {
+            const icon = document.getElementById('dashThemeIcon');
+            const btn = document.getElementById('dashThemeToggle');
+            if (theme === 'dark') {
+                if (icon) icon.className = 'fa-solid fa-sun';
+                if (btn) btn.title = 'Switch to Light Mode';
+            } else {
+                if (icon) icon.className = 'fa-solid fa-moon';
+                if (btn) btn.title = 'Switch to Dark Mode';
+            }
+        }
+
+        // Initialize saved theme on load
         const saved = localStorage.getItem('alts-theme') || 'light';
         document.documentElement.setAttribute('data-theme', saved);
         updateDashboardThemeUI(saved);
