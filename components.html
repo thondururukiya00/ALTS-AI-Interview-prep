@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALTS Developer Component System & Library | Modern High-Contrast</title>
+
+    <!-- Google Fonts: Plus Jakarta Sans (UI) & IBM Plex Mono (Code/Tabular Data) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Design Tokens & Components Stylesheet -->
+    <link rel="stylesheet" href="colors.css">
+    <link rel="stylesheet" href="components.css">
+
+    <style>
+        body {
+            background-color: var(--background);
+            color: var(--foreground);
+            font-family: var(--font-sans);
+            padding: 40px 24px 100px;
+            margin: 0;
+            line-height: 1.55;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .showcase-wrapper {
+            max-width: 1240px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 56px;
+        }
+
+        /* Top Hero Banner */
+        .showcase-header {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 40px 44px;
+            box-shadow: var(--shadow-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .showcase-header::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .header-content h1 {
+            font-size: 34px;
+            font-weight: 800;
+            color: var(--foreground);
+            margin: 0 0 10px;
+            letter-spacing: var(--letter-spacing-tight);
+        }
+
+        .header-content p {
+            font-size: 14.5px;
+            color: var(--muted-foreground);
+            max-width: 680px;
+            margin: 0 0 20px;
+        }
+
+        .token-pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .token-tag {
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: var(--radius);
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            color: var(--foreground);
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .token-tag-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .header-cta-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* Section Container */
+        .showcase-section {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .section-lead {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+        }
+
+        .section-lead h2 {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--foreground);
+            margin: 0;
+            letter-spacing: var(--letter-spacing-tight);
+        }
+
+        .section-lead p {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--muted-foreground);
+            margin: 0;
+        }
+
+        /* Stage Split for Sidebar & Table */
+        .stage-split {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 28px;
+            align-items: flex-start;
+        }
+
+        @media (max-width: 1024px) {
+            .stage-split {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .token-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 14px;
+        }
+
+        .token-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .token-swatch {
+            width: 36px;
+            height: 36px;
+            border-radius: 1rem;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            flex-shrink: 0;
+        }
+
+        .token-meta {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .token-name {
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            font-weight: 700;
+            color: var(--foreground);
+        }
+
+        .token-hex {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--muted-foreground);
+        }
+    </style>
+</head>
+<body>
+
+<div class="showcase-wrapper">
+
+    <!-- Masthead -->
+    <header class="showcase-header">
+        <div class="header-content">
+            <h1>Developer Component System</h1>
+            <p>
+                A crisp, modern, developer-focused UI characterized by high-contrast typography, clean light/dark variants, vibrant violet-indigo primary accents (#7033ff / #8c5cff), and smooth, friendly rounded corners (--radius: 1.4rem).
+            </p>
+            <div class="token-pill-row">
+                <span class="token-tag"><span class="token-tag-dot" style="background:var(--background); border:1px solid var(--border);"></span>--background: #fdfdfd</span>
+                <span class="token-tag"><span class="token-tag-dot" style="background:var(--foreground);"></span>--foreground: #000000</span>
+                <span class="token-tag"><span class="token-tag-dot" style="background:var(--primary);"></span>--primary: #7033ff</span>
+                <span class="token-tag"><span class="token-tag-dot" style="background:var(--border);"></span>--border: #e7e7ee</span>
+                <span class="token-tag"><i class="fa-solid fa-shapes"></i> --radius: 1.4rem</span>
+                <span class="token-tag"><i class="fa-solid fa-font"></i> Plus Jakarta Sans + IBM Plex Mono</span>
+            </div>
+        </div>
+
+        <div class="header-cta-group">
+            <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeToggleBtn" title="Toggle Light / Dark Mode">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+                <span id="themeLabel">Dark Charcoal Mode</span>
+            </button>
+            <a href="login.html" class="btn-dev-outline">
+                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                <span>Login</span>
+            </a>
+            <a href="dashboard.html" class="btn-dev-primary">
+                <span>View Dashboard</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <a href="proctoring.html" class="btn-dev-outline">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Proctoring</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- SECTION: Color Tokens -->
+    <section class="showcase-section">
+        <div class="section-lead">
+            <h2>Design Token Palette</h2>
+            <p>Active CSS Custom Properties</p>
+        </div>
+
+        <div class="token-grid">
+            <div class="token-card">
+                <div class="token-swatch" style="background: var(--card);"></div>
+                <div class="token-meta">
+                    <span class="token-name">--card</span>
+                    <span class="token-hex">#fdfdfd / #222327</span>
+                </div>
+            </div>
+            <div class="token-card">
+                <div class="token-swatch" style="background: var(--primary);"></div>
+                <div class="token-meta">
+                    <span class="token-name">--primary</span>
+                    <span class="token-hex">#7033ff / #8c5cff</span>
+                </div>
+            </div>
+            <div class="token-card">
+                <div class="token-swatch" style="background: var(--background);"></div>
+                <div class="token-meta">
+                    <span class="token-name">--background</span>
+                    <span class="token-hex">#fdfdfd / #1a1b1e</span>
+                </div>
+            </div>
+            <div class="token-card">
+                <div class="token-swatch" style="background: var(--foreground);"></div>
+                <div class="token-meta">
+                    <span class="token-name">--foreground</span>
+                    <span class="token-hex">#000000 / #f0f0f0</span>
+                </div>
+            </div>
+            <div class="token-card">
+                <div class="token-swatch" style="background: var(--border);"></div>
+                <div class="token-meta">
+                    <span class="token-name">--border</span>
+                    <span class="token-hex">#e7e7ee / #33353a</span>
+                </div>
+            </div>
+            <div class="token-card">
+                <div class="token-swatch" style="background: var(--primary-subtle); border-color: var(--primary);"></div>
+                <div class="token-meta">
+                    <span class="token-name">--radius</span>
+                    <span class="token-hex">1.4rem (22.4px)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPONENT 1: Interactive Analytics Grid -->
+    <section class="showcase-section" id="analytics-grid">
+        <div class="section-lead">
+            <h2>Component 01 &mdash; Interactive Analytics Grid</h2>
+            <p>1.4rem rounded cards with IBM Plex Mono metrics and violet telemetry</p>
+        </div>
+
+        <div class="analytics-grid-dev">
+            <!-- Stat Card 1 -->
+            <div class="stat-card-dev">
+                <div class="stat-header">
+                    <span class="stat-label">Composite Score</span>
+                    <div class="stat-icon-wrap">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                </div>
+                <div class="stat-main">
+                    <div class="stat-value">398<span style="font-size: 20px; color: var(--muted-foreground);">/400</span></div>
+                    <div class="stat-progress-bar">
+                        <div class="stat-progress-fill" style="width: 99.5%;"></div>
+                    </div>
+                </div>
+                <div class="stat-footer">
+                    <span class="stat-trend trend-positive">
+                        <i class="fa-solid fa-arrow-trend-up"></i> 99.5%
+                    </span>
+                    <span class="stat-subtext">SDE-I Calibrated</span>
+                </div>
+            </div>
+
+            <!-- Stat Card 2 -->
+            <div class="stat-card-dev">
+                <div class="stat-header">
+                    <span class="stat-label">Pipeline Progress</span>
+                    <div class="stat-icon-wrap">
+                        <i class="fa-solid fa-cubes-stacked"></i>
+                    </div>
+                </div>
+                <div class="stat-main">
+                    <div class="stat-value">03<span style="font-size: 20px; color: var(--muted-foreground);">/04</span></div>
+                    <div class="stat-progress-bar">
+                        <div class="stat-progress-fill" style="width: 75%;"></div>
+                    </div>
+                </div>
+                <div class="stat-footer">
+                    <span class="stat-trend trend-positive">
+                        <i class="fa-solid fa-spinner fa-spin"></i> Technical Code
+                    </span>
+                    <span class="stat-subtext">75% Concluded</span>
+                </div>
+            </div>
+
+            <!-- Stat Card 3 -->
+            <div class="stat-card-dev">
+                <div class="stat-header">
+                    <span class="stat-label">Anti-Cheat Proctor</span>
+                    <div class="stat-icon-wrap">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                </div>
+                <div class="stat-main">
+                    <div class="stat-value">0<span style="font-size: 20px; color: var(--muted-foreground);">/3</span></div>
+                    <div class="stat-progress-bar">
+                        <div class="stat-progress-fill" style="width: 100%; background: #10b981;"></div>
+                    </div>
+                </div>
+                <div class="stat-footer">
+                    <span class="stat-trend trend-positive" style="color: #10b981; background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3);">
+                        <i class="fa-solid fa-circle-check"></i> 100% Clean
+                    </span>
+                    <span class="stat-subtext">Biometrics Armed</span>
+                </div>
+            </div>
+
+            <!-- Stat Card 4 -->
+            <div class="stat-card-dev">
+                <div class="stat-header">
+                    <span class="stat-label">Clock Remaining</span>
+                    <div class="stat-icon-wrap">
+                        <i class="fa-regular fa-clock"></i>
+                    </div>
+                </div>
+                <div class="stat-main">
+                    <div class="stat-value">25:00<span style="font-size: 18px; color: var(--muted-foreground);">m</span></div>
+                    <div class="stat-progress-bar">
+                        <div class="stat-progress-fill" style="width: 38%;"></div>
+                    </div>
+                </div>
+                <div class="stat-footer">
+                    <span class="stat-trend trend-neutral">
+                        <i class="fa-solid fa-stopwatch"></i> Calibrated
+                    </span>
+                    <span class="stat-subtext">65m Total</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPONENT 2 & 3: Sidebar with Stats & Modern Data Table -->
+    <section class="showcase-section" id="sidebar-and-table">
+        <div class="section-lead">
+            <h2>Component 02 & 03 &mdash; Navigation Sidebar with Stats & Data Table</h2>
+            <p>Stationary fixed navigation architecture paired with high-contrast data rows</p>
+        </div>
+
+        <div class="stage-split">
+
+            <!-- Standalone Sidebar Component Mockup -->
+            <aside class="sidebar-dev" style="border: 1px solid var(--border); border-radius: var(--radius); min-height: 640px; box-shadow: var(--shadow-subtle);">
+                <div class="sidebar-header">
+                    <div class="sidebar-brand">
+                        <div class="sidebar-crest">
+                            <i class="fa-solid fa-terminal"></i>
+                        </div>
+                        <div class="sidebar-brand-text">
+                            <h2>ALTS AI Assistant</h2>
+                            <p>Interview Preparation &bull; v2026</p>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" class="sidebar-search-input" placeholder="Search stages, telemetry...">
+                    </div>
+                </div>
+
+                <div class="sidebar-nav-group">
+                    <span class="sidebar-group-title">Assessment</span>
+                    <a href="#overview" class="sidebar-nav-item active">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <span>Dashboard Overview</span>
+                        <span class="sidebar-pill-badge">LIVE</span>
+                    </a>
+                    <a href="#pipeline" class="sidebar-nav-item">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <span>4-Stage Pipeline</span>
+                    </a>
+                    <a href="proctoring.html" class="sidebar-nav-item">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>Security Monitor</span>
+                    </a>
+                    <a href="result.html" class="sidebar-nav-item">
+                        <i class="fa-solid fa-square-poll-vertical"></i>
+                        <span>Audit Dossier</span>
+                    </a>
+                </div>
+
+                <!-- Live Proctoring Telemetry Widget inside Sidebar -->
+                <div class="sidebar-stats-widget">
+                    <div class="telemetry-header">
+                        <span class="telemetry-title">Engine Health</span>
+                        <span class="telemetry-pulse"></span>
+                    </div>
+                    <div class="telemetry-row">
+                        <span class="telemetry-label">Proctor AI:</span>
+                        <span class="telemetry-value" style="color: #10b981;">Online (99.8%)</span>
+                    </div>
+                    <div class="telemetry-row">
+                        <span class="telemetry-label">Strike Count:</span>
+                        <span class="telemetry-value">0 / 3 Allowed</span>
+                    </div>
+                    <div class="telemetry-row">
+                        <span class="telemetry-label">Active Set:</span>
+                        <span class="telemetry-value">Set 1 (E➔M➔H)</span>
+                    </div>
+                </div>
+
+                <!-- Candidate User Card in Sidebar -->
+                <div class="sidebar-footer">
+                    <div class="sidebar-user-card">
+                        <div class="user-avatar">TR</div>
+                        <div class="user-details">
+                            <span class="user-name">Thonduru Rukiya</span>
+                            <span class="user-role">ALTS-2026-9041</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Modern Developer Data Table Component -->
+            <div class="table-dev-container">
+                <div class="table-header-toolbar">
+                    <div class="table-title-area">
+                        <h3>Assessment Execution Matrix</h3>
+                        <p>Tabular verification logs formatted in high-contrast IBM Plex Mono typography.</p>
+                    </div>
+                    <div class="table-filter-toolbar">
+                        <input type="text" class="table-search-input" placeholder="Query stage, type, status...">
+                        <button class="btn-dev-primary" style="padding: 10px 18px; font-size: 13px;">
+                            <i class="fa-solid fa-code-commit"></i> Export JSON
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-scroll-wrapper">
+                    <table class="table-dev">
+                        <thead>
+                            <tr>
+                                <th>Stage ID & Title</th>
+                                <th>Engine Format</th>
+                                <th>Allocated</th>
+                                <th>Status</th>
+                                <th>Score (Mono)</th>
+                                <th style="text-align: right;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div style="width: 32px; height: 32px; border-radius: 0.8rem; background: var(--primary-subtle); border: 1px solid var(--primary-border); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--primary);">
+                                            01
+                                        </div>
+                                        <div>
+                                            <strong style="display: block; font-weight: 700;">Quantitative Aptitude</strong>
+                                            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--muted-foreground);">hash: 0x9f4a8b</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Logic & Algorithmic Quant</td>
+                                <td><span style="font-family: var(--font-mono);">30m / 100pts</span></td>
+                                <td>
+                                    <span class="badge-status badge-verified">VERIFIED COMPLETE</span>
+                                </td>
+                                <td>
+                                    <strong style="font-family: var(--font-mono); font-size: 14.5px;">98/100</strong>
+                                    <span style="font-family: var(--font-mono); font-size: 11px; color: var(--primary); margin-left: 4px;">(+14.2%)</span>
+                                </td>
+                                <td style="text-align: right;">
+                                    <a href="aptitude.html" class="btn-table-action">Inspect</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div style="width: 32px; height: 32px; border-radius: 0.8rem; background: var(--primary-subtle); border: 1px solid var(--primary-border); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--primary);">
+                                            02
+                                        </div>
+                                        <div>
+                                            <strong style="display: block; font-weight: 700;">Dialectical Discussion</strong>
+                                            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--muted-foreground);">hash: 0x3d1c9e</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Speech & NLP Debate</td>
+                                <td><span style="font-family: var(--font-mono);">05m / 100pts</span></td>
+                                <td>
+                                    <span class="badge-status badge-verified">VERIFIED COMPLETE</span>
+                                </td>
+                                <td>
+                                    <strong style="font-family: var(--font-mono); font-size: 14.5px;">95/100</strong>
+                                    <span style="font-family: var(--font-mono); font-size: 11px; color: var(--primary); margin-left: 4px;">(+9.5%)</span>
+                                </td>
+                                <td style="text-align: right;">
+                                    <a href="gd.html" class="btn-table-action">Inspect</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div style="width: 32px; height: 32px; border-radius: 0.8rem; background: var(--primary); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: #ffffff; box-shadow: 0 2px 8px rgba(112, 51, 255, 0.35);">
+                                            03
+                                        </div>
+                                        <div>
+                                            <strong style="display: block; font-weight: 700;">Technical & Code</strong>
+                                            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--primary);">ACTIVE SESSION</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>DSA, Arrays & Graph Stack</td>
+                                <td><span style="font-family: var(--font-mono);">20m / 100pts</span></td>
+                                <td>
+                                    <span class="badge-status badge-progress">EVALUATION IN PROGRESS</span>
+                                </td>
+                                <td>
+                                    <span style="font-family: var(--font-mono); font-size: 13.5px; color: var(--muted-foreground);">TESTING...</span>
+                                </td>
+                                <td style="text-align: right;">
+                                    <a href="tech.html" class="btn-table-action primary">Resume IDE &rarr;</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div style="width: 32px; height: 32px; border-radius: 0.8rem; background: var(--surface-alt); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--muted-foreground);">
+                                            04
+                                        </div>
+                                        <div>
+                                            <strong style="display: block; font-weight: 700;">Behavioral & Leadership</strong>
+                                            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--muted-foreground);">hash: 0x8a7f14</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Autonomous Audio Q&A</td>
+                                <td><span style="font-family: var(--font-mono);">10m / 100pts</span></td>
+                                <td>
+                                    <span class="badge-status badge-pending">SCHEDULED QUEUE</span>
+                                </td>
+                                <td>
+                                    <span style="font-family: var(--font-mono); font-size: 13px; color: var(--muted-foreground);">QUEUED</span>
+                                </td>
+                                <td style="text-align: right;">
+                                    <a href="hr.html" class="btn-table-action">Queue</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="table-footer-bar">
+                    <span>Active Candidate Ledger &bull; Composite: <strong style="font-family: var(--font-mono); color: var(--primary);">398 / 400</strong></span>
+                    <div class="table-pagination">
+                        <button class="btn-pagination active">01</button>
+                        <button class="btn-pagination">02</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- COMPONENT 4: Developer Primitives & Code Samples -->
+    <section class="showcase-section" id="ui-primitives">
+        <div class="section-lead">
+            <h2>Component 04 &mdash; Developer Primitives & Buttons</h2>
+            <p>Components featuring 1.4rem radius and tactile interactive feedback</p>
+        </div>
+
+        <div style="background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 36px; display: flex; flex-direction: column; gap: 32px; box-shadow: var(--shadow-subtle);">
+            
+            <!-- Button Tokens -->
+            <div>
+                <h4 style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted-foreground); margin-bottom: 14px;">Button Hierarchy (--radius: 1.4rem)</h4>
+                <div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center;">
+                    <button class="btn-dev-primary">
+                        <i class="fa-solid fa-play"></i>
+                        <span>Primary Violet Button</span>
+                    </button>
+                    <button class="btn-dev-outline">
+                        <i class="fa-solid fa-code-compare"></i>
+                        <span>Outline Secondary</span>
+                    </button>
+                    <button class="btn-dev-outline" style="border-style: dashed;">
+                        <i class="fa-solid fa-terminal"></i>
+                        <span>Dashed Developer Action</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Monospace & Status Badges -->
+            <div>
+                <h4 style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted-foreground); margin-bottom: 14px;">High-Contrast Badges & Code Tags</h4>
+                <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+                    <span class="badge-status badge-verified">VERIFIED COMPLETE</span>
+                    <span class="badge-status badge-progress">EVALUATION IN PROGRESS</span>
+                    <span class="badge-status badge-pending">PENDING QUEUE</span>
+                    <span class="token-tag">
+                        <i class="fa-solid fa-microchip"></i> SDE_TRACK_CALIBRATION_OK
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+<script>
+    function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('alts-theme', newTheme);
+        updateThemeUI(newTheme);
+    }
+
+    function updateThemeUI(theme) {
+        const icon = document.getElementById('themeIcon');
+        const label = document.getElementById('themeLabel');
+        if (theme === 'dark') {
+            if (icon) icon.className = 'fa-solid fa-sun';
+            if (label) label.textContent = 'Light Mode';
+        } else {
+            if (icon) icon.className = 'fa-solid fa-moon';
+            if (label) label.textContent = 'Dark Charcoal Mode';
+        }
+    }
+
+    // Initialize saved theme on load
+    (function () {
+        const saved = localStorage.getItem('alts-theme') || 'light';
+        document.documentElement.setAttribute('data-theme', saved);
+        updateThemeUI(saved);
+    })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Authentication & Login | ALTS Assessment</title>
+
+    <!-- Google Fonts: Plus Jakarta Sans (UI) & IBM Plex Mono (Code/Tabular Data) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Design Tokens & Login Stylesheet -->
+    <link rel="stylesheet" href="colors.css">
+    <link rel="stylesheet" href="login.css">
+
+    <!-- Main Logic Script (Includes Auth Engine) -->
+    <script src="script.js" defer></script>
+</head>
+
+<body class="login-body">
+
+    <!-- Top Navigation Bar -->
+    <header class="login-topbar">
+        <a href="index.html" class="login-brand" title="Return to ALTS Landing Masthead">
+            <div class="login-brand-icon">
+                <i class="fa-solid fa-terminal"></i>
+            </div>
+            <span class="login-brand-title">ALTS Assessment</span>
+        </a>
+
+        <div class="login-top-actions">
+            <button class="theme-toggle-btn" onclick="toggleAuthTheme()" id="loginThemeBtn" title="Toggle Light / Dark Mode">
+                <i class="fa-solid fa-moon" id="loginThemeIcon"></i>
+                <span id="loginThemeLabel">Dark Mode</span>
+            </button>
+            <a href="index.html" class="btn-top-home">
+                <i class="fa-solid fa-house"></i>
+                <span>Masthead</span>
+            </a>
+            <a href="dashboard.html" class="btn-top-home">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Direct Dashboard</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Central Authentication Card -->
+    <main class="login-main">
+        <div class="auth-card">
+
+            <!-- Card Header -->
+            <div class="auth-header">
+                <span class="auth-badge">
+                    <i class="fa-solid fa-shield-halved"></i> SECURE CANDIDATE PORTAL
+                </span>
+                <h1 id="formTitle">Welcome Back</h1>
+                <p id="formSubtitle">Login to continue</p>
+            </div>
+
+            <!-- Dynamic Feedback Alert Message -->
+            <div id="authMessage" class="auth-message"></div>
+
+            <!-- Login / Signup Form -->
+            <form id="loginForm" class="auth-form" novalidate autocomplete="on">
+
+                <!-- Full Name Field (Displayed during Signup mode) -->
+                <div class="form-group" id="nameBox" style="display: none;">
+                    <label for="name">Full Name</label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-user input-icon"></i>
+                        <input type="text" id="name" name="name" class="auth-input" placeholder="e.g. Thonduru Rukiya" autocomplete="name">
+                    </div>
+                </div>
+
+                <!-- Email Address Field -->
+                <div class="form-group">
+                    <label for="email">Institutional Email</label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-envelope input-icon"></i>
+                        <input type="email" id="email" name="email" class="auth-input" placeholder="candidate@alts.edu" autocomplete="email" required>
+                    </div>
+                </div>
+
+                <!-- Password Field -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-lock input-icon"></i>
+                        <input type="password" id="password" name="password" class="auth-input" placeholder="Password" autocomplete="current-password" required>
+                        <i class="fa-solid fa-eye-slash toggle-password" id="togglePassword" title="Show/Hide Password"></i>
+                    </div>
+                </div>
+
+                <!-- Confirm Password Field (Displayed during Signup mode) -->
+                <div class="form-group" id="confirmPasswordBox" style="display: none;">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-shield-check input-icon"></i>
+                        <input type="password" id="confirmPassword" name="confirmPassword" class="auth-input" placeholder="Confirm Password" autocomplete="new-password">
+                        <i class="fa-solid fa-eye-slash toggle-password" id="toggleConfirmPassword" title="Show/Hide Password"></i>
+                    </div>
+                </div>
+
+                <!-- Primary Submit Action -->
+                <button type="submit" id="submitBtn" class="btn-auth-submit">
+                    <span>Login</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+                <!-- Quick One-Click Demo Login -->
+                <div class="auth-divider">
+                    <span>or fast pass</span>
+                </div>
+
+                <button type="button" class="btn-demo-quick" onclick="fillDemoAndLogin()">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>Quick Demo Login (Thonduru Rukiya)</span>
+                </button>
+
+            </form>
+
+            <!-- Mode Switcher (Login <-> Signup) -->
+            <div class="auth-footer">
+                <span id="authToggleText">New User? </span>
+                <span id="authToggleLink" class="auth-toggle-link" onclick="toggleAuthMode()">Create Account</span>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Bottom Metadata Bar -->
+    <footer class="login-footer-bar">
+        <span>ALTS Autonomous Labor & Technical Assessment</span>
+        <span>&bull;</span>
+        <span>Engine v2026.4.1</span>
+        <span>&bull;</span>
+        <span>256-bit Secure Session</span>
+    </footer>
+
+    <!-- Theme & Demo Script -->
+    <script>
+        function fillDemoAndLogin() {
+            const email = document.getElementById("email");
+            const pass = document.getElementById("password");
+            if (email) email.value = "rukiya.thonduru@alts.edu";
+            if (pass) pass.value = "SecurePass2026!";
+            
+            // Trigger login
+            const form = document.getElementById("loginForm");
+            if (form) {
+                const submitEvent = new Event("submit", { cancelable: true });
+                form.dispatchEvent(submitEvent);
+            }
+        }
+
+        function toggleAuthTheme() {
+            const current = document.documentElement.getAttribute("data-theme") || "light";
+            const next = current === "dark" ? "light" : "dark";
+            document.documentElement.setAttribute("data-theme", next);
+            localStorage.setItem("alts-theme", next);
+            updateLoginThemeUI(next);
+        }
+
+        function updateLoginThemeUI(theme) {
+            const icon = document.getElementById("loginThemeIcon");
+            const label = document.getElementById("loginThemeLabel");
+            if (theme === "dark") {
+                if (icon) icon.className = "fa-solid fa-sun";
+                if (label) label.textContent = "Light Mode";
+            } else {
+                if (icon) icon.className = "fa-solid fa-moon";
+                if (label) label.textContent = "Dark Mode";
+            }
+        }
+
+        (function () {
+            const saved = localStorage.getItem("alts-theme") || "light";
+            document.documentElement.setAttribute("data-theme", saved);
+            updateLoginThemeUI(saved);
+        })();
+    </script>
+
+</body>
+</html>
+

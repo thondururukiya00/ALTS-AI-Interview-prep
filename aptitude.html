@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stage I: Quantitative Aptitude | ALTS Assessment</title>
+
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="aptitude.css">
+    <link rel="stylesheet" href="proctoring.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>ALTS Autonomous Assessment Framework</h1>
+        <h2>Stage I &mdash; Quantitative & Logical Aptitude</h2>
+        <div class="set-header-bar">
+            <span class="active-set-tag" id="setTag"><i class="fa-solid fa-layer-group"></i> Active Set: Set 1</span>
+            <span class="difficulty-scale"><i class="fa-solid fa-signal"></i> Progressive Difficulty: <strong>Easy ➔ Medium ➔ Hard</strong></span>
+        </div>
+    </div>
+
+    <div class="top-bar">
+
+        <div class="progress">
+            <h3>Round 1 of 4: Quantitative & Logical Assessment</h3>
+            <progress value="25" max="100"></progress>
+            <p>5 Progressive Questions (20 Marks each = 100 Marks total)</p>
+        </div>
+
+        <div class="timer-box">
+            <h3><i class="fa-regular fa-clock"></i> Time Left</h3>
+            <h2 id="timer">30:00</h2>
+        </div>
+
+    </div>
+
+    <form id="quizForm">
+
+        <!-- Questions will appear here automatically with Easy -> Medium -> Hard difficulty -->
+        <div id="questionContainer"></div>
+
+        <br>
+
+        <button type="button" id="submitBtn">
+            <span>Submit Aptitude & Proceed to Round 2 (Group Discussion)</span>
+            <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+    </form>
+
+</div>
+
+<script src="aptitude.js"></script>
+
+</body>
+</html>

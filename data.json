@@ -1,0 +1,172 @@
+{
+  "system": {
+    "name": "ALTS AI Powered Interview Assistant",
+    "tagline": "Intelligent 4-Stage Campus & Corporate Hiring Assessment",
+    "version": "2026.4.1"
+  },
+  "candidate": {
+    "name": "Thonduru Rukiya",
+    "email": "rukiya.thonduru@alts.edu",
+    "candidateId": "ALTS-2026-9041",
+    "track": "SDE LEVEL-1 TRACK",
+    "proctorStatus": "PROCTOR ARMED"
+  },
+  "questionSets": {
+    "activeSet": 1,
+    "totalSets": 5,
+    "tag": "Anti-Repeat Active",
+    "description": "Every round contains calibrated questions ordered strictly from Easy ➔ Medium ➔ Hard."
+  },
+  "executiveMetrics": [
+    {
+      "id": "rounds",
+      "icon": "fa-solid fa-cubes-stacked",
+      "colorClass": "metric-blue",
+      "label": "Total Rounds",
+      "value": "4 Calibrated Stages"
+    },
+    {
+      "id": "duration",
+      "icon": "fa-regular fa-clock",
+      "colorClass": "metric-green",
+      "label": "Total Duration",
+      "value": "65 Mins Scheduled"
+    },
+    {
+      "id": "marks",
+      "icon": "fa-solid fa-award",
+      "colorClass": "metric-purple",
+      "label": "Max Composite Marks",
+      "value": "400 Total Points"
+    },
+    {
+      "id": "proctor",
+      "icon": "fa-solid fa-video",
+      "colorClass": "metric-amber",
+      "label": "Anti-Cheat Protocol",
+      "value": "Webcam & 3 Strikes"
+    }
+  ],
+  "dossier": {
+    "title": "ALTS Assessment Evaluation Dossier",
+    "scoreBadge": "398 / 400 (99.5%)",
+    "status": "Strong Hire Recommended",
+    "description": "Multi-stage evaluation dossier ready for Thonduru Rukiya • Status: Strong Hire Recommended",
+    "targetUrl": "result.html"
+  },
+  "rounds": [
+    {
+      "roundNumber": 1,
+      "badge": "Round 01",
+      "cardClass": "round-aptitude",
+      "title": "Aptitude & Logical Reasoning",
+      "icon": "fa-solid fa-brain",
+      "description": "Solve progressive multiple-choice questions assessing quantitative ability, series, logical reasoning, and permutations.",
+      "difficultyFlow": [
+        { "level": "Easy", "className": "diff-easy" },
+        { "level": "Medium", "className": "diff-medium" },
+        { "level": "Hard", "className": "diff-hard" }
+      ],
+      "topics": ["Quant", "Ratios & Work", "Logical Deduction", "Probability"],
+      "meta": {
+        "duration": "30 Mins",
+        "questions": "5 Questions",
+        "marks": "100 Marks"
+      },
+      "targetUrl": "aptitude.html"
+    },
+    {
+      "roundNumber": 2,
+      "badge": "Round 02",
+      "cardClass": "round-gd",
+      "title": "AI Group Discussion",
+      "icon": "fa-solid fa-comments",
+      "description": "Voice-enabled interactive topic discussion. Present clear articulation, structured thoughts, pros/cons, and persuasive conclusions.",
+      "difficultyFlow": [
+        { "level": "Fundamentals", "className": "diff-easy" },
+        { "level": "Analysis", "className": "diff-medium" },
+        { "level": "Impact", "className": "diff-hard" }
+      ],
+      "topics": ["Voice Recognition", "AI Evaluation", "Critical Thinking"],
+      "meta": {
+        "duration": "5 Mins",
+        "questions": "1 Selected Topic",
+        "marks": "100 Marks"
+      },
+      "targetUrl": "gd.html"
+    },
+    {
+      "roundNumber": 3,
+      "badge": "Round 03",
+      "cardClass": "round-tech",
+      "title": "Technical & Coding Round",
+      "icon": "fa-solid fa-code",
+      "description": "Real-time coding challenges covering basic programming, data structures (Search, Arrays, Stacks), and object-oriented fundamentals.",
+      "difficultyFlow": [
+        { "level": "Basic Coding", "className": "diff-easy" },
+        { "level": "DSA / OOP", "className": "diff-medium" },
+        { "level": "Algorithmic", "className": "diff-hard" }
+      ],
+      "topics": ["C", "Python", "Java", "Data Structures"],
+      "meta": {
+        "duration": "20 Mins",
+        "questions": "5 Coding Problems",
+        "marks": "100 Marks"
+      },
+      "targetUrl": "tech.html"
+    },
+    {
+      "roundNumber": 4,
+      "badge": "Round 04",
+      "cardClass": "round-hr",
+      "title": "HR & Behavioral Round",
+      "icon": "fa-solid fa-user-tie",
+      "description": "Voice-driven HR behavioral assessment. Evaluate candidate cultural fit, conflict resolution, work ethic, and situational maturity.",
+      "difficultyFlow": [
+        { "level": "Background", "className": "diff-easy" },
+        { "level": "Behavioral", "className": "diff-medium" },
+        { "level": "Situational", "className": "diff-hard" }
+      ],
+      "topics": ["Self-Awareness", "Conflict Handling", "Leadership", "Ethics"],
+      "meta": {
+        "duration": "10 Mins",
+        "questions": "5 Questions",
+        "marks": "100 Marks"
+      },
+      "targetUrl": "hr.html"
+    }
+  ],
+  "securityGuidelines": [
+    {
+      "icon": "fa-solid fa-triangle-exclamation",
+      "title": "Tab Switching",
+      "detail": "Switching tabs or windows during an active test will be flagged."
+    },
+    {
+      "icon": "fa-solid fa-ban",
+      "title": "Shortcuts & Inspection",
+      "detail": "Right-click and dev-tool keys are disabled inside assessment rounds."
+    },
+    {
+      "icon": "fa-solid fa-bars-progress",
+      "title": "Single Continuous Session",
+      "detail": "Complete all 4 rounds in sequence for the overall composite rating."
+    },
+    {
+      "icon": "fa-solid fa-chart-line",
+      "title": "Adaptive Scoring",
+      "detail": "Each round holds 100 marks (400 total) with weighted evaluation."
+    },
+    {
+      "icon": "fa-solid fa-rotate-right",
+      "title": "Set Anti-Repetition",
+      "detail": "Your next interview attempt will automatically cycle to a fresh non-repeating set."
+    },
+    {
+      "icon": "fa-solid fa-file-circle-check",
+      "title": "Final Performance Report",
+      "detail": "An analytics card with individual round breakdowns is generated at the end."
+    }
+  ]
+}
+

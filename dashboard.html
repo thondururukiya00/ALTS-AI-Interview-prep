@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALTS AI Interview Preparation Assistant</title>
+
+    <!-- Google Fonts: Plus Jakarta Sans (UI) & IBM Plex Mono (Code/Tabular Data) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Design Tokens & Centralized Stylesheets -->
+    <link rel="stylesheet" href="colors.css">
+    <link rel="stylesheet" href="components.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Modular Dashboard Script -->
+    <script src="dashboard.js" defer></script>
+</head>
+
+<body>
+
+<div class="dashboard-app-wrapper">
+
+    <!-- Component 02: Stationary Developer Sidebar Navigation with Stats -->
+    <aside class="sidebar-editorial" id="sidebarNav">
+        <div class="sidebar-header">
+            <div class="sidebar-brand">
+                <div class="sidebar-crest">
+                    <i class="fa-solid fa-terminal"></i>
+                </div>
+                <div class="sidebar-brand-text">
+                    <h2>ALTS AI Assistant</h2>
+                    <p>Interview Preparation &bull; v2026</p>
+                </div>
+            </div>
+
+            <div class="sidebar-search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" class="sidebar-search-input" placeholder="Search stages, rules...">
+            </div>
+        </div>
+
+        <div class="sidebar-nav-group">
+            <span class="sidebar-group-title">Assessment</span>
+            <a href="dashboard.html" class="sidebar-nav-item active">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Dashboard Overview</span>
+                <span class="sidebar-pill-badge">LIVE</span>
+            </a>
+            <a href="#roundsSection" class="sidebar-nav-item">
+                <i class="fa-solid fa-layer-group"></i>
+                <span>4-Stage Pipeline</span>
+            </a>
+            <a href="#tableSection" class="sidebar-nav-item">
+                <i class="fa-solid fa-table-list"></i>
+                <span>Candidate Ledger</span>
+            </a>
+            <a href="proctoring.html" class="sidebar-nav-item">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Anti-Cheat Console</span>
+            </a>
+            <a href="components.html" class="sidebar-nav-item">
+                <i class="fa-solid fa-cubes"></i>
+                <span>Component System</span>
+            </a>
+            <a href="result.html" class="sidebar-nav-item">
+                <i class="fa-solid fa-square-poll-vertical"></i>
+                <span>Audit Dossier</span>
+            </a>
+
+            <span class="sidebar-group-title" style="margin-top: 14px;">System</span>
+            <a href="login.html" class="sidebar-nav-item">
+                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                <span>Candidate Login</span>
+            </a>
+            <a href="index.html" class="sidebar-nav-item">
+                <i class="fa-solid fa-house"></i>
+                <span>Hero Masthead</span>
+            </a>
+            <a href="#conductSection" class="sidebar-nav-item">
+                <i class="fa-solid fa-scale-balanced"></i>
+                <span>Code of Conduct</span>
+            </a>
+        </div>
+
+        <!-- Telemetry Widget -->
+        <div class="sidebar-stats-widget">
+            <div class="telemetry-header">
+                <span class="telemetry-title">Engine Health</span>
+                <span class="telemetry-pulse"></span>
+            </div>
+            <div class="telemetry-row">
+                <span class="telemetry-label">Proctor AI:</span>
+                <span class="telemetry-value" style="color: #10b981;">Online (99.8%)</span>
+            </div>
+            <div class="telemetry-row">
+                <span class="telemetry-label">Strike Count:</span>
+                <span class="telemetry-value">0 / 3 Allowed</span>
+            </div>
+            <div class="telemetry-row">
+                <span class="telemetry-label">Active Set:</span>
+                <span class="telemetry-value">Set 1 (E➔M➔H)</span>
+            </div>
+        </div>
+
+        <!-- User Profile in Sidebar -->
+        <div class="sidebar-footer">
+            <div class="sidebar-user-card">
+                <div class="user-avatar">TR</div>
+                <div class="user-details">
+                    <span class="user-name">Thonduru Rukiya</span>
+                    <span class="user-role">ALTS-2026-9041</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="dashboard-main-area">
+        <div class="dashboard-container">
+
+            <!-- Masthead Header -->
+            <header class="dashboard-header">
+                <div class="header-brand">
+                    <h1>ALTS AI Interview Preparation Assistant</h1>
+                    <p class="brand-tagline">Intelligent 4-Stage Campus & Corporate Hiring Assessment</p>
+                </div>
+
+                <div class="header-actions">
+                    <button class="theme-toggle-btn" onclick="toggleDashboardTheme()" id="dashThemeToggle" title="Toggle Light / Dark Mode">
+                        <i class="fa-solid fa-moon" id="dashThemeIcon"></i>
+                        <span id="dashThemeLabel">Dark Mode</span>
+                    </button>
+                    <a href="components.html" class="btn-header-components" title="Explore Developer Component System">
+                        <i class="fa-solid fa-shapes"></i>
+                        <span>Components</span>
+                    </a>
+                    <a href="proctoring.html" class="btn-header-proctor" title="Open Anti-Cheat Proctoring Console">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>Security</span>
+                    </a>
+                    <button class="btn-header-result" onclick="showResult()" title="View Final Assessment Results">
+                        <i class="fa-solid fa-square-poll-vertical"></i>
+                        <span>Audit Dossier</span>
+                    </button>
+                    <button class="logout-btn" onclick="logout()" title="End Session and Logout">
+                        <span>Exit</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Welcome & Candidate Banner -->
+            <section class="welcome-section" aria-label="Candidate Profile and Question Set">
+                <div class="welcome-profile">
+                    <div class="welcome-info">
+                        <div class="welcome-badges-row">
+                            <h2 id="candidateDisplayName">Thonduru Rukiya</h2>
+                            <span id="candidateTrackBadge" class="badge-track">SDE-LEVEL-1</span>
+                            <span id="candidateProctorBadge" class="badge-proctor"><i class="fa-solid fa-circle-check"></i> PROCTOR ARMED</span>
+                        </div>
+                        <p id="userEmailDisplay" class="user-email-text">Auth User: <strong>rukiya.thonduru@alts.edu</strong> &bull; Candidate ID: <strong>ALTS-2026-9041</strong></p>
+                    </div>
+                </div>
+
+                <div class="set-control-card">
+                    <div class="set-header">
+                        <span class="set-badge">CALIBRATION ENGINE</span>
+                        <span class="no-repeat-tag"><i class="fa-solid fa-shield-check"></i> ANTI-REPEAT ACTIVE</span>
+                    </div>
+                    <div class="set-main">
+                        <h3 id="currentSetLabel">Set 1 of 5</h3>
+                        <button type="button" class="cycle-set-btn" onclick="cycleInterviewSet()" title="Rotate question set">
+                            Rotate Set
+                        </button>
+                    </div>
+                    <p id="setDesc" class="set-desc">Every round contains calibrated questions ordered strictly from <strong>Easy ➔ Medium ➔ Hard</strong>.</p>
+                </div>
+            </section>
+
+            <!-- Component 01: Executive Analytics Metric Cards Strip (4-Column Grid) -->
+            <section class="metrics-section" aria-label="Executive Metrics">
+                <div class="metrics-grid" id="metricsGrid">
+                    <!-- Dynamically populated from data.json / dashboard.js -->
+                </div>
+            </section>
+
+            <!-- Interview Rounds (2x2 Grid) -->
+            <section class="rounds-section" id="roundsSection" aria-label="Interview Rounds">
+                <div class="section-title-wrap">
+                    <h2>The Four Examination Stages</h2>
+                    <p>Sequential execution protocol with difficulty progression from fundamentals to algorithmic complexity.</p>
+                </div>
+
+                <div class="rounds-grid" id="roundsGrid">
+                    <!-- Dynamically populated from data.json / dashboard.js -->
+                </div>
+            </section>
+
+            <!-- Component 03: Modern Developer Data Table with Status Badges -->
+            <section class="table-section" id="tableSection" aria-label="Examination Ledger">
+                <div class="table-dev-container">
+                    <div class="table-header-toolbar">
+                        <div class="table-title-area">
+                            <h3>Assessment Execution Matrix</h3>
+                            <p>Multi-stage verification logs formatted in high-contrast IBM Plex Mono typography.</p>
+                        </div>
+                        <div class="table-filter-toolbar">
+                            <input type="text" class="table-search-input" placeholder="Query stage or hash...">
+                            <a href="result.html" class="btn-dev-primary" style="padding: 10px 18px; font-size: 13px; text-decoration: none;">
+                                <i class="fa-solid fa-file-code"></i> View Full Audit
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="table-scroll-wrapper">
+                        <table class="table-dev">
+                            <thead>
+                                <tr>
+                                    <th>Stage ID & Title</th>
+                                    <th>Engine Format</th>
+                                    <th>Allocated</th>
+                                    <th>Status</th>
+                                    <th>Score (Mono)</th>
+                                    <th style="text-align: right;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 12px;">
+                                            <div style="width: 32px; height: 32px; border-radius: 0.8rem; background: var(--primary-subtle); border: 1px solid var(--primary-border); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--primary);">
+                                                01
+                                            </div>
+                                            <div>
+                                                <strong style="display: block; font-weight: 700;">Quantitative Aptitude</strong>
+                                                <span style="font-family: var(--font-mono); font-size: 11px; color: var(--muted-foreground);">hash: 0x9f4a8b</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Logic & Algorithmic Quant</td>
+                                    <td><span style="font-family: var(--font-mono);">30m / 100pts</span></td>
+                                    <td>
+                                        <span class="badge-status badge-verified">VERIFIED COMPLETE</span>
+                                    </td>
+                                    <td>
+                                        <strong style="font-family: var(--font-mono); font-size: 14.5px;">98/100</strong>
+                                        <span style="font-family: var(--font-mono); font-size: 11px; color: var(--primary); margin-left: 4px;">(+14.2%)</span>
+                                    </td>
+                                    <td style="text-align: right;">
+                                        <a href="aptitude.html" class="btn-table-action">Inspect</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 12px;">
+                                            <div style="width: 32px; height: 32px; border-radius: 0.8rem; background: var(--primary-subtle); border: 1px solid var(--primary-border); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--primary);">
+                                                02
+                                            </div>
+                                            <div>
+                                                <strong style="display: block; font-weight: 700;">Dialectical Discussion</strong>
+                                                <span style="font-family: var(--font-mono); font-size: 11px; color: var(--muted-foreground);">hash: 0x3d1c9e</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Speech & NLP Debate</td>
+                                    <td><span style="font-family: var(--font-mono);">05m / 100pts</span></td>
+                                    <td>
+                                        <span class="badge-status badge-verified">VERIFIED COMPLETE</span>
+                                    </td>
+                                    <td>
+                                        <strong style="font-family: var(--font-mono); font-size: 14.5px;">95/100</strong>
+                                        <span style="font-family: var(--font-mono); font-size: 11px; color: var(--primary); margin-left: 4px;">(+9.5%)</span>
+                                    </td>
+                                    <td style="text-align: right;">
+                                        <a href="gd.html" class="btn-table-action">Inspect</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 12px;">
+                                            <div style="width: 32px; height: 32px; border-radius: 0.8rem; background: var(--primary); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: #ffffff; box-shadow: 0 2px 8px rgba(112, 51, 255, 0.35);">
+                                                03
+                                            </div>
+                                            <div>
+                                                <strong style="display: block; font-weight: 700;">Technical & Code</strong>
+                                                <span style="font-family: var(--font-mono); font-size: 11px; color: var(--primary);">ACTIVE SESSION</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>DSA, Arrays & Graph Stack</td>
+                                    <td><span style="font-family: var(--font-mono);">20m / 100pts</span></td>
+                                    <td>
+                                        <span class="badge-status badge-progress">EVALUATION IN PROGRESS</span>
+                                    </td>
+                                    <td>
+                                        <span style="font-family: var(--font-mono); font-size: 13.5px; color: var(--muted-foreground);">TESTING...</span>
+                                    </td>
+                                    <td style="text-align: right;">
+                                        <a href="tech.html" class="btn-table-action primary">Resume IDE &rarr;</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 12px;">
+                                            <div style="width: 32px; height: 32px; border-radius: 0.8rem; background: var(--surface-alt); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--muted-foreground);">
+                                                04
+                                            </div>
+                                            <div>
+                                                <strong style="display: block; font-weight: 700;">Behavioral & Leadership</strong>
+                                                <span style="font-family: var(--font-mono); font-size: 11px; color: var(--muted-foreground);">hash: 0x8a7f14</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Autonomous Audio Q&A</td>
+                                    <td><span style="font-family: var(--font-mono);">10m / 100pts</span></td>
+                                    <td>
+                                        <span class="badge-status badge-pending">SCHEDULED QUEUE</span>
+                                    </td>
+                                    <td>
+                                        <span style="font-family: var(--font-mono); font-size: 13px; color: var(--muted-foreground);">QUEUED</span>
+                                    </td>
+                                    <td style="text-align: right;">
+                                        <a href="hr.html" class="btn-table-action">Queue</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="table-footer-bar">
+                        <span>Active Candidate Ledger &bull; Composite: <strong style="font-family: var(--font-mono); color: var(--primary);">398 / 400</strong></span>
+                        <div class="table-pagination">
+                            <button class="btn-pagination active">01</button>
+                            <button class="btn-pagination">02</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Evaluation Dossier Card -->
+            <section class="dossier-card" id="dossierCard" aria-label="Performance Dossier Preview">
+                <!-- Dynamically populated from data.json / dashboard.js -->
+            </section>
+
+            <!-- Security Instructions -->
+            <section class="instruction-box" id="conductSection" aria-label="Assessment Security Guidelines">
+                <div class="instruction-header">
+                    <h2>Examination Code of Conduct & Integrity Guidelines</h2>
+                </div>
+
+                <ul class="instruction-grid" id="instructionGrid">
+                    <!-- Dynamically populated from data.json / dashboard.js -->
+                </ul>
+            </section>
+
+            <!-- Start Assessment CTA -->
+            <section class="start-btn-area">
+                <button class="start-btn" onclick="startInterview()">
+                    <span>Initialize Examination (<span id="startSetLabel">Set 1</span>)</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+                <p class="start-btn-hint">Stage 01 (Aptitude & Logical Deduction) will initialize immediately upon click.</p>
+            </section>
+
+        </div>
+    </main>
+
+</div>
+
+<script>
+    function toggleDashboardTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('alts-theme', newTheme);
+        updateDashboardThemeUI(newTheme);
+    }
+
+    function updateDashboardThemeUI(theme) {
+        const icon = document.getElementById('dashThemeIcon');
+        const label = document.getElementById('dashThemeLabel');
+        if (theme === 'dark') {
+            if (icon) icon.className = 'fa-solid fa-sun';
+            if (label) label.textContent = 'Light Mode';
+        } else {
+            if (icon) icon.className = 'fa-solid fa-moon';
+            if (label) label.textContent = 'Dark Mode';
+        }
+    }
+
+    // Initialize saved theme on load
+    (function () {
+        const saved = localStorage.getItem('alts-theme') || 'light';
+        document.documentElement.setAttribute('data-theme', saved);
+        updateDashboardThemeUI(saved);
+    })();
+</script>
+
+</body>
+</html>

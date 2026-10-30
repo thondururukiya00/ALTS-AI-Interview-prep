@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stage IV: Behavioral & Leadership | ALTS Assessment</title>
+
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="hr.css">
+    <link rel="stylesheet" href="proctoring.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>ALTS Autonomous Assessment Framework</h1>
+        <h2>Stage IV &mdash; Behavioral & Leadership Interview</h2>
+        <p>
+            Listen carefully to each question and answer using your voice. Questions progress from <strong>Easy ➔ Medium ➔ Hard</strong>.
+        </p>
+    </div>
+
+    <div class="top">
+
+        <div class="progress-box">
+            <h3>Interview Progress</h3>
+            <progress id="progressBar" value="1" max="5"></progress>
+            <p id="questionNumber">Question 1 of 5</p>
+        </div>
+
+        <div class="timer-box">
+            <h3>Time Remaining</h3>
+            <h2 id="timer">10:00</h2>
+        </div>
+
+    </div>
+
+    <div class="hr-card">
+
+        <div class="card-header-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <h3>Autonomous Examiner</h3>
+            <div style="display: flex; gap: 8px;">
+                <span id="hrSetBadge" style="background:#eff6ff; color:#2563eb; border:1px solid #bfdbfe; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:600;">Set 1</span>
+                <span id="hrDifficultyBadge" style="background:#ecfdf5; color:#059669; border:1px solid #a7f3d0; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:700;">Easy</span>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <h2 id="hrQuestion">Loading Question...</h2>
+        </div>
+
+        <!-- AI Voice Avatar & Audio Equalizer Waveform (HR Round) -->
+        <div class="ai-avatar-container">
+            <div class="ai-avatar-orb" id="aiAvatarOrb">
+                <i class="fa-solid fa-microphone-lines" id="aiOrbIcon"></i>
+                <div class="orb-pulse-ring" id="orbPulseRing" style="display:none;"></div>
+            </div>
+            <div class="ai-status-label" id="aiStatusLabel">
+                AI Interviewer: Waiting for Your Answer
+            </div>
+            <div class="voice-equalizer" id="voiceWave">
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button id="playQuestionBtn" type="button">
+                🔊 Listen to Question
+            </button>
+            <button id="startBtn" type="button" style="background: linear-gradient(135deg, #059669, #10b981); color: #ffffff;">
+                🎤 Start Speaking
+            </button>
+            <button id="stopBtn" type="button" style="background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1;">
+                ⏹️ Pause Speaking
+            </button>
+        </div>
+
+        <br>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <h3 style="font-size: 16px; color: #0f172a;"><i class="fa-solid fa-user-check" style="color: #2563eb;"></i> Candidate Spoken Response</h3>
+            <span id="articulationPill" style="background: rgba(37, 99, 235, 0.12); color: #2563eb; border: 1px solid rgba(37, 99, 235, 0.25); font-size: 11.5px; font-weight: 700; padding: 3px 12px; border-radius: 20px;">
+                Target: 180+ Cumulative Words
+            </span>
+        </div>
+
+        <div id="transcript">Your spoken answer will appear here in real-time...</div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: 13.5px; color: #64748b; font-weight: 500;">
+            <span>Current Question Word Count: <strong id="wordCount" style="color: #2563eb; font-size: 16px;">0</strong></span>
+            <span id="speechQualityTag" style="font-size: 12px; color: #94a3b8;"><i class="fa-solid fa-chart-simple"></i> Answer clearly and professionally</span>
+        </div>
+
+        <br>
+
+        <div class="button-group">
+            <button id="nextBtn">
+                Next Question ➜
+            </button>
+
+            <button id="finishBtn" style="display:none;">
+                ✅ Finish Interview & View Results
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="hr.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Performance Dossier | ALTS Assessment</title>
+
+    <!-- Google Fonts: Newsreader (Editorial Serif) & Inter (Sharp Neutral Sans) & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="colors.css">
+    <link rel="stylesheet" href="result.css">
+    <link rel="stylesheet" href="proctoring.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>ALTS Assessment Framework &bull; Final Dossier</h1>
+        <h2>Candidate Performance Matrix</h2>
+    </div>
+
+    <!-- Candidate Profile Banner -->
+    <div class="candidate-banner" style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 14px;">
+        <div>
+            <h3 id="candidateNameHeader" style="font-family: var(--font-serif); font-size: 24px; color: var(--color-ink); margin-bottom: 2px; font-weight: 600;">Thonduru Rukiya</h3>
+            <p style="font-family: var(--font-mono); font-size: 11.5px; color: var(--color-ink-muted); margin: 0;">
+                Candidate ID: <strong id="candidateIdDisplay" style="color: var(--color-ink);">ALTS-2026-9041</strong> &bull; Track: <strong id="candidateTrackDisplay" style="color: var(--color-ink);">SDE LEVEL-1</strong>
+            </p>
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: var(--color-ink-muted);">
+            <span>Set 1 of 5 &bull; Proctoring Verified</span>
+        </div>
+    </div>
+
+    <div class="result-card">
+
+        <!-- Executive Performance & Hiring Recommendation Card -->
+        <div class="report-overview-card">
+            <div class="gauge-wrap">
+                <svg class="progress-ring" width="130" height="130">
+                    <circle class="progress-ring-bg" stroke-width="8" fill="transparent" r="54" cx="65" cy="65"/>
+                    <circle id="gaugeCircle" class="progress-ring-fill" stroke-width="8" stroke-dasharray="339.29" stroke-dashoffset="339.29" stroke-linecap="square" fill="transparent" r="54" cx="65" cy="65"/>
+                </svg>
+                <div class="gauge-center-text">
+                    <span class="gauge-value" id="gaugePercentage">0%</span>
+                    <span class="gauge-label">Score</span>
+                </div>
+            </div>
+
+            <div class="report-meta">
+                <div id="hiringStatusChip" class="hiring-status-chip">
+                    <span id="hiringStatusText">Calculating Evaluation...</span>
+                </div>
+                <h3>Executive Candidate Performance Matrix</h3>
+                <p>Comprehensive 4-stage evaluation covering Quantitative Reasoning, Interactive Voice Discussion, Algorithmic Coding, and Behavioral Competencies.</p>
+                <button type="button" class="btn-print-report" onclick="window.print()">
+                    Export Examination Ledger (PDF)
+                </button>
+            </div>
+        </div>
+
+        <!-- Official Summary Scores Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Assessment Stage</th>
+                    <th>Score Recorded</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Stage 01: Aptitude & Logical Reasoning</td>
+                    <td id="aptitudeMarks">0</td>
+                </tr>
+                <tr>
+                    <td>Stage 02: AI Group Discussion (Argumentation)</td>
+                    <td id="gdMarks">0</td>
+                </tr>
+                <tr>
+                    <td>Stage 03: Technical Coding & Algorithms</td>
+                    <td id="technicalMarks">0</td>
+                </tr>
+                <tr>
+                    <td>Stage 04: HR & Behavioral Inquiry</td>
+                    <td id="hrMarks">0</td>
+                </tr>
+                <tr>
+                    <th>Total Composite Score</th>
+                    <th id="totalMarks">0 / 400</th>
+                </tr>
+                <tr>
+                    <th>Overall Percentage</th>
+                    <th id="percentage">0%</th>
+                </tr>
+                <tr>
+                    <th>Performance Classification</th>
+                    <th id="performance">-</th>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Stage-by-Stage Comprehensive Assessment Dossier -->
+        <div class="dossier-container" style="margin-top: 35px; border-top: 1px solid var(--color-border-dark); padding-top: 24px;">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+                <div>
+                    <h3 style="font-family: var(--font-serif); font-size: 24px; font-weight: 500; color: var(--color-ink); margin-bottom: 2px;">
+                        Stage-by-Stage Telemetry Audit
+                    </h3>
+                    <p style="font-family: var(--font-sans); font-size: 13.5px; color: var(--color-ink-muted); margin: 0;">Evaluation breakdown for candidate: <strong>Thonduru Rukiya (ALTS-2026-9041)</strong></p>
+                </div>
+                <span style="font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: var(--color-accent); font-weight: 600;">
+                    Overall: 398 / 400 (Recommended)
+                </span>
+            </div>
+
+            <!-- Stage 1 Dossier -->
+            <details open style="background: var(--color-paper-subtle); border: 1px solid var(--color-border); padding: 18px 20px; margin-bottom: 16px;">
+                <summary style="font-family: var(--font-serif); font-size: 17px; font-weight: 600; color: var(--color-ink); cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                    <span>Stage 1: Aptitude & Logical Reasoning (5 Questions)</span>
+                    <strong style="font-family: var(--font-mono); font-size: 13px; color: var(--color-ink);">100 / 100 Marks (100% Accuracy)</strong>
+                </summary>
+                <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 10px; font-size: 13.5px; line-height: 1.6; color: var(--color-ink-light);">
+                    <div style="background: var(--color-paper-white); border: 1px solid var(--color-border); padding: 12px 16px;">
+                        <strong>Q1 (Sequences):</strong> 4, 9, 16, 25, 36, ... &bull; Selected: <strong>C) 49</strong> (+20 Marks)
+                    </div>
+                    <div style="background: var(--color-paper-white); border: 1px solid var(--color-border); padding: 12px 16px;">
+                        <strong>Q2 (Percentages):</strong> 360 marks out of 500 &bull; Selected: <strong>C) 72%</strong> (+20 Marks)
+                    </div>
+                    <div style="background: var(--color-paper-white); border: 1px solid var(--color-border); padding: 12px 16px;">
+                        <strong>Q3 (Time & Work):</strong> A in 12 days, B in 6 days &bull; Selected: <strong>B) 4 days</strong> (+20 Marks)
+                    </div>
+                    <div style="background: var(--color-paper-white); border: 1px solid var(--color-border); padding: 12px 16px;">
+                        <strong>Q4 (Deduction):</strong> 'His mother is the only daughter...' &bull; Selected: <strong>B) Mother</strong> (+20 Marks)
+                    </div>
+                    <div style="background: var(--color-paper-white); border: 1px solid var(--color-border); padding: 12px 16px;">
+                        <strong>Q5 (Probability):</strong> Two dice rolled, sum = 8 &bull; Selected: <strong>A) 5/36</strong> (+20 Marks)
+                    </div>
+                </div>
+            </details>
+
+            <!-- Stage 2 Dossier -->
+            <details style="background: var(--color-paper-subtle); border: 1px solid var(--color-border); padding: 18px 20px; margin-bottom: 16px;">
+                <summary style="font-family: var(--font-serif); font-size: 17px; font-weight: 600; color: var(--color-ink); cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                    <span>Stage 2: AI Group Discussion (Live Speech Articulation)</span>
+                    <strong style="font-family: var(--font-mono); font-size: 13px; color: var(--color-ink);">100 / 100 Marks (242 Words)</strong>
+                </summary>
+                <div style="margin-top: 14px; font-size: 13.5px; line-height: 1.6; color: var(--color-ink-light);">
+                    <p style="margin-bottom: 8px;"><strong>Assigned Topic:</strong> <em>"Artificial Intelligence: Will it create higher-value human careers or lead to irreversible workforce displacement?"</em></p>
+                    <div style="background: var(--color-paper-white); border-left: 3px solid var(--color-border-dark); padding: 14px 18px; font-style: italic; margin-bottom: 12px;">
+                        "Esteemed evaluators, technological revolutions do not eliminate aggregate labor; they radically reallocate human capital. While repetitive deterministic tasks face compression, AI serves as an abstraction multiplier, transitioning software engineers from syntax writers into architecture stewards, prompt specialists, and security auditors..."
+                    </div>
+                </div>
+            </details>
+
+            <!-- Stage 3 Dossier -->
+            <details style="background: var(--color-paper-subtle); border: 1px solid var(--color-border); padding: 18px 20px; margin-bottom: 16px;">
+                <summary style="font-family: var(--font-serif); font-size: 17px; font-weight: 600; color: var(--color-ink); cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                    <span>Stage 3: Technical Coding & Algorithms (5 Challenges)</span>
+                    <strong style="font-family: var(--font-mono); font-size: 13px; color: var(--color-ink);">100 / 100 Marks (Optimal O(N))</strong>
+                </summary>
+                <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 10px; font-size: 13.5px; color: var(--color-ink-light);">
+                    <div style="background: var(--color-paper-white); border: 1px solid var(--color-border); padding: 12px 16px;">
+                        <strong>Challenge 1 (Parity):</strong> <code>n % 2 === 0 ? 'Even' : 'Odd'</code> &bull; O(1) (+20 Marks)
+                    </div>
+                    <div style="background: var(--color-paper-white); border: 1px solid var(--color-border); padding: 12px 16px;">
+                        <strong>Challenge 2 (Factorial):</strong> BigInt accumulator loop &bull; O(n) (+20 Marks)
+                    </div>
+                    <div style="background: var(--color-paper-white); border: 1px solid var(--color-border); padding: 12px 16px;">
+                        <strong>Challenge 3 (Prime):</strong> 6k ± 1 divisor step &bull; O(√n) (+20 Marks)
+                    </div>
+                    <div style="background: var(--color-paper-white); border: 1px solid var(--color-border); padding: 12px 16px;">
+                        <strong>Challenge 4 (Second Largest):</strong> Dual-variable scan &bull; O(n) (+20 Marks)
+                    </div>
+                    <div style="background: var(--color-paper-white); border: 1px solid var(--color-border); padding: 12px 16px;">
+                        <strong>Challenge 5 (Balanced Parentheses):</strong> LIFO Stack bracket match &bull; O(n) (+20 Marks)
+                    </div>
+                </div>
+            </details>
+
+            <!-- Stage 4 Dossier -->
+            <details style="background: var(--color-paper-subtle); border: 1px solid var(--color-border); padding: 18px 20px; margin-bottom: 24px;">
+                <summary style="font-family: var(--font-serif); font-size: 17px; font-weight: 600; color: var(--color-ink); cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                    <span>Stage 4: HR & Behavioral Situational Inquiry</span>
+                    <strong style="font-family: var(--font-mono); font-size: 13px; color: var(--color-ink);">98 / 100 Marks (Exemplary STAR Formulation)</strong>
+                </summary>
+                <div style="margin-top: 14px; font-size: 13.5px; line-height: 1.6; color: var(--color-ink-light);">
+                    <div style="background: var(--color-paper-white); border-left: 3px solid var(--color-border-dark); padding: 14px 18px; margin-bottom: 12px;">
+                        "During a high-concurrency production outage, I established blameless triage, segregated service logs, and authored post-mortem preventative guidelines ensuring zero regression..."
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <button onclick="window.location.href='dashboard.html'">
+            <span>&larr; Return to Candidate Dashboard</span>
+        </button>
+
+    </div>
+
+</div>
+
+<!-- Initialize Calculation -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        if (typeof calculateResult === "function") {
+            calculateResult();
+        }
+    });
+</script>
+
+</body>
+</html>

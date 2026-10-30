@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="tech.css">
+    <link rel="stylesheet" href="proctoring.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+<div class="container">
+    <header class="topbar">
+        <div>
+            <h1>Stage III &mdash; Technical Architecture & Code</h1>
+            <p>ALTS Autonomous Assessment Framework &bull; Vol. 2026</p>
+        </div>
+        <div class="timer-box">
+            <span>Time Remaining</span>
+            <h2 id="timer">20:00</h2>
+        </div>
+    </header>
+
+    <section class="progress-section">
+    <div class="progress-info">
+        <span id="questionNumber">Question 1 of 5</span>
+        <span id="progressPercent">20%</span>
+    </div>
+    <progress id="progressBar" value="1" max="5"></progress>
+</section>
+    <main class="interview-card">
+        <div class="question-header">
+            <span class="tag" id="questionCategory">Programming</span>
+            <span class="tag difficulty" id="questionDifficulty">Easy</span>
+        </div>
+
+        <h2 id="questionTitle">Loading question...</h2>
+        <p id="questionDescription"></p>
+
+        <div class="language-section" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 14px;">
+            <div>
+                <label for="language" style="font-weight: 600; font-size: 14px; color: #334155; display: block; margin-bottom: 6px;">
+                    <i class="fa-solid fa-code"></i> Target Programming Language
+                </label>
+                <select id="language">
+                    <option value="python" selected>Python 3.11</option>
+                    <option value="java">Java (OpenJDK 17)</option>
+                    <option value="c">C (GCC 11)</option>
+                </select>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <button type="button" id="runTestsBtn" class="btn-run-tests" style="background: rgba(16, 185, 129, 0.15); color: #059669; border: 1px solid rgba(16, 185, 129, 0.3); padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;">
+                    <i class="fa-solid fa-play"></i> Run Public Tests
+                </button>
+            </div>
+        </div>
+
+        <!-- Professional MacOS IDE Chrome -->
+        <div class="ide-window" style="background: #0d1117; border-radius: 14px; border: 1px solid #30363d; box-shadow: 0 16px 36px rgba(0,0,0,0.4); overflow: hidden; margin: 20px 0 10px;">
+            <div class="ide-toolbar" style="background: #161b22; border-bottom: 1px solid #30363d; display: flex; align-items: center; justify-content: space-between; padding: 0 14px; height: 42px;">
+                <div class="ide-controls" style="display: flex; gap: 8px;">
+                    <span style="width: 11px; height: 11px; border-radius: 50%; background: #ff5f56; display: inline-block;"></span>
+                    <span style="width: 11px; height: 11px; border-radius: 50%; background: #ffbd2e; display: inline-block;"></span>
+                    <span style="width: 11px; height: 11px; border-radius: 50%; background: #27c93f; display: inline-block;"></span>
+                </div>
+                <div class="ide-tab" style="display: flex; align-items: center; gap: 8px; background: #0d1117; border: 1px solid #30363d; border-bottom: none; padding: 8px 16px; font-size: 13px; color: #f0f6fc; font-family: monospace; border-top-left-radius: 8px; border-top-right-radius: 8px; margin-top: 5px;">
+                    <i class="fa-brands fa-python" id="langTabIcon" style="color: #38bdf8;"></i>
+                    <span id="fileNameTab">solution.py</span>
+                    <span id="unsavedDot" style="width: 6px; height: 6px; border-radius: 50%; background: #f59e0b; display: inline-block;"></span>
+                </div>
+                <div style="font-size: 12px; color: #8b949e; font-family: monospace;">
+                    <span id="editorMetrics">UTF-8 • Tab Size: 4</span>
+                </div>
+            </div>
+
+            <div class="ide-body" style="display: flex; background: #0d1117; position: relative;">
+                <div id="ideGutter" style="width: 44px; padding: 18px 0; text-align: right; color: #484f58; font-family: monospace; font-size: 13.5px; line-height: 1.7; user-select: none; border-right: 1px solid #21262d; background: #0d1117;">
+                    <span style="display:block; padding-right:12px;">1</span>
+                    <span style="display:block; padding-right:12px;">2</span>
+                    <span style="display:block; padding-right:12px;">3</span>
+                    <span style="display:block; padding-right:12px;">4</span>
+                    <span style="display:block; padding-right:12px;">5</span>
+                    <span style="display:block; padding-right:12px;">6</span>
+                    <span style="display:block; padding-right:12px;">7</span>
+                    <span style="display:block; padding-right:12px;">8</span>
+                    <span style="display:block; padding-right:12px;">9</span>
+                    <span style="display:block; padding-right:12px;">10</span>
+                </div>
+                <textarea
+                    id="codeEditor"
+                    spellcheck="false"
+                    placeholder="# Write your optimal algorithm implementation here..."
+                    style="flex: 1; min-height: 280px; background: transparent; color: #e6edf3; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 14px; line-height: 1.7; padding: 18px; border: none; outline: none; resize: vertical;"
+                ></textarea>
+            </div>
+
+            <!-- Public Test Cases Runner Drawer -->
+            <div class="ide-testcases" style="background: #161b22; border-top: 1px solid #30363d; padding: 14px 18px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <span style="font-size: 12.5px; font-weight: 700; color: #f0f6fc; display: flex; align-items: center; gap: 6px;">
+                        <i class="fa-solid fa-flask" style="color: #a855f7;"></i> Public Test Case Validation
+                    </span>
+                    <span id="testCaseResultBadge" style="font-size: 11px; padding: 3px 8px; border-radius: 12px; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3);">
+                        Ready for Execution
+                    </span>
+                </div>
+                <div style="display: flex; gap: 8px; margin-bottom: 10px;">
+                    <button type="button" id="caseTab1" class="case-tab active" onclick="switchTestCase(1)" style="background: #0d1117; color: #ffffff; border: 1px solid #30363d; border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer;">Case 1 (Standard)</button>
+                    <button type="button" id="caseTab2" class="case-tab" onclick="switchTestCase(2)" style="background: transparent; color: #8b949e; border: 1px solid #30363d; border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer;">Case 2 (Boundary)</button>
+                    <button type="button" id="caseTab3" class="case-tab" onclick="switchTestCase(3)" style="background: transparent; color: #8b949e; border: 1px solid #30363d; border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer;">Case 3 (Edge Case)</button>
+                </div>
+                <div id="testCaseBody" style="background: #0d1117; border: 1px solid #21262d; border-radius: 8px; padding: 10px 14px; font-family: monospace; font-size: 12px; color: #8b949e; line-height: 1.6;">
+                    <div><strong style="color: #cbd5e1;">Input:</strong> nums = [2, 7, 11, 15], target = 9</div>
+                    <div><strong style="color: #cbd5e1;">Expected Output:</strong> [0, 1]</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="editor-info">
+            <span id="answerStatus"><i class="fa-regular fa-clock"></i> Not answered yet</span>
+            <span id="charCount"><i class="fa-solid fa-code"></i> 0 characters</span>
+        </div>
+
+        <div class="navigation">
+            <button id="previousBtn" class="secondary-btn">
+                ← Previous Problem
+            </button>
+            <button id="nextBtn" class="primary-btn">
+                Save & Next Problem →
+            </button>
+            <button id="finishBtn" class="finish-btn" hidden>
+                ✅ Submit Technical Round & Proceed to HR
+            </button>
+        </div>
+    </main>
+
+    <p class="note" style="text-align: center; margin-top: 18px; color: #64748b; font-size: 13px;">
+        <i class="fa-solid fa-shield-halved" style="color: #059669;"></i>
+        Interactive Proctored Sandbox: Your code and algorithmic logic are calibrated against time and space complexity upon final submission.
+    </p>
+</div>
+
+<script src="tech.js"></script>
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALTS — Autonomous Labor & Technical Assessment</title>
+
+    <!-- Google Fonts: Fraunces (Bespoke Humanist Serif) & Plus Jakarta Sans & Space Grotesk -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Design Tokens & Hero Stylesheet -->
+    <link rel="stylesheet" href="colors.css">
+    <link rel="stylesheet" href="hero.css">
+</head>
+<body class="landing-body">
+
+<div class="landing-container">
+
+    <!-- Editorial Top Metadata Bar -->
+    <div class="editorial-top-meta">
+        <div>ALTS Evaluation Framework &bull; Engineering Standard Specification</div>
+        <div>Vol. 2026 &bull; <span class="issue-tag">Issue 04</span> &bull; Candidate File 9041</div>
+        <div>Track: SDE Level-1</div>
+    </div>
+
+    <!-- Masthead Navigation Header -->
+    <header class="landing-header">
+        <div class="header-brand">
+            <a href="index.html" class="landing-logo-title">ALTS Assessment</a>
+            <span class="brand-tagline">Autonomous Labor & Technical Assessment System</span>
+        </div>
+
+        <nav class="landing-nav">
+            <a href="#pipeline" class="nav-link">Evaluation Pipeline</a>
+            <a href="#metrics" class="nav-link">Examination Ledger</a>
+            <a href="proctoring.html" class="nav-link">Security Protocol</a>
+            <a href="login.html" class="nav-link">Candidate Login</a>
+            <a href="dashboard.html" class="nav-btn-cta">
+                <span>Enter Dossier</span>
+                <span>&rarr;</span>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Hero Section (CSS Grid 2-Column Layout) -->
+    <main class="hero-section" aria-label="Hero Introduction">
+        <div class="hero-grid">
+
+            <!-- Hero Left Column: Headline & Action -->
+            <div class="hero-content">
+                <div class="hero-status-pill">
+                    <span class="pulse-indicator"></span>
+                    <span>System Active &bull; Non-Repeating Calibration</span>
+                </div>
+
+                <h1 class="hero-headline">
+                    A rigorous four-stage evaluation for <em>modern engineering</em> talent.
+                </h1>
+
+                <p class="hero-description">
+                    ALTS replaces arbitrary interviewing with progressive cognitive calibration, structured argumentation analysis, syntax execution, and verified behavioral inquiry.
+                </p>
+
+                <!-- Editorial Feature Badges -->
+                <div class="hero-badges">
+                    <span class="feature-badge">Calibrated Scaling</span>
+                    <span class="feature-badge">Voice Argumentation</span>
+                    <span class="feature-badge">Execution Environment</span>
+                    <span class="feature-badge">3-Strike Enclave</span>
+                    <span class="feature-badge">Deterministic Scoring</span>
+                </div>
+
+                <!-- Call to Action Buttons -->
+                <div class="hero-actions">
+                    <a href="dashboard.html" class="hero-cta-btn" id="heroCtaBtn">
+                        <span>Open Assessment Dossier</span>
+                        <span>&rarr;</span>
+                    </a>
+                    <a href="proctoring.html" class="hero-secondary-btn">
+                        <span>Surveillance Console</span>
+                    </a>
+                </div>
+
+                <!-- Trust Metrics Ledger -->
+                <div class="hero-trust-metrics" id="metrics">
+                    <div class="trust-item">
+                        <span class="trust-val">400</span>
+                        <span class="trust-lbl">Max Composite Score</span>
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-val">65m</span>
+                        <span class="trust-lbl">Examination Duration</span>
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-val">05</span>
+                        <span class="trust-lbl">Calibrated Sets</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Right Column: Active System & Candidate Preview Ledger Card -->
+            <div class="hero-preview-col">
+                <div class="preview-card" id="systemPreviewCard">
+
+                    <!-- Preview Header -->
+                    <div class="preview-card-header">
+                        <div class="window-dots">
+                            RECORD 9041 // CANDIDATE FILE
+                        </div>
+                        <div class="preview-system-tag">
+                            STATUS: READY
+                        </div>
+                    </div>
+
+                    <!-- Candidate Tracking Specs -->
+                    <div class="preview-candidate-box">
+                        <div class="preview-candidate-meta">
+                            <span class="preview-tracking-label">Active Candidate Dossier</span>
+                            <h3 class="preview-candidate-name" id="previewCandidateName">Thonduru Rukiya</h3>
+                            <p class="preview-candidate-sub">
+                                ID: <strong id="previewCandidateId">ALTS-2026-9041</strong> &bull;
+                                <span class="preview-badge-pill" id="previewCandidateTrack">SDE LEVEL-1</span>
+                            </p>
+                        </div>
+
+                        <div class="preview-set-indicator">
+                            <span class="set-pill-label">Rotation</span>
+                            <strong id="previewActiveSet">Set 1 of 5</strong>
+                        </div>
+                    </div>
+
+                    <!-- 4-Stage Pipeline Progress Preview -->
+                    <div class="preview-pipeline-list">
+                        <div class="preview-pipeline-item">
+                            <div class="preview-stage-details">
+                                <div class="stage-headline">
+                                    <strong>Stage 01: Aptitude & Logic</strong>
+                                    <span class="stage-pts">100 Pts</span>
+                                </div>
+                                <p class="stage-sub">5 MCQs &bull; 30 Mins &bull; Calibrated Progression</p>
+                            </div>
+                            <span class="preview-status-tag ready">Ready</span>
+                        </div>
+
+                        <div class="preview-pipeline-item">
+                            <div class="preview-stage-details">
+                                <div class="stage-headline">
+                                    <strong>Stage 02: AI Group Discussion</strong>
+                                    <span class="stage-pts">100 Pts</span>
+                                </div>
+                                <p class="stage-sub">Voice Interactive &bull; 5 Mins &bull; Argumentation</p>
+                            </div>
+                            <span class="preview-status-tag">Queued</span>
+                        </div>
+
+                        <div class="preview-pipeline-item">
+                            <div class="preview-stage-details">
+                                <div class="stage-headline">
+                                    <strong>Stage 03: Technical Systems</strong>
+                                    <span class="stage-pts">100 Pts</span>
+                                </div>
+                                <p class="stage-sub">DSA Execution &bull; 20 Mins &bull; Algorithmic</p>
+                            </div>
+                            <span class="preview-status-tag">Queued</span>
+                        </div>
+
+                        <div class="preview-pipeline-item">
+                            <div class="preview-stage-details">
+                                <div class="stage-headline">
+                                    <strong>Stage 04: Behavioral Inquiry</strong>
+                                    <span class="stage-pts">100 Pts</span>
+                                </div>
+                                <p class="stage-sub">STAR Taxonomy &bull; 10 Mins &bull; Cultural Fit</p>
+                            </div>
+                            <span class="preview-status-tag">Queued</span>
+                        </div>
+                    </div>
+
+                    <!-- Security & Proctor Status Bar -->
+                    <div class="preview-security-strip">
+                        <div class="sec-item">
+                            <span>Webcam Enclave</span>
+                            <strong>Active</strong>
+                        </div>
+                        <div class="sec-item">
+                            <span>Violation Strikes</span>
+                            <strong>0 / 3</strong>
+                        </div>
+                        <div class="sec-item">
+                            <span>Progression</span>
+                            <strong>Sequential</strong>
+                        </div>
+                    </div>
+
+                    <!-- Card Launch CTA -->
+                    <a href="dashboard.html" class="preview-action-btn">
+                        <span>Proceed to Examination</span>
+                        <span>&rarr;</span>
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Pipeline Overview Section -->
+    <section id="pipeline" class="pipeline-section" aria-label="Pipeline Architecture">
+        <div class="section-title-wrap text-center">
+            <span class="section-subtitle">Examination Protocol</span>
+            <h2>The Four Sequential Stages</h2>
+            <p>Each stage evaluates a discrete facet of professional competence under progressive difficulty. Backtracking is prohibited to preserve evaluation fidelity.</p>
+        </div>
+
+        <div class="pipeline-cards-grid">
+            <div class="pipeline-card">
+                <div class="card-step-badge">Stage 01</div>
+                <h3>Aptitude & Logical Deduction</h3>
+                <p>Five calibrated multiple-choice problems assessing quantitative reasoning, sequence derivation, and analytical speed.</p>
+                <div class="card-meta-tags">
+                    <span>30 Minutes</span>
+                    <span>100 Points</span>
+                </div>
+            </div>
+
+            <div class="pipeline-card">
+                <div class="card-step-badge">Stage 02</div>
+                <h3>Interactive Voice Discussion</h3>
+                <p>Real-time synthesis debate analyzing thesis defense, pros/cons counterargumentation, and articulation under time constraints.</p>
+                <div class="card-meta-tags">
+                    <span>05 Minutes</span>
+                    <span>100 Points</span>
+                </div>
+            </div>
+
+            <div class="pipeline-card">
+                <div class="card-step-badge">Stage 03</div>
+                <h3>Technical & Algorithmic Systems</h3>
+                <p>Direct code execution evaluating data structures (search, arrays, stacks), algorithmic complexity, and edge-case resilience.</p>
+                <div class="card-meta-tags">
+                    <span>20 Minutes</span>
+                    <span>100 Points</span>
+                </div>
+            </div>
+
+            <div class="pipeline-card">
+                <div class="card-step-badge">Stage 04</div>
+                <h3>Behavioral & Ethics Inquiry</h3>
+                <p>Structured STAR-method interrogation probing self-awareness, conflict mediation, leadership maturity, and team alignment.</p>
+                <div class="card-meta-tags">
+                    <span>10 Minutes</span>
+                    <span>100 Points</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proctoring Enclave Notice -->
+    <section class="proctoring-summary-card" aria-label="Proctoring Protocols">
+        <div class="proctoring-summary-content">
+            <h3>Enterprise Surveillance & Anti-Cheat Enclave</h3>
+            <p>The assessment is monitored by continuous computer vision telemetry, window-blur tracking, and restricted system keystroke interception. Three recorded violations invalidate the session immediately.</p>
+        </div>
+        <div class="proctoring-summary-actions">
+            <a href="proctoring.html" class="btn-proctor-console">
+                <span>View Security Console</span>
+            </a>
+            <a href="dashboard.html" class="btn-proctor-enter">
+                <span>Enter Assessment</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Colophon / Editorial Footer -->
+    <footer class="landing-footer">
+        <div class="footer-bottom">
+            <div>&copy; 2026 ALTS Assessment Systems &bull; Architectural & Engineering Examination Standard</div>
+            <div class="footer-links">
+                <a href="dashboard.html">Candidate Dossier</a>
+                <span>&bull;</span>
+                <a href="proctoring.html">Security Enclave</a>
+                <span>&bull;</span>
+                <a href="result.html">Evaluation Matrix</a>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+<!-- Hydration script for candidate preview -->
+<script>
+    (async function hydrateLandingPreview() {
+        try {
+            const res = await fetch('data.json');
+            if (!res.ok) return;
+            const data = await res.json();
+            if (data.candidate) {
+                const nameEl = document.getElementById('previewCandidateName');
+                const idEl = document.getElementById('previewCandidateId');
+                const trackEl = document.getElementById('previewCandidateTrack');
+                if (nameEl && data.candidate.name) nameEl.textContent = data.candidate.name;
+                if (idEl && data.candidate.candidateId) idEl.textContent = data.candidate.candidateId;
+                if (trackEl && data.candidate.track) trackEl.textContent = data.candidate.track;
+            }
+            if (data.questionSets) {
+                const setEl = document.getElementById('previewActiveSet');
+                if (setEl) {
+                    setEl.textContent = `Set ${data.questionSets.activeSet || 1} of ${data.questionSets.totalSets || 5}`;
+                }
+            }
+        } catch (e) {
+            console.log('Using static candidate fallback.');
+        }
+    })();
+</script>
+
+</body>
+</html>
