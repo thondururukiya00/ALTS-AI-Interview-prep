@@ -2,6 +2,17 @@
 <html lang="en">
 
 <head>
+    <!-- Session Auth Guard -->
+    <script>
+        try {
+            var activeEmail = localStorage.getItem("userEmail");
+            if (!activeEmail || !activeEmail.trim()) {
+                window.location.replace("login.html");
+            }
+        } catch (e) {
+            window.location.replace("login.html");
+        }
+    </script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

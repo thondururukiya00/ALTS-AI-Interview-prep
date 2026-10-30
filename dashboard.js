@@ -677,7 +677,8 @@
     window.logout = function () {
         localStorage.removeItem("userEmail");
         localStorage.removeItem("userName");
-        window.location.href = "login.html";
+        localStorage.removeItem("candidateId");
+        window.location.replace("login.html");
     };
 
     /**

@@ -575,7 +575,7 @@ const server = http.createServer(async (req, res) => {
 
   // Static File Serving
   if (cleanUrl === '/' || cleanUrl === '') {
-    cleanUrl = '/login.html';
+    cleanUrl = '/index.html';
   }
 
   const filePath = path.join(PUBLIC_DIR, cleanUrl);

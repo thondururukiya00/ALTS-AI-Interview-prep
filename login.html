@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Candidate Authentication & Login | ALTS Assessment</title>
 
+    <!-- Immediate Auth Check: Existing logged-in user goes straight to dashboard -->
+    <script>
+        (function() {
+            try {
+                var activeEmail = localStorage.getItem("userEmail");
+                if (activeEmail && activeEmail.trim()) {
+                    window.location.replace("dashboard.html");
+                }
+            } catch (e) {}
+        })();
+    </script>
+
     <!-- Google Fonts: Plus Jakarta Sans (UI) & IBM Plex Mono (Code/Tabular Data) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,7 +38,7 @@
 
     <!-- Top Navigation Bar -->
     <header class="login-topbar">
-        <a href="index.html" class="login-brand" title="Return to ALTS Landing Masthead">
+        <a href="login.html" class="login-brand" title="ALTS Assessment Portal">
             <div class="login-brand-icon">
                 <i class="fa-solid fa-terminal"></i>
             </div>
