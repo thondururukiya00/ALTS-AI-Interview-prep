@@ -44,7 +44,7 @@
         </div>
 
         <div class="sidebar-nav-group">
-            <span class="sidebar-group-title">Assessment</span>
+            <span class="sidebar-group-title">Interview Prep</span>
             <a href="dashboard.html" class="sidebar-nav-item active">
                 <i class="fa-solid fa-chart-pie"></i>
                 <span>Dashboard Overview</span>
@@ -52,23 +52,23 @@
             </a>
             <a href="#roundsSection" class="sidebar-nav-item">
                 <i class="fa-solid fa-layer-group"></i>
-                <span>4-Stage Pipeline</span>
+                <span>Interview Rounds</span>
             </a>
             <a href="#tableSection" class="sidebar-nav-item">
                 <i class="fa-solid fa-table-list"></i>
-                <span>Candidate Ledger</span>
+                <span>Round Details</span>
             </a>
             <a href="proctoring.html" class="sidebar-nav-item">
                 <i class="fa-solid fa-shield-halved"></i>
-                <span>Anti-Cheat Console</span>
+                <span>Security Rules</span>
             </a>
             <a href="components.html" class="sidebar-nav-item">
                 <i class="fa-solid fa-cubes"></i>
-                <span>Component System</span>
+                <span>Design System</span>
             </a>
             <a href="result.html" class="sidebar-nav-item">
                 <i class="fa-solid fa-square-poll-vertical"></i>
-                <span>Audit Dossier</span>
+                <span>My Score Report</span>
             </a>
 
             <span class="sidebar-group-title" style="margin-top: 14px;">System</span>
@@ -78,11 +78,11 @@
             </a>
             <a href="index.html" class="sidebar-nav-item">
                 <i class="fa-solid fa-house"></i>
-                <span>Hero Masthead</span>
+                <span>Home Page</span>
             </a>
             <a href="#conductSection" class="sidebar-nav-item">
                 <i class="fa-solid fa-scale-balanced"></i>
-                <span>Code of Conduct</span>
+                <span>Rules & Guidelines</span>
             </a>
         </div>
 
@@ -126,7 +126,7 @@
             <header class="dashboard-header">
                 <div class="header-brand">
                     <h1>ALTS AI Interview Preparation Assistant</h1>
-                    <p class="brand-tagline">Intelligent 4-Stage Campus & Corporate Hiring Assessment</p>
+                    <p class="brand-tagline">Practice and prepare for your job interview in 4 simple rounds</p>
                 </div>
 
                 <div class="header-actions">
@@ -135,18 +135,18 @@
                     </button>
                     <a href="components.html" class="btn-header-components" title="Explore Developer Component System">
                         <i class="fa-solid fa-shapes"></i>
-                        <span>Components</span>
+                        <span>Design System</span>
                     </a>
                     <a href="proctoring.html" class="btn-header-proctor" title="Open Anti-Cheat Proctoring Console">
                         <i class="fa-solid fa-shield-halved"></i>
-                        <span>Security</span>
+                        <span>Rules</span>
                     </a>
                     <button class="btn-header-result" onclick="showResult()" title="View Final Assessment Results">
                         <i class="fa-solid fa-square-poll-vertical"></i>
-                        <span>Audit Dossier</span>
+                        <span>View Results</span>
                     </button>
                     <button class="logout-btn" onclick="logout()" title="End Session and Logout">
-                        <span>Exit</span>
+                        <span>Logout</span>
                     </button>
                 </div>
             </header>
@@ -158,7 +158,7 @@
                         <div class="welcome-badges-row">
                             <h2 id="candidateDisplayName">Thonduru Rukiya</h2>
                             <span id="candidateTrackBadge" class="badge-track">SDE-LEVEL-1</span>
-                            <span id="candidateProctorBadge" class="badge-proctor"><i class="fa-solid fa-circle-check"></i> PROCTOR ARMED</span>
+                            <span id="candidateProctorBadge" class="badge-proctor"><i class="fa-solid fa-circle-check"></i> SECURITY ACTIVE</span>
                         </div>
                         <p id="userEmailDisplay" class="user-email-text">Auth User: <strong>rukiya.thonduru@alts.edu</strong> &bull; Candidate ID: <strong>ALTS-2026-9041</strong></p>
                     </div>
@@ -166,8 +166,8 @@
 
                 <div class="set-control-card">
                     <div class="set-header">
-                        <span class="set-badge">CALIBRATION ENGINE</span>
-                        <span class="no-repeat-tag"><i class="fa-solid fa-shield-check"></i> ANTI-REPEAT ACTIVE</span>
+                        <span class="set-badge">QUESTION SET</span>
+                        <span class="no-repeat-tag"><i class="fa-solid fa-shield-check"></i> NO REPEATED QUESTIONS</span>
                     </div>
                     <div class="set-main">
                         <h3 id="currentSetLabel">Set 1 of 5</h3>
@@ -175,7 +175,7 @@
                             Rotate Set
                         </button>
                     </div>
-                    <p id="setDesc" class="set-desc">Every round contains calibrated questions ordered strictly from <strong>Easy ➔ Medium ➔ Hard</strong>.</p>
+                    <p id="setDesc" class="set-desc">Questions start with basic concepts and progress to harder problems.</p>
                 </div>
             </section>
 
@@ -189,8 +189,8 @@
             <!-- Interview Rounds (2x2 Grid) -->
             <section class="rounds-section" id="roundsSection" aria-label="Interview Rounds">
                 <div class="section-title-wrap">
-                    <h2>The Four Examination Stages</h2>
-                    <p>Sequential execution protocol with difficulty progression from fundamentals to algorithmic complexity.</p>
+                    <h2>The 4 Interview Rounds</h2>
+                    <p>Complete each round in order, starting from easy questions to more challenging ones.</p>
                 </div>
 
                 <div class="rounds-grid" id="roundsGrid">
@@ -203,13 +203,13 @@
                 <div class="table-dev-container">
                     <div class="table-header-toolbar">
                         <div class="table-title-area">
-                            <h3>Assessment Execution Matrix</h3>
-                            <p>Multi-stage verification logs formatted in high-contrast IBM Plex Mono typography.</p>
+                            <h3>Round Summary & Progress</h3>
+                            <p>Check question counts, time limits, and target scores for each round.</p>
                         </div>
                         <div class="table-filter-toolbar">
                             <input type="text" class="table-search-input" placeholder="Query stage or hash...">
                             <a href="result.html" class="btn-dev-primary" style="padding: 10px 18px; font-size: 13px; text-decoration: none;">
-                                <i class="fa-solid fa-file-code"></i> View Full Audit
+                                <i class="fa-solid fa-file-lines"></i> View Detailed Report
                             </a>
                         </div>
                     </div>
@@ -347,7 +347,7 @@
             <!-- Security Instructions -->
             <section class="instruction-box" id="conductSection" aria-label="Assessment Security Guidelines">
                 <div class="instruction-header">
-                    <h2>Examination Code of Conduct & Integrity Guidelines</h2>
+                    <h2>Interview Rules & Guidelines</h2>
                 </div>
 
                 <ul class="instruction-grid" id="instructionGrid">
@@ -358,10 +358,10 @@
             <!-- Start Assessment CTA -->
             <section class="start-btn-area">
                 <button class="start-btn" onclick="startInterview()">
-                    <span>Initialize Examination (<span id="startSetLabel">Set 1</span>)</span>
+                    <span>Start Interview (<span id="startSetLabel">Set 1</span>)</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </button>
-                <p class="start-btn-hint">Stage 01 (Aptitude & Logical Deduction) will initialize immediately upon click.</p>
+                <p class="start-btn-hint">Click to begin Round 1: Math & Logical Reasoning.</p>
             </section>
 
         </div>

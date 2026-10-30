@@ -44,35 +44,35 @@
                 icon: "fa-solid fa-cubes-stacked",
                 colorClass: "metric-blue",
                 label: "Total Rounds",
-                value: "4 Calibrated Stages"
+                value: "4 Practice Rounds"
             },
             {
                 id: "duration",
                 icon: "fa-regular fa-clock",
                 colorClass: "metric-green",
-                label: "Total Duration",
-                value: "65 Mins Scheduled"
+                label: "Total Time",
+                value: "65 Minutes"
             },
             {
                 id: "marks",
                 icon: "fa-solid fa-award",
                 colorClass: "metric-purple",
-                label: "Max Composite Marks",
-                value: "400 Total Points"
+                label: "Total Score",
+                value: "400 Points Max"
             },
             {
                 id: "proctor",
                 icon: "fa-solid fa-shield-halved",
                 colorClass: "metric-amber",
-                label: "Anti-Cheat Protocol",
-                value: "Focus & 3 Strikes"
+                label: "Interview Rules",
+                value: "3 Strikes Allowed"
             }
         ],
         dossier: {
-            title: "ALTS Assessment Evaluation Dossier",
+            title: "Your Interview Score & Performance Report",
             scoreBadge: "398 / 400 (99.5%)",
             status: "Strong Hire Recommended",
-            description: "Multi-stage evaluation dossier ready for Thonduru Rukiya • Status: Strong Hire Recommended",
+            description: "Your interview score card, detailed breakdown, and feedback are ready to review.",
             targetUrl: "result.html"
         },
         rounds: [
@@ -80,9 +80,9 @@
                 roundNumber: 1,
                 badge: "Round 01",
                 cardClass: "round-aptitude",
-                title: "Aptitude & Logical Reasoning",
+                title: "Round 1: Math & Logical Reasoning",
                 icon: "fa-solid fa-brain",
-                description: "Solve progressive multiple-choice questions assessing quantitative ability, series, logical reasoning, and permutations.",
+                description: "Multiple-choice questions testing math, logical thinking, patterns, and quick problem-solving.",
                 difficultyFlow: [
                     { level: "Easy", className: "diff-easy" },
                     { level: "Medium", className: "diff-medium" },
@@ -100,9 +100,9 @@
                 roundNumber: 2,
                 badge: "Round 02",
                 cardClass: "round-gd",
-                title: "AI Group Discussion",
+                title: "Round 2: Group Discussion (GD)",
                 icon: "fa-solid fa-comments",
-                description: "Voice-enabled interactive topic discussion. Present clear articulation, structured thoughts, pros/cons, and persuasive conclusions.",
+                description: "Speak or type your thoughts on a given topic. Express clear ideas, pros, cons, and a final conclusion.",
                 difficultyFlow: [
                     { level: "Fundamentals", className: "diff-easy" },
                     { level: "Analysis", className: "diff-medium" },
@@ -120,9 +120,9 @@
                 roundNumber: 3,
                 badge: "Round 03",
                 cardClass: "round-tech",
-                title: "Technical & Coding Round",
+                title: "Round 3: Coding & Technical",
                 icon: "fa-solid fa-code",
-                description: "Real-time coding challenges covering basic programming, data structures (Search, Arrays, Stacks), and object-oriented fundamentals.",
+                description: "Write and run code in Python, C, or Java to solve programming and data structure problems.",
                 difficultyFlow: [
                     { level: "Basic Coding", className: "diff-easy" },
                     { level: "DSA / OOP", className: "diff-medium" },
@@ -140,9 +140,9 @@
                 roundNumber: 4,
                 badge: "Round 04",
                 cardClass: "round-hr",
-                title: "HR & Behavioral Round",
+                title: "Round 4: HR & Personal Interview",
                 icon: "fa-solid fa-user-tie",
-                description: "Voice-driven HR behavioral assessment. Evaluate candidate cultural fit, conflict resolution, work ethic, and situational maturity.",
+                description: "Voice or text interview answering common HR questions about yourself, your goals, and teamwork.",
                 difficultyFlow: [
                     { level: "Background", className: "diff-easy" },
                     { level: "Behavioral", className: "diff-medium" },
