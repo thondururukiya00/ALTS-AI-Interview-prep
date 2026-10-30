@@ -15,13 +15,7 @@ const technicalSets = {
                 { input: "4", expected: "Even" },
                 { input: "7", expected: "Odd" },
                 { input: "0", expected: "Even" }
-            ],
-            templates: {
-                python: "# Python 3.14\ndef check_even_odd(n: int) -> str:\n    # Write your logic here\n    return \"Even\" if n % 2 == 0 else \"Odd\"\n\nif __name__ == '__main__':\n    import sys\n    data = sys.stdin.read().split()\n    if data:\n        print(check_even_odd(int(data[0])))\n",
-                java: "// Java (OpenJDK 27)\nimport java.util.Scanner;\n\npublic class Solution {\n    public static String checkEvenOdd(int n) {\n        // Write your logic here\n        return (n % 2 == 0) ? \"Even\" : \"Odd\";\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            System.out.println(checkEvenOdd(sc.nextInt()));\n        }\n    }\n}\n",
-                c: "// C (GCC 11)\n#include <stdio.h>\n\nvoid checkEvenOdd(int n) {\n    if (n % 2 == 0) {\n        printf(\"Even\\n\");\n    } else {\n        printf(\"Odd\\n\");\n    }\n}\n\nint main() {\n    int n;\n    if (scanf(\"%d\", &n) == 1) {\n        checkEvenOdd(n);\n    }\n    return 0;\n}\n",
-                cpp: "// C++ (G++ 17)\n#include <iostream>\n#include <string>\nusing namespace std;\n\nstring checkEvenOdd(int n) {\n    return (n % 2 == 0) ? \"Even\" : \"Odd\";\n}\n\nint main() {\n    int n;\n    if (cin >> n) {\n        cout << checkEvenOdd(n) << endl;\n    }\n    return 0;\n}\n"
-            }
+            ]
         },
         {
             title: "Find the factorial of a number.",
@@ -32,13 +26,7 @@ const technicalSets = {
                 { input: "5", expected: "120" },
                 { input: "0", expected: "1" },
                 { input: "6", expected: "720" }
-            ],
-            templates: {
-                python: "# Python 3.14\ndef factorial(n: int) -> int:\n    # Write your logic here\n    res = 1\n    for i in range(2, n + 1):\n        res *= i\n    return res\n\nif __name__ == '__main__':\n    import sys\n    data = sys.stdin.read().split()\n    if data:\n        print(factorial(int(data[0])))\n",
-                java: "// Java (OpenJDK 27)\nimport java.util.Scanner;\n\npublic class Solution {\n    public static long factorial(int n) {\n        long res = 1;\n        for (int i = 2; i <= n; i++) res *= i;\n        return res;\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            System.out.println(factorial(sc.nextInt()));\n        }\n    }\n}\n",
-                c: "// C (GCC 11)\n#include <stdio.h>\n\nlong long factorial(int n) {\n    long long res = 1;\n    for (int i = 2; i <= n; i++) res *= i;\n    return res;\n}\n\nint main() {\n    int n;\n    if (scanf(\"%d\", &n) == 1) {\n        printf(\"%lld\\n\", factorial(n));\n    }\n    return 0;\n}\n",
-                cpp: "// C++ (G++ 17)\n#include <iostream>\nusing namespace std;\n\nlong long factorial(int n) {\n    long long res = 1;\n    for (int i = 2; i <= n; i++) res *= i;\n    return res;\n}\n\nint main() {\n    int n;\n    if (cin >> n) {\n        cout << factorial(n) << endl;\n    }\n    return 0;\n}\n"
-            }
+            ]
         },
         {
             title: "Check whether a number is Prime.",
@@ -49,13 +37,7 @@ const technicalSets = {
                 { input: "7", expected: "Prime" },
                 { input: "12", expected: "Not Prime" },
                 { input: "1", expected: "Not Prime" }
-            ],
-            templates: {
-                python: "# Python 3.14\ndef is_prime(n: int) -> str:\n    if n <= 1:\n        return \"Not Prime\"\n    for i in range(2, int(n**0.5) + 1):\n        if n % i == 0:\n            return \"Not Prime\"\n    return \"Prime\"\n\nif __name__ == '__main__':\n    import sys\n    data = sys.stdin.read().split()\n    if data:\n        print(is_prime(int(data[0])))\n",
-                java: "// Java (OpenJDK 27)\nimport java.util.Scanner;\n\npublic class Solution {\n    public static String isPrime(int n) {\n        if (n <= 1) return \"Not Prime\";\n        for (int i = 2; i * i <= n; i++) {\n            if (n % i == 0) return \"Not Prime\";\n        }\n        return \"Prime\";\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            System.out.println(isPrime(sc.nextInt()));\n        }\n    }\n}\n",
-                c: "// C (GCC 11)\n#include <stdio.h>\n\nvoid checkPrime(int n) {\n    if (n <= 1) { printf(\"Not Prime\\n\"); return; }\n    for (int i = 2; i * i <= n; i++) {\n        if (n % i == 0) { printf(\"Not Prime\\n\"); return; }\n    }\n    printf(\"Prime\\n\");\n}\n\nint main() {\n    int n;\n    if (scanf(\"%d\", &n) == 1) {\n        checkPrime(n);\n    }\n    return 0;\n}\n",
-                cpp: "// C++ (G++ 17)\n#include <iostream>\n#include <string>\nusing namespace std;\n\nstring isPrime(int n) {\n    if (n <= 1) return \"Not Prime\";\n    for (int i = 2; i * i <= n; i++) {\n        if (n % i == 0) return \"Not Prime\";\n    }\n    return \"Prime\";\n}\n\nint main() {\n    int n;\n    if (cin >> n) {\n        cout << isPrime(n) << endl;\n    }\n    return 0;\n}\n"
-            }
+            ]
         },
         {
             title: "Find the second-largest distinct element in an array.",
@@ -66,13 +48,7 @@ const technicalSets = {
                 { input: "12 35 1 10 34 1", expected: "34" },
                 { input: "10 5 10", expected: "5" },
                 { input: "10 10 10", expected: "-1" }
-            ],
-            templates: {
-                python: "# Python 3.14\ndef second_largest(nums):\n    distinct = sorted(list(set(nums)))\n    return distinct[-2] if len(distinct) >= 2 else -1\n\nif __name__ == '__main__':\n    import sys\n    tokens = sys.stdin.read().split()\n    if tokens:\n        arr = [int(x) for x in tokens]\n        print(second_largest(arr))\n",
-                java: "// Java (OpenJDK 27)\nimport java.util.*;\n\npublic class Solution {\n    public static int getSecondLargest(List<Integer> nums) {\n        TreeSet<Integer> set = new TreeSet<>(nums);\n        if (set.size() < 2) return -1;\n        set.pollLast();\n        return set.last();\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        List<Integer> list = new ArrayList<>();\n        while (sc.hasNextInt()) list.add(sc.nextInt());\n        if (!list.isEmpty()) {\n            System.out.println(getSecondLargest(list));\n        }\n    }\n}\n",
-                c: "// C (GCC 11)\n#include <stdio.h>\n\nint main() {\n    int val;\n    long long first = -9999999999LL, second = -9999999999LL;\n    while (scanf(\"%d\", &val) == 1) {\n        if (val > first) {\n            second = first;\n            first = val;\n        } else if (val < first && val > second) {\n            second = val;\n        }\n    }\n    if (second <= -999999999LL) printf(\"-1\\n\");\n    else printf(\"%lld\\n\", second);\n    return 0;\n}\n",
-                cpp: "// C++ (G++ 17)\n#include <iostream>\n#include <set>\nusing namespace std;\n\nint main() {\n    set<int> s;\n    int x;\n    while (cin >> x) s.insert(x);\n    if (s.size() < 2) {\n        cout << -1 << endl;\n    } else {\n        auto it = s.rbegin();\n        it++;\n        cout << *it << endl;\n    }\n    return 0;\n}\n"
-            }
+            ]
         },
         {
             title: "Check for Balanced Parentheses.",
@@ -83,13 +59,7 @@ const technicalSets = {
                 { input: "{[()]}", expected: "Balanced" },
                 { input: "{[(])}", expected: "Not Balanced" },
                 { input: "((()))", expected: "Balanced" }
-            ],
-            templates: {
-                python: "# Python 3.14\ndef is_balanced(s: str) -> str:\n    stack = []\n    pairs = {')': '(', '}': '{', ']': '['}\n    for char in s:\n        if char in '({[':\n            stack.append(char)\n        elif char in ')}]':\n            if not stack or stack[-1] != pairs[char]:\n                return \"Not Balanced\"\n            stack.pop()\n    return \"Balanced\" if not stack else \"Not Balanced\"\n\nif __name__ == '__main__':\n    import sys\n    raw = sys.stdin.read().strip()\n    if raw:\n        print(is_balanced(raw))\n",
-                java: "// Java (OpenJDK 27)\nimport java.util.*;\n\npublic class Solution {\n    public static String isBalanced(String s) {\n        Stack<Character> stack = new Stack<>();\n        for (char c : s.toCharArray()) {\n            if (c == '(' || c == '{' || c == '[') stack.push(c);\n            else if (c == ')' || c == '}' || c == ']') {\n                if (stack.isEmpty()) return \"Not Balanced\";\n                char top = stack.pop();\n                if (c == ')' && top != '(') return \"Not Balanced\";\n                if (c == '}' && top != '{') return \"Not Balanced\";\n                if (c == ']' && top != '[') return \"Not Balanced\";\n            }\n        }\n        return stack.isEmpty() ? \"Balanced\" : \"Not Balanced\";\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) {\n            System.out.println(isBalanced(sc.next()));\n        }\n    }\n}\n",
-                c: "// C (GCC 11)\n#include <stdio.h>\n#include <string.h>\n\nint isBalanced(char* s) {\n    char stack[1000];\n    int top = -1;\n    for (int i = 0; s[i] != '\\0'; i++) {\n        char c = s[i];\n        if (c == '(' || c == '{' || c == '[') stack[++top] = c;\n        else if (c == ')' || c == '}' || c == ']') {\n            if (top < 0) return 0;\n            char t = stack[top--];\n            if (c == ')' && t != '(') return 0;\n            if (c == '}' && t != '{') return 0;\n            if (c == ']' && t != '[') return 0;\n        }\n    }\n    return top == -1;\n}\n\nint main() {\n    char s[1000];\n    if (scanf(\"%s\", s) == 1) {\n        if (isBalanced(s)) printf(\"Balanced\\n\");\n        else printf(\"Not Balanced\\n\");\n    }\n    return 0;\n}\n",
-                cpp: "// C++ (G++ 17)\n#include <iostream>\n#include <stack>\n#include <string>\nusing namespace std;\n\nstring isBalanced(const string& s) {\n    stack<char> st;\n    for (char c : s) {\n        if (c == '(' || c == '{' || c == '[') st.push(c);\n        else if (c == ')' || c == '}' || c == ']') {\n            if (st.empty()) return \"Not Balanced\";\n            char t = st.top(); st.pop();\n            if (c == ')' && t != '(') return \"Not Balanced\";\n            if (c == '}' && t != '{') return \"Not Balanced\";\n            if (c == ']' && t != '[') return \"Not Balanced\";\n        }\n    }\n    return st.empty() ? \"Balanced\" : \"Not Balanced\";\n}\n\nint main() {\n    string s;\n    if (cin >> s) {\n        cout << isBalanced(s) << endl;\n    }\n    return 0;\n}\n"
-            }
+            ]
         }
     ],
     2: [
@@ -102,13 +72,7 @@ const technicalSets = {
                 { input: "HelloWorld", expected: "3" },
                 { input: "rhythm", expected: "0" },
                 { input: "AEIOU", expected: "5" }
-            ],
-            templates: {
-                python: "# Python 3.14\ndef count_vowels(s: str) -> int:\n    return sum(1 for c in s.lower() if c in 'aeiou')\n\nif __name__ == '__main__':\n    import sys\n    raw = sys.stdin.read().strip()\n    print(count_vowels(raw))\n",
-                java: "// Java (OpenJDK 27)\nimport java.util.Scanner;\n\npublic class Solution {\n    public static int countVowels(String s) {\n        int count = 0;\n        String lower = s.toLowerCase();\n        for (char c : lower.toCharArray()) {\n            if (\"aeiou\".indexOf(c) != -1) count++;\n        }\n        return count;\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) System.out.println(countVowels(sc.next()));\n    }\n}\n",
-                c: "// C (GCC 11)\n#include <stdio.h>\n#include <ctype.h>\n\nint main() {\n    char s[1000];\n    if (scanf(\"%s\", s) == 1) {\n        int cnt = 0;\n        for (int i = 0; s[i] != '\\0'; i++) {\n            char c = tolower(s[i]);\n            if (c=='a'||c=='e'||c=='i'||c=='o'||c=='u') cnt++;\n        }\n        printf(\"%d\\n\", cnt);\n    }\n    return 0;\n}\n",
-                cpp: "// C++ (G++ 17)\n#include <iostream>\n#include <string>\n#include <cctype>\nusing namespace std;\n\nint main() {\n    string s;\n    if (cin >> s) {\n        int cnt = 0;\n        for (char c : s) {\n            char lower = tolower(c);\n            if (string(\"aeiou\").find(lower) != string::npos) cnt++;\n        }\n        cout << cnt << endl;\n    }\n    return 0;\n}\n"
-            }
+            ]
         },
         {
             title: "Reverse a number or string.",
@@ -119,13 +83,7 @@ const technicalSets = {
                 { input: "12345", expected: "54321" },
                 { input: "algorithm", expected: "mhtirogla" },
                 { input: "racecar", expected: "racecar" }
-            ],
-            templates: {
-                python: "# Python 3.14\ndef reverse_str(s: str) -> str:\n    return s[::-1]\n\nif __name__ == '__main__':\n    import sys\n    print(reverse_str(sys.stdin.read().strip()))\n",
-                java: "// Java (OpenJDK 27)\nimport java.util.Scanner;\n\npublic class Solution {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) {\n            System.out.println(new StringBuilder(sc.next()).reverse().toString());\n        }\n    }\n}\n",
-                c: "// C (GCC 11)\n#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s[1000];\n    if (scanf(\"%s\", s) == 1) {\n        int len = strlen(s);\n        for (int i = len - 1; i >= 0; i--) putchar(s[i]);\n        putchar('\\n');\n    }\n    return 0;\n}\n",
-                cpp: "// C++ (G++ 17)\n#include <iostream>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    string s;\n    if (cin >> s) {\n        reverse(s.begin(), s.end());\n        cout << s << endl;\n    }\n    return 0;\n}\n"
-            }
+            ]
         },
         {
             title: "Check whether a string is a Palindrome.",
@@ -136,13 +94,7 @@ const technicalSets = {
                 { input: "racecar", expected: "Palindrome" },
                 { input: "hello", expected: "Not Palindrome" },
                 { input: "madam", expected: "Palindrome" }
-            ],
-            templates: {
-                python: "# Python 3.14\ndef is_palindrome(s: str) -> str:\n    cleaned = s.lower()\n    return \"Palindrome\" if cleaned == cleaned[::-1] else \"Not Palindrome\"\n\nif __name__ == '__main__':\n    import sys\n    print(is_palindrome(sys.stdin.read().strip()))\n",
-                java: "// Java (OpenJDK 27)\nimport java.util.Scanner;\n\npublic class Solution {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) {\n            String s = sc.next().toLowerCase();\n            String rev = new StringBuilder(s).reverse().toString();\n            System.out.println(s.equals(rev) ? \"Palindrome\" : \"Not Palindrome\");\n        }\n    }\n}\n",
-                c: "// C (GCC 11)\n#include <stdio.h>\n#include <string.h>\n#include <ctype.h>\n\nint main() {\n    char s[1000];\n    if (scanf(\"%s\", s) == 1) {\n        int l = 0, r = strlen(s) - 1;\n        int pal = 1;\n        while (l < r) {\n            if (tolower(s[l]) != tolower(s[r])) { pal = 0; break; }\n            l++; r--;\n        }\n        if (pal) printf(\"Palindrome\\n\");\n        else printf(\"Not Palindrome\\n\");\n    }\n    return 0;\n}\n",
-                cpp: "// C++ (G++ 17)\n#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s;\n    if (cin >> s) {\n        string rev = string(s.rbegin(), s.rend());\n        cout << (s == rev ? \"Palindrome\" : \"Not Palindrome\") << endl;\n    }\n    return 0;\n}\n"
-            }
+            ]
         },
         {
             title: "Implement Binary Search on a sorted array.",
@@ -153,13 +105,7 @@ const technicalSets = {
                 { input: "5\n1 3 5 7 9\n7", expected: "3" },
                 { input: "4\n2 4 6 8\n5", expected: "-1" },
                 { input: "1\n100\n100", expected: "0" }
-            ],
-            templates: {
-                python: "# Python 3.14\ndef binary_search(arr, target):\n    l, r = 0, len(arr) - 1\n    while l <= r:\n        mid = (l + r) // 2\n        if arr[mid] == target: return mid\n        elif arr[mid] < target: l = mid + 1\n        else: r = mid - 1\n    return -1\n\nif __name__ == '__main__':\n    import sys\n    tokens = sys.stdin.read().split()\n    if tokens:\n        n = int(tokens[0])\n        arr = [int(x) for x in tokens[1:n+1]]\n        target = int(tokens[n+1])\n        print(binary_search(arr, target))\n",
-                java: "// Java (OpenJDK 27)\nimport java.util.Scanner;\n\npublic class Solution {\n    public static int binarySearch(int[] arr, int target) {\n        int l = 0, r = arr.length - 1;\n        while (l <= r) {\n            int mid = l + (r - l) / 2;\n            if (arr[mid] == target) return mid;\n            if (arr[mid] < target) l = mid + 1;\n            else r = mid - 1;\n        }\n        return -1;\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int[] arr = new int[n];\n            for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n            int target = sc.nextInt();\n            System.out.println(binarySearch(arr, target));\n        }\n    }\n}\n",
-                c: "// C (GCC 11)\n#include <stdio.h>\n\nint binarySearch(int arr[], int n, int target) {\n    int l = 0, r = n - 1;\n    while (l <= r) {\n        int mid = l + (r - l) / 2;\n        if (arr[mid] == target) return mid;\n        if (arr[mid] < target) l = mid + 1;\n        else r = mid - 1;\n    }\n    return -1;\n}\n\nint main() {\n    int n;\n    if (scanf(\"%d\", &n) == 1) {\n        int arr[1000];\n        for (int i = 0; i < n; i++) scanf(\"%d\", &arr[i]);\n        int target;\n        scanf(\"%d\", &target);\n        printf(\"%d\\n\", binarySearch(arr, n, target));\n    }\n    return 0;\n}\n",
-                cpp: "// C++ (G++ 17)\n#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    if (cin >> n) {\n        vector<int> arr(n);\n        for (int i = 0; i < n; i++) cin >> arr[i];\n        int target; cin >> target;\n        int l = 0, r = n - 1, ans = -1;\n        while (l <= r) {\n            int mid = l + (r - l) / 2;\n            if (arr[mid] == target) { ans = mid; break; }\n            if (arr[mid] < target) l = mid + 1;\n            else r = mid - 1;\n        }\n        cout << ans << endl;\n    }\n    return 0;\n}\n"
-            }
+            ]
         },
         {
             title: "Longest Substring Without Repeating Characters.",
@@ -170,34 +116,14 @@ const technicalSets = {
                 { input: "abcabcbb", expected: "3" },
                 { input: "bbbbb", expected: "1" },
                 { input: "pwwkew", expected: "3" }
-            ],
-            templates: {
-                python: "# Python 3.14\ndef length_of_longest_substring(s: str) -> int:\n    seen = {}\n    start = max_len = 0\n    for i, c in enumerate(s):\n        if c in seen and seen[c] >= start:\n            start = seen[c] + 1\n        seen[c] = i\n        max_len = max(max_len, i - start + 1)\n    return max_len\n\nif __name__ == '__main__':\n    import sys\n    print(length_of_longest_substring(sys.stdin.read().strip()))\n",
-                java: "// Java (OpenJDK 27)\nimport java.util.*;\n\npublic class Solution {\n    public static int lengthOfLongestSubstring(String s) {\n        Map<Character, Integer> map = new HashMap<>();\n        int maxLen = 0, start = 0;\n        for (int i = 0; i < s.length(); i++) {\n            char c = s.charAt(i);\n            if (map.containsKey(c) && map.get(c) >= start) start = map.get(c) + 1;\n            map.put(c, i);\n            maxLen = Math.max(maxLen, i - start + 1);\n        }\n        return maxLen;\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) System.out.println(lengthOfLongestSubstring(sc.next()));\n    }\n}\n",
-                c: "// C (GCC 11)\n#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s[1000];\n    if (scanf(\"%s\", s) == 1) {\n        int last[256];\n        memset(last, -1, sizeof(last));\n        int maxLen = 0, start = 0;\n        for (int i = 0; s[i] != '\\0'; i++) {\n            unsigned char c = s[i];\n            if (last[c] >= start) start = last[c] + 1;\n            last[c] = i;\n            int len = i - start + 1;\n            if (len > maxLen) maxLen = len;\n        }\n        printf(\"%d\\n\", maxLen);\n    }\n    return 0;\n}\n",
-                cpp: "// C++ (G++ 17)\n#include <iostream>\n#include <string>\n#include <unordered_map>\nusing namespace std;\n\nint main() {\n    string s;\n    if (cin >> s) {\n        unordered_map<char, int> seen;\n        int maxLen = 0, start = 0;\n        for (int i = 0; i < s.length(); i++) {\n            if (seen.count(s[i]) && seen[s[i]] >= start) start = seen[s[i]] + 1;\n            seen[s[i]] = i;\n            maxLen = max(maxLen, i - start + 1);\n        }\n        cout << maxLen << endl;\n    }\n    return 0;\n}\n"
-            }
+            ]
         }
     ]
 };
 
-// Fallback generator for Sets 3, 4, 5
-function generateGenericTemplates(qTitle, lang) {
-    if (lang === 'python') {
-        return `# Python 3.14\n# ${qTitle}\nimport sys\n\ndef solve(input_data: str) -> str:\n    # Write your optimal algorithm implementation here\n    tokens = input_data.split()\n    return \"Solution output\"\n\nif __name__ == '__main__':\n    raw = sys.stdin.read().strip()\n    if raw:\n        print(solve(raw))\n`;
-    } else if (lang === 'java') {
-        return `// Java (OpenJDK 27)\n// ${qTitle}\nimport java.util.*;\n\npublic class Solution {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your optimal solution here\n        if (sc.hasNext()) {\n            System.out.println(\"Solution output\");\n        }\n    }\n}\n`;
-    } else if (lang === 'c') {
-        return `// C (GCC 11)\n// ${qTitle}\n#include <stdio.h>\n#include <stdlib.h>\n\nint main() {\n    // Write your optimal C implementation here\n    char buffer[256];\n    if (scanf(\"%s\", buffer) == 1) {\n        printf(\"Solution output\\n\");\n    }\n    return 0;\n}\n`;
-    } else {
-        return `// C++ (G++ 17)\n// ${qTitle}\n#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\n\nint main() {\n    // Write your optimal C++ algorithm here\n    string token;\n    if (cin >> token) {\n        cout << \"Solution output\" << endl;\n    }\n    return 0;\n}\n`;
-    }
-}
-
 // Active Non-Repeating Set
 let currentSetId = Number(localStorage.getItem("currentInterviewSet")) || 1;
 if (!technicalSets[currentSetId]) {
-    // If set is 3, 4, 5, map dynamically
     technicalSets[currentSetId] = technicalSets[1];
 }
 
@@ -206,9 +132,11 @@ let currentQuestion = 0;
 let currentLanguage = "python";
 let timeLeft = 20 * 60;
 
-// Separate storage per (questionId + "_" + language) to guarantee zero mismatch
+// Separate storage per (questionId + "_" + language)
+// Candidate writes code themselves; starts empty
 const codeStorage = {};
 const answers = {};
+const questionScores = [0, 0, 0, 0, 0];
 
 // DOM Elements
 const questionTitle = document.getElementById("questionTitle");
@@ -239,13 +167,17 @@ const finishBtn = document.getElementById("finishBtn");
 
 let activeTestCaseIndex = 1;
 
-// Get Starter Template for Question + Language
-function getTemplate(qIdx, lang) {
-    const q = selectedQuestions[qIdx];
-    if (q && q.templates && q.templates[lang]) {
-        return q.templates[lang];
+// Placeholder comments guiding the candidate (no pre-filled code)
+function getPlaceholder(lang) {
+    if (lang === "python") {
+        return "# Write your Python solution here...\n# Read input from stdin and print the output\n";
+    } else if (lang === "java") {
+        return "// Write your Java solution here...\n// Read input from stdin and print the output\n";
+    } else if (lang === "c") {
+        return "// Write your C solution here...\n// Read input from stdin and print the output\n";
+    } else {
+        return "// Write your C++ solution here...\n// Read input from stdin and print the output\n";
     }
-    return generateGenericTemplates(q ? q.title : "Algorithm", lang);
 }
 
 // Update Language File Tab
@@ -295,15 +227,17 @@ function displayQuestion() {
         progressPercent.textContent = Math.round(((currentQuestion + 1) / selectedQuestions.length) * 100) + "%";
     }
 
-    // Load code for this question and selected language
+    // Load candidate's written code for this question and selected language
+    // Starts completely empty so the user writes their code from scratch
     const storageKey = currentQuestion + "_" + currentLanguage;
     if (codeStorage[storageKey] !== undefined) {
         codeEditor.value = codeStorage[storageKey];
     } else {
-        const starter = getTemplate(currentQuestion, currentLanguage);
-        codeEditor.value = starter;
-        codeStorage[storageKey] = starter;
+        codeEditor.value = "";
+        codeStorage[storageKey] = "";
     }
+
+    codeEditor.placeholder = getPlaceholder(currentLanguage);
 
     updateLanguageTab(currentLanguage);
     updateWordCount();
@@ -312,10 +246,17 @@ function displayQuestion() {
     switchTestCase(1);
 
     if (testCaseResultBadge) {
-        testCaseResultBadge.textContent = "Ready for Execution";
-        testCaseResultBadge.style.background = "rgba(56, 189, 248, 0.15)";
-        testCaseResultBadge.style.color = "#38bdf8";
-        testCaseResultBadge.style.borderColor = "rgba(56, 189, 248, 0.3)";
+        if (questionScores[currentQuestion] > 0) {
+            testCaseResultBadge.textContent = `✅ Solved (${questionScores[currentQuestion]}/20 pts)`;
+            testCaseResultBadge.style.background = "rgba(16, 185, 129, 0.18)";
+            testCaseResultBadge.style.color = "#34d399";
+            testCaseResultBadge.style.borderColor = "rgba(16, 185, 129, 0.3)";
+        } else {
+            testCaseResultBadge.textContent = "Ready for Execution";
+            testCaseResultBadge.style.background = "rgba(56, 189, 248, 0.15)";
+            testCaseResultBadge.style.color = "#38bdf8";
+            testCaseResultBadge.style.borderColor = "rgba(56, 189, 248, 0.3)";
+        }
     }
 }
 
@@ -324,10 +265,13 @@ function updateWordCount() {
     const count = text.length;
     if (charCount) charCount.innerHTML = `<i class="fa-solid fa-code"></i> ${count} characters`;
 
-    if (answers[currentQuestion]) {
-        answerStatus.innerHTML = `<i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Submitted &amp; Verified`;
+    if (answers[currentQuestion] && questionScores[currentQuestion] === 20) {
+        answerStatus.innerHTML = `<i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Submitted &amp; Verified (20/20 pts)`;
         answerStatus.style.color = "#10b981";
-    } else if (count > 20) {
+    } else if (answers[currentQuestion] && questionScores[currentQuestion] > 0) {
+        answerStatus.innerHTML = `<i class="fa-solid fa-triangle-exclamation" style="color:#f59e0b;"></i> Partially Solved (${questionScores[currentQuestion]}/20 pts)`;
+        answerStatus.style.color = "#f59e0b";
+    } else if (count > 0) {
         answerStatus.innerHTML = `<i class="fa-solid fa-pen" style="color:#38bdf8;"></i> Code in Progress`;
         answerStatus.style.color = "#38bdf8";
     } else {
@@ -411,27 +355,26 @@ languageSelect.addEventListener("change", function () {
     currentLanguage = languageSelect.value;
     updateLanguageTab(currentLanguage);
 
-    // 3. Load or initialize template
+    // 3. Load or initialize empty editor
     const storageKey = currentQuestion + "_" + currentLanguage;
     if (codeStorage[storageKey] !== undefined) {
         codeEditor.value = codeStorage[storageKey];
     } else {
-        const starter = getTemplate(currentQuestion, currentLanguage);
-        codeEditor.value = starter;
-        codeStorage[storageKey] = starter;
+        codeEditor.value = "";
+        codeStorage[storageKey] = "";
     }
 
+    codeEditor.placeholder = getPlaceholder(currentLanguage);
     updateWordCount();
     updateGutterLines();
 });
 
-// Reset Template Button
+// Clear / Reset Editor Button
 if (resetTemplateBtn) {
     resetTemplateBtn.addEventListener("click", () => {
-        if (confirm("Reset current editor code to the default starter template for " + currentLanguage.toUpperCase() + "?")) {
-            const starter = getTemplate(currentQuestion, currentLanguage);
-            codeEditor.value = starter;
-            codeStorage[currentQuestion + "_" + currentLanguage] = starter;
+        if (confirm("Are you sure you want to clear your code for this question?")) {
+            codeEditor.value = "";
+            codeStorage[currentQuestion + "_" + currentLanguage] = "";
             updateWordCount();
             updateGutterLines();
         }
@@ -451,8 +394,8 @@ codeEditor.addEventListener("input", function () {
 if (compileRunBtn) {
     compileRunBtn.addEventListener("click", async function () {
         const code = (codeEditor.value || "").trim();
-        if (!code || code.length < 5) {
-            alert("Please write code before compiling.");
+        if (!code || code.length === 0) {
+            alert("Please write your code first before compiling.");
             return;
         }
 
@@ -475,7 +418,7 @@ if (compileRunBtn) {
         // Switch to Terminal tab to show immediate output
         switchDrawerTab('terminal');
         if (terminalScreen) {
-            terminalScreen.innerHTML = `<span style="color:#6e7681;">[1/2] Compiling ${currentLanguage.toUpperCase()} program...\\n[2/2] Running process in sandbox...</span>`;
+            terminalScreen.innerHTML = `<span style="color:#6e7681;">[1/2] Compiling ${currentLanguage.toUpperCase()} program...\n[2/2] Running process in sandbox...</span>`;
         }
 
         try {
@@ -496,10 +439,10 @@ if (compileRunBtn) {
                 outHtml += `<div style="color:#8b949e; border-bottom:1px solid #21262d; padding-bottom:6px; margin-bottom:8px;">Execution Environment: ${currentLanguage.toUpperCase()} • Time: ${data.executionTimeMs || 0}ms • Status: ${data.success ? 'Exit Code 0 (Success)' : 'Exit Code ' + data.exitCode}</div>`;
 
                 if (data.stdout) {
-                    outHtml += `<div style="color:#e6edf3;"><strong>Standard Output (stdout):</strong>\\n${escapeHtml(data.stdout)}</div>\\n`;
+                    outHtml += `<div style="color:#e6edf3;"><strong>Standard Output (stdout):</strong>\n${escapeHtml(data.stdout)}</div>\n`;
                 }
                 if (data.stderr) {
-                    outHtml += `<div style="color:#f87171; margin-top:8px;"><strong>Standard Error / Warnings (stderr):</strong>\\n${escapeHtml(data.stderr)}</div>`;
+                    outHtml += `<div style="color:#f87171; margin-top:8px;"><strong>Standard Error / Warnings (stderr):</strong>\n${escapeHtml(data.stderr)}</div>`;
                 }
                 if (!data.stdout && !data.stderr) {
                     outHtml += `<div style="color:#a78bfa;">Process exited cleanly with no console output.</div>`;
@@ -528,15 +471,15 @@ if (compileRunBtn) {
     });
 }
 
-// 2. Run Public Tests Button
+// 2. Run Public Tests Button (Evaluates user's code against test cases)
 if (runTestsBtn) {
     runTestsBtn.addEventListener("click", async function () {
         const code = (codeEditor.value || "").trim();
         const q = selectedQuestions[currentQuestion];
         if (!q || !q.testCases) return;
 
-        if (!code || code.length < 5) {
-            alert("Please write code before running tests.");
+        if (!code || code.length === 0) {
+            alert("Please write your code first before running tests.");
             return;
         }
 
@@ -594,26 +537,28 @@ if (runTestsBtn) {
                 }
             }
         } catch (err) {
-            console.warn("Public test runner fallback:", err);
+            console.warn("Public test runner error:", err);
         }
     });
 }
 
-// 3. Submit Solution Button
+// 3. Submit Solution Button (Evaluates submission & computes marks)
 if (submitBtn) {
     submitBtn.addEventListener("click", async function () {
         const code = (codeEditor.value || "").trim();
         const q = selectedQuestions[currentQuestion];
         if (!q) return;
 
-        if (!code || code.length < 10) {
-            alert("Please write a complete solution before submitting.");
+        if (!code || code.length === 0) {
+            alert("Please write your solution before submitting.");
             return;
         }
 
         // Run full evaluation
         if (testCaseResultBadge) {
             testCaseResultBadge.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Evaluating Submission...`;
+            testCaseResultBadge.style.background = "rgba(245, 158, 11, 0.15)";
+            testCaseResultBadge.style.color = "#fbbf24";
         }
 
         try {
@@ -628,24 +573,60 @@ if (submitBtn) {
             });
 
             const data = await resp.json();
-            const allPassed = data.allPassed !== undefined ? data.allPassed : true;
+            const allPassed = !!data.allPassed;
+            const passedCount = Number(data.passedCount) || 0;
+            const totalCases = q.testCases.length || 3;
 
-            // Mark question as solved
+            // Calculate score for this question (out of 20 marks)
+            const earnedMarks = Math.round((passedCount / totalCases) * 20);
+            questionScores[currentQuestion] = earnedMarks;
             answers[currentQuestion] = code;
             codeStorage[currentQuestion + "_" + currentLanguage] = code;
 
-            updateWordCount();
-
-            if (window.showToast) {
-                window.showToast(`Problem ${currentQuestion + 1} Submitted Successfully!`, "success");
-            } else {
-                alert(`Problem ${currentQuestion + 1} Solution Submitted Successfully!`);
+            if (data.results && Array.isArray(data.results)) {
+                data.results.forEach((res, idx) => {
+                    if (q.testCases[idx]) {
+                        q.testCases[idx].actual = res.actual;
+                        q.testCases[idx].passed = res.passed;
+                    }
+                    const tabBtn = document.getElementById("caseTab" + (idx + 1));
+                    if (tabBtn) {
+                        tabBtn.innerHTML = (res.passed ? "✅ " : "❌ ") + `Case ${idx + 1}`;
+                    }
+                });
+                switchTestCase(activeTestCaseIndex);
             }
 
-            if (testCaseResultBadge) {
-                testCaseResultBadge.textContent = allPassed ? "✅ Accepted (100% Tests Passed)" : "⚠️ Submitted (Partial Tests Passed)";
-                testCaseResultBadge.style.background = "rgba(16, 185, 129, 0.2)";
-                testCaseResultBadge.style.color = "#34d399";
+            updateWordCount();
+
+            if (allPassed) {
+                if (testCaseResultBadge) {
+                    testCaseResultBadge.textContent = "✅ Accepted (100% Tests Passed • 20/20 Marks)";
+                    testCaseResultBadge.style.background = "rgba(16, 185, 129, 0.2)";
+                    testCaseResultBadge.style.color = "#34d399";
+                    testCaseResultBadge.style.borderColor = "rgba(16, 185, 129, 0.4)";
+                }
+                if (window.showToast) {
+                    window.showToast(`Problem ${currentQuestion + 1} Accepted! (+20 marks)`, "success");
+                } else {
+                    alert(`Problem ${currentQuestion + 1} Accepted! All tests passed (+20 marks).`);
+                }
+            } else if (passedCount > 0) {
+                if (testCaseResultBadge) {
+                    testCaseResultBadge.textContent = `⚠️ Submitted (${passedCount}/${totalCases} Tests Passed • ${earnedMarks}/20 Marks)`;
+                    testCaseResultBadge.style.background = "rgba(245, 158, 11, 0.2)";
+                    testCaseResultBadge.style.color = "#fbbf24";
+                    testCaseResultBadge.style.borderColor = "rgba(245, 158, 11, 0.4)";
+                }
+                alert(`Problem ${currentQuestion + 1} Evaluated: ${passedCount} of ${totalCases} test cases passed (${earnedMarks}/20 marks).`);
+            } else {
+                if (testCaseResultBadge) {
+                    testCaseResultBadge.textContent = `❌ Evaluation Failed (0/${totalCases} Tests Passed)`;
+                    testCaseResultBadge.style.background = "rgba(239, 68, 68, 0.18)";
+                    testCaseResultBadge.style.color = "#f87171";
+                    testCaseResultBadge.style.borderColor = "rgba(239, 68, 68, 0.35)";
+                }
+                alert(`Problem ${currentQuestion + 1} Evaluation: 0 tests passed. Check your algorithm logic and try again.`);
             }
 
             // If last question, show Finish button
@@ -655,9 +636,8 @@ if (submitBtn) {
             }
 
         } catch (e) {
-            answers[currentQuestion] = code;
-            updateWordCount();
-            alert(`Problem ${currentQuestion + 1} Solution Submitted!`);
+            console.error("Evaluation error:", e);
+            alert("Error during evaluation: " + e.message);
         }
     });
 }
@@ -691,27 +671,22 @@ nextBtn.addEventListener("click", function () {
     }
 });
 
-// Finish Technical Round
+// Finish Technical Round (Score is sum of marks earned from evaluated submissions)
 function finishInterview() {
     codeStorage[currentQuestion + "_" + currentLanguage] = codeEditor.value;
 
-    let attempted = 0;
-    for (let i = 0; i < selectedQuestions.length; i++) {
-        if (answers[i] || (codeStorage[i + "_" + currentLanguage] && codeStorage[i + "_" + currentLanguage].length > 20)) {
-            attempted++;
-        }
-    }
+    let totalScore = questionScores.reduce((sum, val) => sum + val, 0);
+    if (totalScore > 100) totalScore = 100;
 
-    let score = attempted * 20;
-    if (score > 100) score = 100;
+    localStorage.setItem("technical", totalScore);
+    localStorage.setItem("tech", totalScore);
 
-    localStorage.setItem("technical", score);
-    localStorage.setItem("tech", score);
+    const attempted = questionScores.filter(s => s > 0).length;
 
     if (window.showRoundTransitionModal) {
         window.showRoundTransitionModal(
             "Round 3: Technical Coding Interview",
-            `Score: ${score} / 100 Marks (${attempted} / 5 Problems Solved)`,
+            `Evaluated Score: ${totalScore} / 100 Marks (${attempted} / 5 Problems Solved)`,
             "Round 4: HR &amp; Behavioral Round",
             "hr.html"
         );
