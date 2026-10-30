@@ -256,82 +256,14 @@
 
     // Build Floating PIP HUD
     function renderProctorHud() {
-        if (document.getElementById("proctorHud")) return;
-
-        const hud = document.createElement("div");
-        hud.id = "proctorHud";
-        hud.className = "proctor-hud";
-
-        hud.innerHTML = `
-            <div class="proctor-header" id="proctorHeader">
-                <div class="proctor-title-wrap">
-                    <span class="proctor-rec-dot"></span>
-                    <span>System Integrity HUD</span>
-                </div>
-                <button id="proctorToggleBtn" class="proctor-toggle-btn" title="Minimize / Expand HUD">
-                    <i class="fa-solid fa-compress" id="proctorToggleIcon"></i>
-                </button>
-            </div>
-            <div class="proctor-body" style="padding: 14px 16px;">
-                <div class="proctor-sensor-matrix" style="display: flex; flex-direction: column; gap: 9px;">
-                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 11.5px;">
-                        <span style="color: #64748b;"><i class="fa-solid fa-shield-halved" style="color: #10b981; margin-right: 6px;"></i>Session Security</span>
-                        <strong style="color: #10b981; font-weight: 700;">Active</strong>
-                    </div>
-                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 11.5px;">
-                        <span style="color: #64748b;"><i class="fa-solid fa-window-restore" style="color: #3b82f6; margin-right: 6px;"></i>Focus Enclave</span>
-                        <strong style="color: #3b82f6; font-weight: 700;">Engaged</strong>
-                    </div>
-                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 11.5px;">
-                        <span style="color: #64748b;"><i class="fa-solid fa-keyboard" style="color: #8b5cf6; margin-right: 6px;"></i>Anti-Cheat Defense</span>
-                        <strong style="color: #8b5cf6; font-weight: 700;">Armed</strong>
-                    </div>
-                </div>
-            </div>
-            <div class="proctor-footer">
-                <div class="proctor-status-row">
-                    <span style="color: #94a3b8; font-size: 11px;">Status:</span>
-                    <span id="proctorStrikeBadge" class="proctor-strike-badge clean">
-                        <i class="fa-solid fa-shield-check"></i> 0 / ${MAX_STRIKES} Strikes
-                    </span>
-                </div>
-                <div class="proctor-action-row">
-                    <button id="proctorFullscreenBtn" class="proctor-btn-fullscreen" title="Toggle Fullscreen Mode">
-                        <i class="fa-solid fa-expand"></i> Fullscreen Mode
-                    </button>
-                </div>
-            </div>
-        `;
-
-        document.body.appendChild(hud);
-        updateHudStrikeBadge(getStrikes());
-
-        // Toggle Minimize / Expand
-        const toggleBtn = document.getElementById("proctorToggleBtn");
-        const toggleIcon = document.getElementById("proctorToggleIcon");
-        toggleBtn.addEventListener("click", () => {
-            hud.classList.toggle("minimized");
-            if (hud.classList.contains("minimized")) {
-                toggleIcon.className = "fa-solid fa-expand";
-            } else {
-                toggleIcon.className = "fa-solid fa-compress";
-            }
-        });
-
-        // Fullscreen Button
-        const fsBtn = document.getElementById("proctorFullscreenBtn");
-        fsBtn.addEventListener("click", () => {
-            if (!isFullscreenActive()) {
-                requestFullscreen();
-            } else {
-                showProctorToast("Fullscreen is already active.");
-            }
-        });
-
-        // Webcam initialization removed
+        const hud = document.getElementById("proctorHud");
+        if (hud) hud.remove();
+        const hudEl = document.querySelector(".proctor-hud");
+        if (hudEl) hudEl.remove();
     }
-
-    // Webcam removed per specification
+    function updateHudStrikeBadge(strikes) {
+        // No HUD badge
+    }
 
     // Attach Event Listeners
     function attachProctorSecurityListeners() {

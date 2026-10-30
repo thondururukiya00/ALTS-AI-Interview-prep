@@ -43,20 +43,32 @@
         <h2 id="questionTitle">Loading question...</h2>
         <p id="questionDescription"></p>
 
-        <div class="language-section" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 14px;">
+        <div class="language-section" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 14px; margin-bottom: 8px;">
             <div>
-                <label for="language" style="font-weight: 600; font-size: 14px; color: #334155; display: block; margin-bottom: 6px;">
+                <label for="language" style="font-weight: 600; font-size: 13.5px; color: #334155; display: block; margin-bottom: 6px;">
                     <i class="fa-solid fa-code"></i> Target Programming Language
                 </label>
-                <select id="language">
-                    <option value="python" selected>Python 3.11</option>
-                    <option value="java">Java (OpenJDK 17)</option>
-                    <option value="c">C (GCC 11)</option>
-                </select>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <select id="language" style="padding: 9px 14px; border-radius: 8px; border: 1.5px solid #cbd5e1; background: #ffffff; font-weight: 600; font-size: 13px; color: #0f172a; cursor: pointer; outline: none; transition: border-color 0.2s;">
+                        <option value="python" selected>Python 3.14</option>
+                        <option value="java">Java (OpenJDK 27)</option>
+                        <option value="c">C (GCC 11)</option>
+                        <option value="cpp">C++ (G++ 17)</option>
+                    </select>
+                    <button type="button" id="resetTemplateBtn" title="Reset starter template for this language" style="background: #f8fafc; border: 1px solid #cbd5e1; color: #64748b; padding: 8px 12px; border-radius: 8px; font-size: 12px; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; transition: all 0.2s;">
+                        <i class="fa-solid fa-rotate-left"></i> Reset Template
+                    </button>
+                </div>
             </div>
-            <div style="display: flex; gap: 8px;">
-                <button type="button" id="runTestsBtn" class="btn-run-tests" style="background: rgba(16, 185, 129, 0.15); color: #059669; border: 1px solid rgba(16, 185, 129, 0.3); padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;">
-                    <i class="fa-solid fa-play"></i> Run Public Tests
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <button type="button" id="compileRunBtn" class="btn-compile-run" style="background: linear-gradient(135deg, #059669, #10b981); color: #ffffff; border: 1px solid #059669; padding: 9px 18px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.25); transition: all 0.2s;">
+                    <i class="fa-solid fa-gear"></i> Compile &amp; Run
+                </button>
+                <button type="button" id="runTestsBtn" class="btn-run-tests" style="background: #1e293b; color: #38bdf8; border: 1px solid #334155; padding: 9px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; transition: all 0.2s;">
+                    <i class="fa-solid fa-vial-circle-check"></i> Run Public Tests
+                </button>
+                <button type="button" id="submitBtn" class="btn-submit-code" style="background: linear-gradient(135deg, #7033ff, #8c5cff); color: #ffffff; border: 1px solid #7033ff; padding: 9px 20px; border-radius: 8px; font-size: 13.5px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(112, 51, 255, 0.35); transition: all 0.2s;">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Submit Solution
                 </button>
             </div>
         </div>
@@ -100,24 +112,49 @@
                 ></textarea>
             </div>
 
-            <!-- Public Test Cases Runner Drawer -->
+            <!-- Public Test Cases & Compiler Output Drawer -->
             <div class="ide-testcases" style="background: #161b22; border-top: 1px solid #30363d; padding: 14px 18px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <span style="font-size: 12.5px; font-weight: 700; color: #f0f6fc; display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-flask" style="color: #a855f7;"></i> Public Test Case Validation
-                    </span>
-                    <span id="testCaseResultBadge" style="font-size: 11px; padding: 3px 8px; border-radius: 12px; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                    <div style="display: flex; gap: 6px;">
+                        <button type="button" id="drawerTabTests" class="drawer-nav-btn active" onclick="switchDrawerTab('tests')" style="background: #0d1117; color: #f0f6fc; border: 1px solid #30363d; border-radius: 6px; padding: 5px 12px; font-size: 12px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-flask" style="color: #a855f7;"></i> Public Test Cases (3)
+                        </button>
+                        <button type="button" id="drawerTabTerminal" class="drawer-nav-btn" onclick="switchDrawerTab('terminal')" style="background: transparent; color: #8b949e; border: 1px solid #30363d; border-radius: 6px; padding: 5px 12px; font-size: 12px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-terminal" style="color: #38bdf8;"></i> Compiler Output &amp; Terminal
+                        </button>
+                        <button type="button" id="drawerTabStdin" class="drawer-nav-btn" onclick="switchDrawerTab('stdin')" style="background: transparent; color: #8b949e; border: 1px solid #30363d; border-radius: 6px; padding: 5px 12px; font-size: 12px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-keyboard" style="color: #10b981;"></i> Custom Input (stdin)
+                        </button>
+                    </div>
+                    <span id="testCaseResultBadge" style="font-size: 11px; padding: 4px 10px; border-radius: 12px; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-weight: 600;">
                         Ready for Execution
                     </span>
                 </div>
-                <div style="display: flex; gap: 8px; margin-bottom: 10px;">
-                    <button type="button" id="caseTab1" class="case-tab active" onclick="switchTestCase(1)" style="background: #0d1117; color: #ffffff; border: 1px solid #30363d; border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer;">Case 1 (Standard)</button>
-                    <button type="button" id="caseTab2" class="case-tab" onclick="switchTestCase(2)" style="background: transparent; color: #8b949e; border: 1px solid #30363d; border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer;">Case 2 (Boundary)</button>
-                    <button type="button" id="caseTab3" class="case-tab" onclick="switchTestCase(3)" style="background: transparent; color: #8b949e; border: 1px solid #30363d; border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer;">Case 3 (Edge Case)</button>
+
+                <!-- Tab 1: Test Cases View -->
+                <div id="drawerPaneTests">
+                    <div style="display: flex; gap: 8px; margin-bottom: 10px;">
+                        <button type="button" id="caseTab1" class="case-tab active" onclick="switchTestCase(1)" style="background: #0d1117; color: #ffffff; border: 1px solid #30363d; border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer;">Case 1 (Standard)</button>
+                        <button type="button" id="caseTab2" class="case-tab" onclick="switchTestCase(2)" style="background: transparent; color: #8b949e; border: 1px solid #30363d; border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer;">Case 2 (Boundary)</button>
+                        <button type="button" id="caseTab3" class="case-tab" onclick="switchTestCase(3)" style="background: transparent; color: #8b949e; border: 1px solid #30363d; border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer;">Case 3 (Edge Case)</button>
+                    </div>
+                    <div id="testCaseBody" style="background: #0d1117; border: 1px solid #21262d; border-radius: 8px; padding: 12px 16px; font-family: monospace; font-size: 12.5px; color: #8b949e; line-height: 1.7;">
+                        <div><strong style="color: #cbd5e1;">Input:</strong> nums = [2, 7, 11, 15], target = 9</div>
+                        <div><strong style="color: #cbd5e1;">Expected Output:</strong> [0, 1]</div>
+                    </div>
                 </div>
-                <div id="testCaseBody" style="background: #0d1117; border: 1px solid #21262d; border-radius: 8px; padding: 10px 14px; font-family: monospace; font-size: 12px; color: #8b949e; line-height: 1.6;">
-                    <div><strong style="color: #cbd5e1;">Input:</strong> nums = [2, 7, 11, 15], target = 9</div>
-                    <div><strong style="color: #cbd5e1;">Expected Output:</strong> [0, 1]</div>
+
+                <!-- Tab 2: Terminal Output View -->
+                <div id="drawerPaneTerminal" style="display: none;">
+                    <div id="terminalScreen" style="background: #090d13; border: 1px solid #21262d; border-radius: 8px; padding: 12px 16px; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 12.5px; color: #e6edf3; min-height: 100px; max-height: 200px; overflow-y: auto; white-space: pre-wrap; line-height: 1.6;">
+                        <span style="color: #6e7681;">Click "Compile &amp; Run" to execute your program against stdin and inspect stdout/stderr here...</span>
+                    </div>
+                </div>
+
+                <!-- Tab 3: Custom Input View -->
+                <div id="drawerPaneStdin" style="display: none;">
+                    <div style="font-size: 12px; color: #8b949e; margin-bottom: 6px;">Provide custom command line input passed to stdin:</div>
+                    <textarea id="customStdinInput" placeholder="Enter input values here..." style="width: 100%; height: 75px; background: #090d13; color: #e6edf3; border: 1px solid #21262d; border-radius: 6px; font-family: monospace; font-size: 12.5px; padding: 10px; resize: none; box-sizing: border-box; outline: none;"></textarea>
                 </div>
             </div>
         </div>

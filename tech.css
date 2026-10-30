@@ -235,3 +235,73 @@ textarea#codeEditor:focus {
         text-align: center;
     }
 }
+
+
+/* ==========================================================================
+   Enhanced IDE Actions, Terminal Drawer & Language Buttons
+   ========================================================================== */
+
+.btn-compile-run:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4) !important;
+}
+
+.btn-run-tests:hover {
+    background: #242c38 !important;
+    border-color: #38bdf8 !important;
+    transform: translateY(-1px);
+}
+
+.btn-submit-code:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(112, 51, 255, 0.45) !important;
+}
+
+.btn-compile-run:active,
+.btn-run-tests:active,
+.btn-submit-code:active {
+    transform: translateY(0);
+}
+
+.drawer-nav-btn {
+    transition: all 0.2s ease;
+}
+
+.drawer-nav-btn:hover {
+    border-color: #4b5563 !important;
+    color: #f0f6fc !important;
+}
+
+.case-tab {
+    transition: all 0.2s ease;
+}
+
+.case-tab:hover {
+    border-color: #64748b !important;
+    color: #f8fafc !important;
+}
+
+/* Custom Scrollbar for IDE & Terminal Screen */
+#terminalScreen::-webkit-scrollbar,
+#codeEditor::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+#terminalScreen::-webkit-scrollbar-track,
+#codeEditor::-webkit-scrollbar-track {
+    background: #0d1117;
+}
+
+#terminalScreen::-webkit-scrollbar-thumb,
+#codeEditor::-webkit-scrollbar-thumb {
+    background: #30363d;
+    border-radius: 4px;
+}
+
+#terminalScreen::-webkit-scrollbar-thumb:hover,
+#codeEditor::-webkit-scrollbar-thumb:hover {
+    background: #484f58;
+}
