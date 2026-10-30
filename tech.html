@@ -26,6 +26,7 @@
     <!-- Supabase Cloud SDK & Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabaseClient.js"></script>
+    <script src="theme.js"></script>
 </head>
 <body>
 
@@ -35,9 +36,14 @@
             <h1>Stage III &mdash; Technical Architecture & Code</h1>
             <p>ALTS Autonomous Assessment Framework &bull; Vol. 2026</p>
         </div>
-        <div class="timer-box">
-            <span>Time Remaining</span>
-            <h2 id="timer">20:00</h2>
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeToggleBtn" title="Toggle Theme" aria-label="Toggle Theme">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+            </button>
+            <div class="timer-box">
+                <span>Time Remaining</span>
+                <h2 id="timer">20:00</h2>
+            </div>
         </div>
     </header>
 

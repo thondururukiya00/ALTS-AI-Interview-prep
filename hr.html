@@ -28,6 +28,7 @@
     <!-- Supabase Cloud SDK & Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabaseClient.js"></script>
+    <script src="theme.js"></script>
 </head>
 
 <body>
@@ -35,9 +36,16 @@
 <div class="container">
 
     <div class="header">
-        <h1>ALTS Autonomous Assessment Framework</h1>
-        <h2>Stage IV &mdash; Behavioral & Leadership Interview</h2>
-        <p>
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;">
+            <div>
+                <h1>ALTS Autonomous Assessment Framework</h1>
+                <h2>Stage IV &mdash; Behavioral & Leadership Interview</h2>
+            </div>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeToggleBtn" title="Toggle Theme" aria-label="Toggle Theme">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+            </button>
+        </div>
+        <p style="margin-top: 10px;">
             Listen carefully to each question and answer using your voice. Questions progress from <strong>Easy ➔ Medium ➔ Hard</strong>.
         </p>
     </div>

@@ -32,6 +32,7 @@
     <!-- Supabase Cloud SDK & Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabaseClient.js"></script>
+    <script src="theme.js"></script>
 </head>
 
 <body class="login-body">
@@ -159,50 +160,6 @@
             form.dispatchEvent(submitEvent);
         }
     }
-
-    function toggleAuthTheme() {
-        const btn = document.getElementById('loginThemeBtn');
-        if (btn) {
-            btn.classList.add('theme-animating');
-            setTimeout(() => btn.classList.remove('theme-animating'), 400);
-        }
-        const current = document.documentElement.getAttribute("data-theme") || "light";
-        const next = current === "dark" ? "light" : "dark";
-        
-        document.documentElement.setAttribute("data-theme", next);
-        if (next === 'dark') {
-            document.body.classList.add('dark-theme');
-        } else {
-            document.body.classList.remove('dark-theme');
-        }
-        localStorage.setItem("alts-theme", next);
-        updateLoginThemeUI(next);
-    }
-
-    function updateLoginThemeUI(theme) {
-        const icon = document.getElementById("loginThemeIcon");
-        const btn = document.getElementById("loginThemeBtn");
-        if (theme === "dark") {
-            if (icon) icon.className = "fa-solid fa-sun";
-            if (btn) btn.title = "Switch to Light Mode";
-        } else {
-            if (icon) icon.className = "fa-solid fa-moon";
-            if (btn) btn.title = "Switch to Dark Mode";
-        }
-    }
-
-    window.toggleAuthTheme = toggleAuthTheme;
-
-    document.addEventListener("DOMContentLoaded", () => {
-        const saved = localStorage.getItem("alts-theme") || "light";
-        document.documentElement.setAttribute("data-theme", saved);
-        if (saved === 'dark') {
-            document.body.classList.add('dark-theme');
-        } else {
-            document.body.classList.remove('dark-theme');
-        }
-        updateLoginThemeUI(saved);
-    });
 </script>
 
 </body>

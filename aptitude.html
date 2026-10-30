@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="aptitude.css">
     <link rel="stylesheet" href="proctoring.css">
     <script src="script.js" defer></script>
+    <!-- Global Theme Engine -->
+    <script src="theme.js"></script>
     <!-- Supabase Cloud SDK & Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabaseClient.js"></script>
@@ -32,8 +34,11 @@
     <div class="header">
         <h1>ALTS Autonomous Assessment Framework</h1>
         <h2>Stage I &mdash; Quantitative & Logical Aptitude</h2>
-        <div class="set-header-bar">
+        <div class="set-header-bar" style="display: flex; justify-content: space-between; align-items: center;">
             <span class="difficulty-scale"><i class="fa-solid fa-signal"></i> Progressive Difficulty: <strong>Easy ➔ Medium ➔ Hard</strong></span>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeToggleBtn" title="Toggle Theme" aria-label="Toggle Theme">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+            </button>
         </div>
     </div>
 
